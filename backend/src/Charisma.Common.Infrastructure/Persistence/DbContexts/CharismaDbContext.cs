@@ -1,3 +1,4 @@
+using Charisma.Common.Domain.Entities.Conference;
 using Charisma.Common.Domain.Entities.Dictionaries;
 using Charisma.Common.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +14,11 @@ namespace Charisma.Common.Infrastructure.Persistence.DbContexts
         public DbSet<DictionaryCountry> DictionaryCountries { get; set; }
         public DbSet<DictionaryCounty> DictionaryCounties { get; set; }
         public DbSet<DictionaryStatus> DictionaryStatuses { get; set; }
+        public DbSet<Location> Locations { get; set; }
 
         
+
+
 
 
 
