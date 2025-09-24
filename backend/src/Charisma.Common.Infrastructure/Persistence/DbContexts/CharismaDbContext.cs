@@ -15,8 +15,12 @@ namespace Charisma.Common.Infrastructure.Persistence.DbContexts
         public DbSet<DictionaryCounty> DictionaryCounties { get; set; }
         public DbSet<DictionaryStatus> DictionaryStatuses { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Conference> Conferences { get; set; }
+
 
         
+
+
 
 
 

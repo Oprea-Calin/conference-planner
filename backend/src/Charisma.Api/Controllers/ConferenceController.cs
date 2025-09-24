@@ -26,6 +26,15 @@ namespace Charisma.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetAllConferences")]
+        public async Task<IActionResult> GetAllConferences([FromRoute] GetAllConferences.Query query)
+        {
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        
+
 
 
 
