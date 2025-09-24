@@ -39,7 +39,26 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
 
             return await Task.FromResult(categ);
         }
-        
+
+        public async Task<Conference> GetConferenceById(int id)
+        {
+            var categ = new Conference();
+            categ = await dbContext.Conferences
+                .Include(x => x.conferenceType)
+                .Include(x => x.location)
+                .ThenInclude(x =>x.Country)
+                .Include(x => x.location)
+                .ThenInclude(x => x.County)
+                .Include(x => x.location)
+                .ThenInclude(x => x.City)
+                .Include(x => x.category)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            
+
+
+            return await Task.FromResult(categ);
+        }
 
     }
     

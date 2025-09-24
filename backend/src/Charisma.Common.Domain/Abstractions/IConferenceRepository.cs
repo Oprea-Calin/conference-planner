@@ -11,6 +11,7 @@ namespace Charisma.Common.Domain.Abstractions
     {
         public Task<List<Location>> GetLocation();
         public Task<List<Conference>> GetAllConferences();
+        public Task<Conference> GetConferenceById(int id);
 
     }
 }
