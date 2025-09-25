@@ -30,7 +30,7 @@ namespace Charisma.Api.Controllers
         }
 
         [HttpGet("GetAllConferences")]
-        public async Task<IActionResult> GetAllConferences([FromRoute] GetAllConferences.Query query)
+        public async Task<IActionResult> GetAllConferences([FromQuery] GetAllConferences.Query query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);
@@ -43,12 +43,12 @@ namespace Charisma.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetConfercesFiltered")]
-        public async Task<IActionResult> GetConfercesFiltered([FromQuery] GetConfercesFiltered.Query query)
-        {
-            var result = await _mediator.Send(query);
-            return Ok(result);
-        }
+        //[HttpGet("GetConfercesFiltered")]
+        //public async Task<IActionResult> GetConfercesFiltered([FromQuery] GetConfercesFiltered.Query query)
+        //{
+        //    var result = await _mediator.Send(query);
+        //    return Ok(result);
+        //}
 
         [HttpPost("SaveConference")]
         public async Task<IActionResult> SaveConference([FromBody]SaveConference command)
