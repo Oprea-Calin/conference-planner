@@ -1,8 +1,11 @@
 ﻿using Charisma.Api.Application.Queries.Conference;
 using Charisma.Api.Application.Queries.Users;
+using Charisma.Common.Domain.Dtos.Commands;
+using Charisma.Common.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NBB.Correlation;
 using System.Threading.Tasks;
 
 namespace Charisma.Api.Controllers
@@ -39,6 +42,24 @@ namespace Charisma.Api.Controllers
             var result = await _mediator.Send(query);
             return Ok(result);
         }
+
+        [HttpGet("GetConfercesFiltered")]
+        public async Task<IActionResult> GetConfercesFiltered([FromQuery] GetConfercesFiltered.Query query)
+        {
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpPost("SaveConference")]
+        public async Task<IActionResult> SaveConference([FromBody]SaveConference command)
+        {
+
+            await _mediator.Send(command);
+            return Ok(new AsyncCommandResult(CorrelationManager.GetCorrelationId()));
+        }
+
+
+
 
 
 

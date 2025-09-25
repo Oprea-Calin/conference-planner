@@ -10,11 +10,17 @@ using System.Threading.Tasks;
 
 namespace Charisma.Api.Application.Queries.Conference
 {
-
-    public class GetConferenceById
+    public class GetConfercesFiltered
     {
-        public class Query : IRequest<ConferenceDTO> { public int id { get; set; } }
-
+        public class Query : IRequest<ConferenceDTO> { public int id { get; set; }
+            public DateTime startDate { get; set; }
+            public DateTime endDate { get; set; }
+            public string conferenceName { get; set; } 
+            public string location { get; set; }
+            public string category { get; set; }
+            public string email { get; set; }
+        }
+        //aici am ramas
         public class QueryHandler(IConferenceRepository conferenceRepository) : IRequestHandler<Query, ConferenceDTO>
         {
             public async Task<ConferenceDTO> Handle(Query request, CancellationToken cancellationToken)

@@ -46,7 +46,7 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
             categ = await dbContext.Conferences
                 .Include(x => x.conferenceType)
                 .Include(x => x.location)
-                .ThenInclude(x =>x.Country)
+                .ThenInclude(x => x.Country)
                 .Include(x => x.location)
                 .ThenInclude(x => x.County)
                 .Include(x => x.location)
@@ -54,12 +54,21 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
                 .Include(x => x.category)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            
-
-
             return await Task.FromResult(categ);
         }
 
+       
+        public void AddConference(Conference conference)
+        {
+            dbContext.Conferences.Add(conference);
+        }
+
+        public async Task Save()
+        {
+            await dbContext.SaveChangesAsync();
+        }
+
+
+
     }
-    
 }
