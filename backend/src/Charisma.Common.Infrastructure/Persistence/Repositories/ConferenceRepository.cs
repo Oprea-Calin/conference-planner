@@ -75,6 +75,10 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
             return await Task.FromResult(categ);
         }
 
+        public void DeleteConference(Conference conference)
+        {
+            dbContext.Conferences.Remove(conference);
+        }
 
         public void AddConference(Conference conference)
         {

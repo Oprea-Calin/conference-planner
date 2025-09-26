@@ -13,58 +13,48 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
 {
     public class DictionariesRepository(CharismaDbContext dbContext, ILogger<DictionariesRepository> logger) : IDictionariesRepository
     {
-        public async Task<List<DictionaryCategory>> GetDictionaryCategory()
+        public Task<List<DictionaryCategory>> GetDictionaryCategory()
         {
-            var categ = new List<DictionaryCategory>();
-            categ = await dbContext.DictionaryCategories.ToListAsync();
+            var categ = dbContext.DictionaryCategories.ToListAsync();
             
 
-            return await Task.FromResult(categ);
+            return categ;
         }
 
-        public async Task<List<DictionaryCity>> GetDictionaryCity()
+        public Task<List<DictionaryCity>> GetDictionaryCity()
         {
-            var categ = new List<DictionaryCity>();
-            categ = await dbContext.DictionaryCities.ToListAsync();
+            var categ = dbContext.DictionaryCities.ToListAsync(); //todo optimizeaza si celelalte dictionare ca pe asta
 
 
-            return await Task.FromResult(categ);
+            return categ;
         }
         
-        public async Task<List<DictionaryConferenceType>> GetDictionaryConferenceType()
+        public  Task<List<DictionaryConferenceType>> GetDictionaryConferenceType()
         {
-            var categ = new List<DictionaryConferenceType>();
-            categ = await dbContext.DictionaryConferenceTypes.ToListAsync();
+            var categ = dbContext.DictionaryConferenceTypes.ToListAsync();
 
-
-            return await Task.FromResult(categ);
+            return categ;
         }
 
-        public async Task<List<DictionaryCountry>> GetDictionaryCountry()
+        public Task<List<DictionaryCountry>> GetDictionaryCountry()
         {
-            var categ = new List<DictionaryCountry>();
-            categ = await dbContext.DictionaryCountries.ToListAsync();
+            var categ = dbContext.DictionaryCountries.ToListAsync();
 
-
-            return await Task.FromResult(categ);
+            return categ;
         }
 
-        public async Task<List<DictionaryCounty>> GetDictionaryCounty()
+        public  Task<List<DictionaryCounty>> GetDictionaryCounty()
         {
-            var categ = new List<DictionaryCounty>();
-            categ = await dbContext.DictionaryCounties.ToListAsync();
-
-
-            return await Task.FromResult(categ);
+            var categ = dbContext.DictionaryCounties.ToListAsync();
+        
+            return categ;
         }
 
-        public async Task<List<DictionaryStatus>> GetDictionaryStatus()
+        public Task<List<DictionaryStatus>> GetDictionaryStatus()
         {
-            var categ = new List<DictionaryStatus>();
-            categ = await dbContext.DictionaryStatuses.ToListAsync();
+            var categ = dbContext.DictionaryStatuses.ToListAsync();
 
-
-            return await Task.FromResult(categ);
+            return categ;
         }
 
 

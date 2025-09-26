@@ -19,7 +19,7 @@ namespace Charisma.Worker.Application.Handlers.Commands
             Conference conference;
             if(request.Conference.Id == 0)
             {
-                 conference = new Conference
+                conference = new Conference
                 {
                     Name = request.Conference.Name,
                     OrganizerEmail = request.Conference.OrganizerEmail,
@@ -29,6 +29,21 @@ namespace Charisma.Worker.Application.Handlers.Commands
                     CategoryId = request.Conference.CategoryId,
                     LocationId = request.Conference.LocationId
                 };
+                if (conference.LocationId == 0)
+                {
+                    conference.location = new Location()
+                    {
+                        CityId = request.Conference.location.City.Id,
+                        CountryId = request.Conference.location.Country.Id,
+                        CountyId = request.Conference.location.County.Id,
+                        Name = request.Conference.location.Name,
+                        Code = request.Conference.location.Code,
+                        Address = request.Conference.location.Address,
+                        Latitude = request.Conference.location.Latitude,
+                        Longitude = request.Conference.location.Longitude
+
+                    };
+                }
                 conferenceRepository.AddConference(conference);
             }
             else
@@ -43,6 +58,23 @@ namespace Charisma.Worker.Application.Handlers.Commands
                 conference.ConferenceTypeId = request.Conference.ConferenceTypeId;
                 conference.CategoryId = request.Conference.CategoryId;
                 conference.LocationId = request.Conference.LocationId;
+
+                if(conference.LocationId == 0)
+                {
+                    conference.location = new Location()
+                    {
+                        CityId = request.Conference.location.City.Id,
+                        CountryId = request.Conference.location.Country.Id,
+                        CountyId = request.Conference.location.County.Id,
+                        Name = request.Conference.location.Name,
+                        Code = request.Conference.location.Code,
+                        Address = request.Conference.location.Address,
+                        Latitude = request.Conference.location.Latitude,
+                        Longitude = request.Conference.location.Longitude
+
+                    };
+                }
+
             }
 
 

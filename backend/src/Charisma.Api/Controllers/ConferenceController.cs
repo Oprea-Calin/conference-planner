@@ -58,6 +58,13 @@ namespace Charisma.Api.Controllers
             return Ok(new AsyncCommandResult(CorrelationManager.GetCorrelationId()));
         }
 
+        [HttpDelete("DeleteConference/{id}")]
+        public async Task<IActionResult> DeleteConference([FromRoute] DeleteConference command)
+        {
+
+            await _mediator.Send(command);
+            return Ok(new AsyncCommandResult(CorrelationManager.GetCorrelationId()));
+        }
 
 
 
