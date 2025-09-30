@@ -1,22 +1,19 @@
-﻿using Charisma.Common.Domain.Entities.Conference;
-using System;
+using Charisma.Common.Domain.Entities.Conferences;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Charisma.Common.Domain.Abstractions
 {
     public interface IConferenceRepository
     {
-        public Task<List<Location>> GetLocation();
-        public Task<List<Conference>> GetAllConferences();
-        public Task<Conference> GetConferenceById(int id);
-
-        public void AddConference(Conference conference);
-        public Task Save();
-        public void DeleteConference(Conference conference);
-
-
+        Task<List<Conference>> GetConferences();
+        Task<Conference> GetConferenceById(int id);
+        Task<List<Speaker>> GetSpeakers();
+        void Add(Conference conference);
+        void Remove(Conference conference);
+        Task Save(CancellationToken cancellationToken);
+        Task<List<ConferenceXAttendee>> GetAtendeesForConference(int conferenceId);
+        void AddAtendeeStatus(ConferenceXAttendee confXAtendee);
     }
 }

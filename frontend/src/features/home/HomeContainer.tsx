@@ -9,10 +9,13 @@ const HomeContainer: React.FC = () => {
     <Card sx={{ maxWidth: 500, width: "100%" }}>
       <CardContent>
         <Typography variant="h6" textAlign="center" gutterBottom>
-          {t("Homepage.Title")}
+          {t("Common.FirstPage")}
         </Typography>
         <Typography variant="body2" color="text.secondary" textAlign="center">
-          {t("Common.ComingSoon")}
+          {t("Common.FirstPageAux")}
+        </Typography>
+         <Typography variant="body2" color="text.secondary" textAlign="left">
+          {t("Common.FirstPage3rd")}
         </Typography>
       </CardContent>
     </Card>

@@ -1,0 +1,11 @@
+import { fontSize, styled } from "@mui/system";
+import theme from "units/theme/variants/default";
+
+const Paragraph = styled('p')(({theme})=>
+
+({ fontSize: "2rem",
+    lineHeight:2.2,
+    color: theme.palette.text.secondary
+
+}));
+export default Paragraph

@@ -21,6 +21,7 @@ namespace Charisma.Common.Domain.Services
             {
                 UserId = userId,
                 UserName = user.UserName,
+                Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Groups =

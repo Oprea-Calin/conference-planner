@@ -6,7 +6,8 @@
     "Notifications": "Notifications",
     "Support": "Support",
     "Search": "Rechercher...",
-    "GoToHome": "Aller à l'accueil"
+    "GoToHome": "Aller à l'accueil",
+    "Users": "Utilisateur"
   },
   "Validations": {
     "Generic": {
@@ -81,6 +82,10 @@
     "AppVersion": "Version de l'application: {{version}}",
     "LastUpdated": "Dernière mise à jour: {{date}}",
     "DatabaseVersion": "Version de la base de données",
-    "Error": "Erreur de version: {{message}}"
+    "Error": "Erreur de version: {{message}}",
+    "FirstName": "Nom: {{FirstName}}",
+    "LastName": "Prenom: {{LastName}}",
+    "Email": "Email: {{Email}}",
+    "Username": "Nom d’utilisateur: {{Username}}"
   }
 }

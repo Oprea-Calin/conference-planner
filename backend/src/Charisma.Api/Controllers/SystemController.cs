@@ -21,6 +21,12 @@ namespace Charisma.Api.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("ping")]
+        public ActionResult Ping()
+        {
+            return Ok("Hello World");
+        }
+
         [HttpGet("version")]
         public async Task<IActionResult> GetVersion([FromRoute] GetSystemVersion.Query query)
         {

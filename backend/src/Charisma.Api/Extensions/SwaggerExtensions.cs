@@ -67,6 +67,8 @@ namespace Charisma.Api.Extensions
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
+            var __default_tenant_id = "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46";
+
             operation.Parameters ??= [];
             operation.Parameters.Add(new OpenApiParameter
             {
@@ -76,8 +78,7 @@ namespace Charisma.Api.Extensions
                 Schema = new OpenApiSchema()
                 {
                     Type = "string",
-                    Default = new Microsoft.OpenApi.Any.OpenApiString("ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46")
-
+                    Default = new Microsoft.OpenApi.Any.OpenApiString(__default_tenant_id)
                 }
             });
         }

@@ -23,8 +23,9 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
             {
                 UserId = 1,
                 UserName = "Admin Admin",
-                FirstName = "Admin",
-                LastName = "Admin",
+                FirstName = "Oprea",
+                LastName = "Calin",
+                Email = "calin@totalsoft.ro",
                 Inactive = false
             };
 

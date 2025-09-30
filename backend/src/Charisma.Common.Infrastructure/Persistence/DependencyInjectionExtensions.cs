@@ -22,11 +22,8 @@ namespace Charisma.Common.Infrastructure.Persistence
             });
             services.AddScoped<ISystemRepository, SystemRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IDictionariesRepository, DictionariesRepository>();
             services.AddScoped<IConferenceRepository, ConferenceRepository>();
-
-
-
+            services.AddScoped<IDictionaryRepository, DictionaryRepository>();
         }
     }
 }

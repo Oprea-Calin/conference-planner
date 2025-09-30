@@ -12,7 +12,9 @@
     "Notifications": "Notifications",
     "Support": "Support",
     "Search": "Search...",
-    "GoToHome": "Go to Homepage"
+    "GoToHome": "Go to Homepage",
+    "Users": "User",
+    "Tutorial": "Tutorial"
   },
   "Validations": {
     "Generic": {
@@ -33,6 +35,9 @@
     "Saved": "Document saved successfully"
   },
   "Common": {
+    "FirstPage3rd": "This is my page for real",
+    "FirstPage" : "My first page",
+    "FirstPageAux": "This is my page",
     "ComingSoon": "Coming soon...",
     "PageNotFound": "Page not found",
     "BackToList": "Back to list",
@@ -91,6 +96,11 @@
     "AppVersion": "App version: {{version}}",
     "LastUpdated": "Last updated: {{date}}",
     "DatabaseVersion": "Database version",
-    "Error": "Version error: {{message}}"
+    "Error": "Version error: {{message}}",
+    "FirstName": "First Name: {{FirstName}}",
+    "LastName": "Last Name: {{LastName}}",
+    "Email": "Email: {{Email}}",
+    "Username": "Username: {{Username}}"
+
   }
 }

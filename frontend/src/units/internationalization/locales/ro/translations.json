@@ -6,7 +6,8 @@
     "Notifications": "Notificări",
     "Support": "Suport",
     "Search": "Căutare...",
-    "GoToHome": "Mergi la pagina principală"
+    "GoToHome": "Mergi la pagina principală",
+    "Users": "Utilizator"
   },
   "Validations": {
     "Generic": {
@@ -81,6 +82,10 @@
     "AppVersion": "Versiunea aplicației: {{version}}",
     "LastUpdated": "Ultima actualizare: {{date}}",
     "DatabaseVersion": "Versiunea bazei de date",
-    "Error": "Eroare incărcare versiune: {{message}}"
+    "Error": "Eroare incărcare versiune: {{message}}",
+    "FirstName": "Nume: {{FirstName}}",
+    "LastName": "Prenume: {{LastName}}",
+    "Email": "Email: {{Email}}",
+    "Username": "Nume de utilizator: {{Username}}"
   }
 }
