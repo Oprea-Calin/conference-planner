@@ -1,0 +1,13 @@
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\bin\Debug\net9.0\Charisma.Common.Domain.deps.json
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\bin\Debug\net9.0\Charisma.Common.Domain.dll
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\bin\Debug\net9.0\Charisma.Common.Domain.pdb
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\Charisma.Common.Domain.csproj.AssemblyReference.cache
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\Charisma.Common.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\Charisma.Common.Domain.AssemblyInfoInputs.cache
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\Charisma.Common.Domain.AssemblyInfo.cs
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\Charisma.Common.Domain.csproj.CoreCompileInputs.cache
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\Charisma.Common.Domain.sourcelink.json
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\Charisma.Common.Domain.dll
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\refint\Charisma.Common.Domain.dll
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\Charisma.Common.Domain.pdb
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Domain\obj\Debug\net9.0\ref\Charisma.Common.Domain.dll

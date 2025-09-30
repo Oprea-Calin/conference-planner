@@ -1,0 +1,419 @@
+[
+  {
+    "ContainingType": "Charisma.Api.Controllers.ConferenceController",
+    "Method": "DeleteConference",
+    "RelativePath": "api/Conference/DeleteConference/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.ConferenceController",
+    "Method": "GetAllConferences",
+    "RelativePath": "api/Conference/GetAllConferences",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "startDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "conferenceName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "location",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.ConferenceController",
+    "Method": "GetConferenceById",
+    "RelativePath": "api/Conference/GetConferenceById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.ConferenceController",
+    "Method": "GetLocation",
+    "RelativePath": "api/Conference/GetLocation",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.Conference.GetLocation\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.ConferenceController",
+    "Method": "SaveConference",
+    "RelativePath": "api/Conference/SaveConference",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Charisma.Common.Domain.Dtos.Commands.SaveConference",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.DictionaryController",
+    "Method": "GetDictionaryCategory",
+    "RelativePath": "api/Dictionary/GetDictionaryCategory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCategory\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.DictionaryController",
+    "Method": "GetDictionaryCity",
+    "RelativePath": "api/Dictionary/GetDictionaryCity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCity\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.DictionaryController",
+    "Method": "GetDictionaryConferenceType",
+    "RelativePath": "api/Dictionary/GetDictionaryConferenceType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryConferenceType\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.DictionaryController",
+    "Method": "GetDictionaryCountry",
+    "RelativePath": "api/Dictionary/GetDictionaryCountry",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCountry\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.DictionaryController",
+    "Method": "GetDictionaryCounty",
+    "RelativePath": "api/Dictionary/GetDictionaryCounty",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCounty\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.DictionaryController",
+    "Method": "GetDictionaryStatus",
+    "RelativePath": "api/Dictionary/GetDictionaryStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryStatus\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "GetDatabaseResources",
+    "RelativePath": "api/internationalization/database-resources",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "DisableLanguage",
+    "RelativePath": "api/internationalization/disable-language/{languageId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "languageId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "EnableLanguage",
+    "RelativePath": "api/internationalization/enable-language/{languageId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "languageId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "GetEnabledTargets",
+    "RelativePath": "api/internationalization/enabled-targets",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Leasing.Internationalization.Application.Queries.GetEnabledTargets\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "GetLanguages",
+    "RelativePath": "api/internationalization/languages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Leasing.Internationalization.Application.Queries.GetLanguages\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "GetTextResourceList",
+    "RelativePath": "api/internationalization/text-resources",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TargetId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "SchemaName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "EntityName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ColumnName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "SaveTextResources",
+    "RelativePath": "api/internationalization/text-resources",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "saveTextResources",
+        "Type": "Charisma.Leasing.Internationalization.Models.Commands.SaveTextResources",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "ImportTextResources",
+    "RelativePath": "api/internationalization/text-resources",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "File",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "EnabledTargets",
+        "Type": "System.String[]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Leasing.Internationalization.Controllers.InternationalizationController",
+    "Method": "GetTranslatableEntities",
+    "RelativePath": "api/internationalization/translatable-entities",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.SystemController",
+    "Method": "GetDatabaseVersion",
+    "RelativePath": "api/System/database-version",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.System.GetDatabaseVersion\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.SystemController",
+    "Method": "ResetCache",
+    "RelativePath": "api/System/reset-cache",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Charisma.Common.Domain.Dtos.Commands.ResetCache",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.SystemController",
+    "Method": "GetVersion",
+    "RelativePath": "api/System/version",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.System.GetSystemVersion\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Charisma.Api.Controllers.UsersController",
+    "Method": "GetUser",
+    "RelativePath": "api/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Charisma.Api.Application.Queries.Users.GetUser\u002BQuery",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

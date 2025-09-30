@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "src\\Charisma.Api\\Charisma.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Charisma.Worker\\Charisma.Worker.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

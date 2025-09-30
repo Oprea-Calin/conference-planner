@@ -1,0 +1,16 @@
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\bin\Debug\net9.0\Charisma.Common.Infrastructure.deps.json
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\bin\Debug\net9.0\Charisma.Common.Infrastructure.dll
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\bin\Debug\net9.0\Charisma.Common.Infrastructure.pdb
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\bin\Debug\net9.0\Charisma.Common.Domain.dll
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\bin\Debug\net9.0\Charisma.Common.Domain.pdb
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.Common.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.Common.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.Common.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.Common.Infrastructure.AssemblyInfo.cs
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.Common.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.Common.Infrastructure.sourcelink.json
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.4F10AF6F.Up2Date
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.Common.Infrastructure.dll
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\refint\Charisma.Common.Infrastructure.dll
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\Charisma.Common.Infrastructure.pdb
+C:\Users\calin.oprea\Source\Repos\conference-planner\backend\src\Charisma.Common.Infrastructure\obj\Debug\net9.0\ref\Charisma.Common.Infrastructure.dll

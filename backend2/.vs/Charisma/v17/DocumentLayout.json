@@ -1,0 +1,102 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{AFAFD118-A9F3-49C8-ABBE-BCB051BDA5E2}|src\\Charisma.Worker\\Charisma.Worker.csproj|c:\\users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\charisma.worker\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{AFAFD118-A9F3-49C8-ABBE-BCB051BDA5E2}|src\\Charisma.Worker\\Charisma.Worker.csproj|solutionrelative:src\\charisma.worker\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2B21931-A8F0-4348-9871-1CA8F354CD26}|src\\Charisma.Worker.Application\\Charisma.Worker.Application.csproj|c:\\users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\charisma.worker.application\\handlers\\commands\\saveconferencehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2B21931-A8F0-4348-9871-1CA8F354CD26}|src\\Charisma.Worker.Application\\Charisma.Worker.Application.csproj|solutionrelative:src\\charisma.worker.application\\handlers\\commands\\saveconferencehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF304549-0D5D-4CF1-977C-D1F0A48B4B1C}|src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj|c:\\users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\charisma.common.infrastructure\\persistence\\repositories\\conferencerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF304549-0D5D-4CF1-977C-D1F0A48B4B1C}|src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj|solutionrelative:src\\charisma.common.infrastructure\\persistence\\repositories\\conferencerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32B7F4C2-30DC-4811-B485-48D1CD0DF462}|src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj|c:\\users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\charisma.common.domain\\entities\\conference\\conference.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32B7F4C2-30DC-4811-B485-48D1CD0DF462}|src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj|solutionrelative:src\\charisma.common.domain\\entities\\conference\\conference.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32B7F4C2-30DC-4811-B485-48D1CD0DF462}|src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj|c:\\users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\charisma.common.domain\\dtos\\commands\\saveconference.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32B7F4C2-30DC-4811-B485-48D1CD0DF462}|src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj|solutionrelative:src\\charisma.common.domain\\dtos\\commands\\saveconference.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Worker\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "src\\Charisma.Worker\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Worker\\appsettings.Development.json",
+              "RelativeToolTip": "src\\Charisma.Worker\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAACWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-26T14:15:26.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ConferenceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Persistence\\Repositories\\ConferenceRepository.cs",
+              "RelativeDocumentMoniker": "src\\Charisma.Common.Infrastructure\\Persistence\\Repositories\\ConferenceRepository.cs",
+              "ToolTip": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Persistence\\Repositories\\ConferenceRepository.cs",
+              "RelativeToolTip": "src\\Charisma.Common.Infrastructure\\Persistence\\Repositories\\ConferenceRepository.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwBMAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T13:25:13.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SaveConference.cs",
+              "DocumentMoniker": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Dtos\\Commands\\SaveConference.cs",
+              "RelativeDocumentMoniker": "src\\Charisma.Common.Domain\\Dtos\\Commands\\SaveConference.cs",
+              "ToolTip": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Dtos\\Commands\\SaveConference.cs",
+              "RelativeToolTip": "src\\Charisma.Common.Domain\\Dtos\\Commands\\SaveConference.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwBAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T12:26:17.191Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Conference.cs",
+              "DocumentMoniker": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Entities\\Conference\\Conference.cs",
+              "RelativeDocumentMoniker": "src\\Charisma.Common.Domain\\Entities\\Conference\\Conference.cs",
+              "ToolTip": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Entities\\Conference\\Conference.cs",
+              "RelativeToolTip": "src\\Charisma.Common.Domain\\Entities\\Conference\\Conference.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwAkAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T11:47:31.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SaveConferenceHandler.cs",
+              "DocumentMoniker": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Worker.Application\\Handlers\\Commands\\SaveConferenceHandler.cs",
+              "RelativeDocumentMoniker": "src\\Charisma.Worker.Application\\Handlers\\Commands\\SaveConferenceHandler.cs",
+              "ToolTip": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Worker.Application\\Handlers\\Commands\\SaveConferenceHandler.cs",
+              "RelativeToolTip": "src\\Charisma.Worker.Application\\Handlers\\Commands\\SaveConferenceHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAC4AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T07:22:38.613Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

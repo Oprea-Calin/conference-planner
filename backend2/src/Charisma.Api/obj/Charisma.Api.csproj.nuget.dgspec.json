@@ -1,0 +1,500 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api\\Charisma.Api.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api.Application\\Charisma.Api.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api.Application\\Charisma.Api.Application.csproj",
+        "projectName": "Charisma.Api.Application",
+        "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api.Application\\Charisma.Api.Application.csproj",
+        "packagesPath": "C:\\Users\\calin.oprea\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\NuGet.Config",
+          "C:\\Users\\calin.oprea\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://incbnuget.appservice.online/nuget": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj": {
+                "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj"
+              },
+              "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[15.0.1, )"
+            },
+            "Charisma.Leasing.Internationalization": {
+              "target": "Package",
+              "version": "[1.0.5, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.5.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[9.0.7, )"
+            },
+            "NBB.Messaging.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.MultiTenancy.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api\\Charisma.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api\\Charisma.Api.csproj",
+        "projectName": "Charisma.Api",
+        "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api\\Charisma.Api.csproj",
+        "packagesPath": "C:\\Users\\calin.oprea\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\NuGet.Config",
+          "C:\\Users\\calin.oprea\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://incbnuget.appservice.online/nuget": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api.Application\\Charisma.Api.Application.csproj": {
+                "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Api.Application\\Charisma.Api.Application.csproj"
+              },
+              "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj": {
+                "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj"
+              },
+              "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "AspNetCore.HealthChecks.UI.Client": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "IdentityServer4.AccessTokenValidation": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[9.0.7, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[9.0.7, )"
+            },
+            "Microsoft.IdentityModel.Protocols.OpenIdConnect": {
+              "target": "Package",
+              "version": "[8.3.1, )"
+            },
+            "NBB.Correlation": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Correlation.AspNet": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Correlation.Serilog": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Correlation.Serilog.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Messaging.BackwardCompatibility": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Messaging.Host": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Messaging.MultiTenancy": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Messaging.Nats": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Messaging.OpenTelemetry": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Messaging.Rusi": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.MultiTenancy.AspNet": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.MultiTenancy.Identification.Http": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.MultiTenancy.Identification.Messaging": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Tools.Serilog.Enrichers.TenantId": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Tools.Serilog.OpenTelemetryTracingSink": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
+            "OpenTelemetry.Exporter.Prometheus.AspNetCore": {
+              "target": "Package",
+              "version": "[1.12.0-beta.1, )"
+            },
+            "OpenTelemetry.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
+            "OpenTelemetry.Extensions.Propagators": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
+            "OpenTelemetry.Instrumentation.AspNetCore": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
+            "OpenTelemetry.Instrumentation.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[1.12.0-beta.2, )"
+            },
+            "OpenTelemetry.Instrumentation.Http": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
+            "OpenTelemetry.Instrumentation.Runtime": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
+            "Scrutor": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.MSSqlServer": {
+              "target": "Package",
+              "version": "[8.2.2, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj",
+        "projectName": "Charisma.Common.Domain",
+        "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj",
+        "packagesPath": "C:\\Users\\calin.oprea\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\NuGet.Config",
+          "C:\\Users\\calin.oprea\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://incbnuget.appservice.online/nuget": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "MediatR.Contracts": {
+              "target": "Package",
+              "version": "[2.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
+            "NBB.Core.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NBB.Messaging.DataContracts": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj",
+        "projectName": "Charisma.Common.Infrastructure",
+        "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\Charisma.Common.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\calin.oprea\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\NuGet.Config",
+          "C:\\Users\\calin.oprea\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://incbnuget.appservice.online/nuget": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj": {
+                "projectPath": "C:\\Users\\calin.oprea\\source\\repos\\conference-planner\\backend2\\src\\Charisma.Common.Domain\\Charisma.Common.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Charisma.Leasing.Internationalization": {
+              "target": "Package",
+              "version": "[1.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            },
+            "NBB.MultiTenancy.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "TS.DistributedCache": {
+              "target": "Package",
+              "version": "[1.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

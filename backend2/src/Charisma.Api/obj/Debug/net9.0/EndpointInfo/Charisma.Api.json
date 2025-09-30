@@ -1,0 +1,1342 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Charisma Api",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Conference/GetLocation": {
+      "get": {
+        "tags": [
+          "Conference"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.Conference.GetLocation.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Conference/GetAllConferences": {
+      "get": {
+        "tags": [
+          "Conference"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "conferenceName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Conference/GetConferenceById/{id}": {
+      "get": {
+        "tags": [
+          "Conference"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Conference/SaveConference": {
+      "post": {
+        "tags": [
+          "Conference"
+        ],
+        "parameters": [
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Charisma.Common.Domain.Dtos.Commands.SaveConference"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Charisma.Common.Domain.Dtos.Commands.SaveConference"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Charisma.Common.Domain.Dtos.Commands.SaveConference"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Charisma.Common.Domain.Dtos.Commands.SaveConference"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Conference/DeleteConference/{id}": {
+      "delete": {
+        "tags": [
+          "Conference"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dictionary/GetDictionaryCategory": {
+      "get": {
+        "tags": [
+          "Dictionary"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCategory.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dictionary/GetDictionaryCity": {
+      "get": {
+        "tags": [
+          "Dictionary"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCity.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dictionary/GetDictionaryConferenceType": {
+      "get": {
+        "tags": [
+          "Dictionary"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.Dictionaries.GetDictionaryConferenceType.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dictionary/GetDictionaryCountry": {
+      "get": {
+        "tags": [
+          "Dictionary"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCountry.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dictionary/GetDictionaryCounty": {
+      "get": {
+        "tags": [
+          "Dictionary"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCounty.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Dictionary/GetDictionaryStatus": {
+      "get": {
+        "tags": [
+          "Dictionary"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.Dictionaries.GetDictionaryStatus.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/internationalization/languages": {
+      "get": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Leasing.Internationalization.Application.Queries.GetLanguages.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/internationalization/enabled-targets": {
+      "get": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Leasing.Internationalization.Application.Queries.GetEnabledTargets.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/internationalization/text-resources": {
+      "get": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "TargetId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SchemaName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EntityName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ColumnName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Charisma.Leasing.Internationalization.Models.Commands.SaveTextResources"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Charisma.Leasing.Internationalization.Models.Commands.SaveTextResources"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Charisma.Leasing.Internationalization.Models.Commands.SaveTextResources"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Charisma.Leasing.Internationalization.Models.Commands.SaveTextResources"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "File": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "EnabledTargets": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "File": {
+                  "style": "form"
+                },
+                "EnabledTargets": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/internationalization/enable-language/{languageId}": {
+      "post": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "languageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/internationalization/disable-language/{languageId}": {
+      "post": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "languageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/internationalization/database-resources": {
+      "get": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/internationalization/translatable-entities": {
+      "get": {
+        "tags": [
+          "Internationalization"
+        ],
+        "parameters": [
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/System/version": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.System.GetSystemVersion.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/System/database-version": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.System.GetDatabaseVersion.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/System/reset-cache": {
+      "post": {
+        "tags": [
+          "System"
+        ],
+        "parameters": [
+          {
+            "name": "command",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Common.Domain.Dtos.Commands.ResetCache"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Charisma.Api.Application.Queries.Users.GetUser.Query"
+            }
+          },
+          {
+            "name": "TenantId",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ba5ff8f4-ac8f-4f73-898a-5e4a6babdd46"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "6E101840-EAC1-445D-FFF9-08DDBEC8254E"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Charisma.Api.Application.Queries.Conference.GetLocation.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCategory.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCity.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryConferenceType.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCountry.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryCounty.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.Dictionaries.GetDictionaryStatus.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.System.GetDatabaseVersion.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.System.GetSystemVersion.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Api.Application.Queries.Users.GetUser.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Common.Domain.Dtos.Commands.ResetCache": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Common.Domain.Dtos.Commands.SaveConference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conferenceTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "locationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Charisma.Common.Domain.Dtos.LocationDTO"
+          },
+          "organizerEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "speakers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Charisma.Common.Domain.Dtos.Commands.SaveConference.Speaker"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Charisma.Common.Domain.Dtos.Commands.SaveConference.Speaker": {
+        "type": "object",
+        "properties": {
+          "conferenceSpeakerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "speakerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "nationality": {
+            "type": "string",
+            "nullable": true
+          },
+          "rating": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isMainSpeaker": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Charisma.Common.Domain.Dtos.LocationDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "countyId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "country": {
+            "$ref": "#/components/schemas/Charisma.Common.Domain.Entities.Dictionaries.DictionaryCountry"
+          },
+          "county": {
+            "$ref": "#/components/schemas/Charisma.Common.Domain.Entities.Dictionaries.DictionaryCounty"
+          },
+          "city": {
+            "$ref": "#/components/schemas/Charisma.Common.Domain.Entities.Dictionaries.DictionaryCity"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Charisma.Common.Domain.Entities.Dictionaries.DictionaryCity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Charisma.Common.Domain.Entities.Dictionaries.DictionaryCountry": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Charisma.Common.Domain.Entities.Dictionaries.DictionaryCounty": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Charisma.Leasing.Internationalization.Application.Queries.GetEnabledTargets.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Leasing.Internationalization.Application.Queries.GetLanguages.Query": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Charisma.Leasing.Internationalization.Models.Commands.SaveTextResources": {
+        "type": "object",
+        "properties": {
+          "targetId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "textResources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Charisma.Leasing.Internationalization.Models.Commands.TextResource"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Charisma.Leasing.Internationalization.Models.Commands.TextResource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "languageId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "deleted": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://sso-qa.charisma.online/connect/authorize",
+            "tokenUrl": "https://sso-qa.charisma.online/connect/token",
+            "scopes": {
+              "Charisma.Api.full_access": "Access all API operations"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "Charisma.Api.full_access"
+      ]
+    }
+  ]
+}
