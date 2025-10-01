@@ -2,6 +2,7 @@ using Charisma.Common.Domain.Abstractions;
 using Charisma.Common.Domain.Dtos;
 using Charisma.Common.Domain.Entities.Conferences;
 using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,7 +12,15 @@ namespace Charisma.Api.Application.Queries.Conference
 {
     public class GetConferenceList
     {
-        public record Query : IRequest<List<ConferenceListItemDto>>;
+        public record Query : IRequest<List<ConferenceListItemDto>>
+        {
+            public DateTime? startDate { get; set; }
+            public DateTime? endDate { get; set; }
+            public string conferenceName { get; set; }
+            public string location { get; set; }
+            public string category { get; set; }
+            public string email { get; set; }
+        };
 
         public class QueryHandler(IConferenceRepository conferenceRepository) : IRequestHandler<Query, List<ConferenceListItemDto>>
         {
@@ -20,7 +29,29 @@ namespace Charisma.Api.Application.Queries.Conference
                 var conferences = await conferenceRepository.GetConferences();
                 List < ConferenceListItemDto > result = new List<ConferenceListItemDto>();
 
-                foreach (var conference in conferences)
+                var filtered = conferences.AsQueryable();
+
+
+                if (request.startDate.HasValue)
+                    filtered = filtered.Where(c => c.StartDate >= request.startDate.Value);
+
+                if (request.endDate.HasValue)
+                    filtered = filtered.Where(c => c.EndDate <= request.endDate.Value);
+
+                if (!string.IsNullOrWhiteSpace(request.conferenceName))
+                    filtered = filtered.Where(c => c.Name != null && c.Name.Contains(request.conferenceName, StringComparison.OrdinalIgnoreCase));
+
+                if (!string.IsNullOrWhiteSpace(request.location))
+                    filtered = filtered.Where(c => c.Location != null && c.Location.Name != null && c.Location.Name.Contains(request.location, StringComparison.OrdinalIgnoreCase));
+
+                if (!string.IsNullOrWhiteSpace(request.category))
+                    filtered = filtered.Where(c => c.Category != null && c.Category.Name != null && c.Category.Name.Contains(request.category, StringComparison.OrdinalIgnoreCase));
+
+                if (!string.IsNullOrWhiteSpace(request.email))
+                    filtered = filtered.Where(c => c.OrganizerEmail != null && c.OrganizerEmail.Contains(request.email, StringComparison.OrdinalIgnoreCase));
+
+
+                foreach (var conference in filtered)
                 {
                     var atendeesList = new List<ConferenceXAtendee>();
                     conference.ConferenceXAttendees?.ForEach(x =>
