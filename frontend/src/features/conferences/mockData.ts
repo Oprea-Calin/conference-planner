@@ -1,4 +1,16 @@
-export const mockData = [
+export interface Conference {
+  id: number;
+  conferenceTypeName: string;
+  locationName: string;
+  startDate: string;
+  endDate: string;
+  mainSpeakerName: string;
+  attendeesList: string[];
+  name: string;
+  country: string;
+}
+
+export const mockData: Conference[] = [
   {
     id: 1,
     conferenceTypeName: "remote",
@@ -26,8 +38,7 @@ export const mockData = [
       "mihai"
     ],
     name: "Real conference",
-    country: "Romania",
-    author: "Bob"
+    country: "Romania"
   },
   {
     id: 2,
@@ -38,8 +49,7 @@ export const mockData = [
     mainSpeakerName: "John Lemon",
     attendeesList: ["marius", "marian", "mihai", "marinica"],
     name: "Fake conference",
-    country: "Romania",
-    author: "Bob"
+    country: "Romania"
   },
   {
     id: 3,
@@ -50,8 +60,7 @@ export const mockData = [
     mainSpeakerName: "Mihai Lemon",
     attendeesList: ["marius", "marian", "mihai"],
     name: "Conference about something",
-    country: "Romania",
-    author: "Bob"
+    country: "Romania"
   },
   {
     id: 4,
@@ -62,8 +71,7 @@ export const mockData = [
     mainSpeakerName: "Marian Lemon",
     attendeesList: ["marius", "marian", "mihai"],
     name: "Conference about nothing",
-    country: "Romania",
-    author: "Bob"
+    country: "Romania"
   },
   {
     id: 5,
@@ -74,7 +82,6 @@ export const mockData = [
     mainSpeakerName: "Marius Lemon",
     attendeesList: ["marius", "marian", "mihai"],
     name: "Conference of conferences",
-    country: "Romania",
-    author: "Bob"
+    country: "Romania"
   }
 ];
