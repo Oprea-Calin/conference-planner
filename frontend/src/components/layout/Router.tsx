@@ -9,6 +9,7 @@ import NotificationsContainer from "../../features/notifications/NotificationsCo
 import SupportContainer from "../../features/support/SupportContainer";
 import UserContainer from "features/users/UserContainer";
 import TutorialContainer from "features/tutorial/TutorialContainer";
+import ConferenceContainer from "features/conferences/ConferenceContainer";
 
 const Router: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const Router: React.FC = () => {
         <Route path="/" element={<LayoutShell />}>
           <Route index element={<HomeContainer />} />
           <Route path="users" element={<UserContainer />} />
+          <Route path="conferences" element={<ConferenceContainer />} />
           <Route path="settings" element={<SettingsContainer />} />
           <Route path="notifications" element={<NotificationsContainer />} />
           <Route path="tutorial" element={<TutorialContainer />} />
