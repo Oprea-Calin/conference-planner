@@ -17,6 +17,9 @@ const endpoints = {
   },
   users: {
     default: `${usersRoute}`
+  },
+  dictionaries: {
+    categories: `${apiHost}/Dictionaries/categories`
   }
 };
 

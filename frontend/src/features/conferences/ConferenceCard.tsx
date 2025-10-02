@@ -6,54 +6,67 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const ConferenceCard: React.FC<{ item: Conference }> = ({ item }) => {
   return (
-    <CardContent>
-      <Grid alignItems={"right"} justifyContent={"right"} container mb={2} gap={2}>
-        <EditIcon />
-        <DeleteIcon />
-      </Grid>
-      <Grid container direction="column" gap={2}>
-        <Grid container justifyContent="space-between" alignItems="center" sx={{ backgroundColor: "#f5f5f5", p: 1, borderRadius: 1 }}>
-          <GroupsIcon />
-          <Typography variant="h6" fontWeight={600}>
-            {item.name}
-          </Typography>
-          <Chip label={item.conferenceTypeName} sx={{ textTransform: "capitalize" }} />
+    <Grid container sx={{ border: "1px solid #e0e0e0", borderRadius: 2 }}>
+      <CardContent>
+        <Grid alignItems={"right"} justifyContent={"right"} container mb={2} gap={2}>
+          <EditIcon />
+          <DeleteIcon />
         </Grid>
+        <Grid container direction="column" gap={2}>
+          <Grid container justifyContent="space-between" alignItems="center" sx={{ backgroundColor: "#f5f5f5", p: 1, borderRadius: 1 }}>
+            <GroupsIcon />
+            <Typography variant="h6" fontWeight={600}>
+              {item.name}
+            </Typography>
+            <Chip label={item.conferenceTypeName} sx={{ textTransform: "capitalize" }} />
+          </Grid>
 
-        <Grid container justifyContent="space-between" alignItems="center" padding={1} sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}>
-          <Grid>
-            <Typography fontWeight={500}>Locatie:</Typography>
-            <Typography>{item.locationName}</Typography>
+          <Grid
+            container
+            justifyContent="space-between"
+            alignItems="center"
+            padding={1}
+            sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}
+          >
+            <Grid>
+              <Typography fontWeight={500}>Locatie:</Typography>
+              <Typography>{item.locationName}</Typography>
+            </Grid>
+            <Grid>
+              <Typography fontWeight={500}>Tara:</Typography>
+              <Typography>{item.country}</Typography>
+            </Grid>
           </Grid>
-          <Grid>
-            <Typography fontWeight={500}>Tara:</Typography>
-            <Typography>{item.country}</Typography>
-          </Grid>
-        </Grid>
 
-        <Grid container justifyContent="space-between" padding={1} alignItems="center" sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}>
-          <Grid>
-            <Typography fontWeight={500}>Data inceput:</Typography>
-            <Typography>{item.startDate.trim()}</Typography>
+          <Grid
+            container
+            justifyContent="space-between"
+            padding={1}
+            alignItems="center"
+            sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}
+          >
+            <Grid>
+              <Typography fontWeight={500}>Data inceput:</Typography>
+              <Typography>{item.startDate.trim()}</Typography>
+            </Grid>
+            <Grid>
+              <Typography fontWeight={500}>Data final:</Typography>
+              <Typography>{item.endDate.trim()}</Typography>
+            </Grid>
           </Grid>
-          <Grid>
-            <Typography fontWeight={500}>Data final:</Typography>
-            <Typography>{item.endDate.trim()}</Typography>
-          </Grid>
-        </Grid>
 
-        <Grid container justifyContent="space-between" padding={1} sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}>
-          <Grid>
-            <Typography fontWeight={500}>Speaker principal:</Typography>
-            <Typography>{item.mainSpeakerName}</Typography>
+          <Grid container justifyContent="space-between" padding={1} sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}>
+            <Grid>
+              <Typography fontWeight={500}>Speaker principal:</Typography>
+              <Typography>{item.mainSpeakerName}</Typography>
+            </Grid>
+            <Grid>
+              <Typography fontWeight={500}>Participanti: </Typography>
+              <Typography>{item.attendeesList.length}</Typography>
+            </Grid>
           </Grid>
-          <Grid>
-            <Typography fontWeight={500}>Participanti: </Typography>
-            <Typography>{item.attendeesList.length}</Typography>
-          </Grid>
-        </Grid>
 
-        {/* <Grid container direction="column" padding={1} sx={{ backgroundColor: "#f5f5f5", borderRadius: 1 }}>
+          {/* <Grid container direction="column" padding={1} sx={{ backgroundColor: "#f5f5f5", borderRadius: 1 }}>
           <Typography fontWeight={500} mb={1}>
             Participanti {item.attendeesList.length}:
           </Typography>
@@ -63,8 +76,9 @@ const ConferenceCard: React.FC<{ item: Conference }> = ({ item }) => {
             ))}
           </Box>
         </Grid> */}
-      </Grid>
-    </CardContent>
+        </Grid>
+      </CardContent>
+    </Grid>
   );
 };
 

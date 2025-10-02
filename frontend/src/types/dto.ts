@@ -2,6 +2,11 @@ type SystemVersionDto = {
   version: string;
   buildDate: string;
 };
+type DictionaryItem = {
+  id: number;
+  name: string;
+  code: string;
+};
 
 type UserGroupDto = {
   userGroupId: number;
@@ -52,5 +57,6 @@ export type {
   InitializationParamDto,
   InitializationParamValue,
   AsyncCommandResult,
-  CommandExecutionError
+  CommandExecutionError,
+  DictionaryItem
 };

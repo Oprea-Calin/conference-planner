@@ -6,7 +6,7 @@ const ConferenceListFilters: React.FC<{
 }> = ({ filterText, onFilterTextChange }) => {
   return (
     <div>
-      <Grid display={"flex"} justifyContent="center" alignItems="center">
+      <Grid display={"flex"} justifyContent="center" alignItems="center" padding={0}>
         <Grid container spacing={2} size={{ xs: 6, md: 4 }} overflow={"auto"} justifyContent="center">
           <Grid>
             <input
