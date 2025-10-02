@@ -1,4 +1,3 @@
-import { mockData } from "features/conferences/mockData";
 import FilterableProductTable from "./FilterableProductTable";
 import { mockup } from "./mockup";
 

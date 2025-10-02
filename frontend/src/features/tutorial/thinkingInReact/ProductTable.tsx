@@ -3,11 +3,21 @@ import type { Product } from "./mockup";
 import ProductCategoryRow from "./ProductCategoryRow";
 import ProductRow from "./ProductRow";
 
-const ProductTable: React.FC<{ products: Product[] }> = ({ products }) => {
+const ProductTable: React.FC<{ products: Product[]; filterText: string; inStockOnly: boolean }> = ({
+  products,
+  filterText,
+  inStockOnly
+}) => {
   const rows: JSX.Element[] = [];
   let lastCategory: string | null = null;
 
   products.forEach((product) => {
+    if (product.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
+      return;
+    }
+    if (inStockOnly && !product.stocked) {
+      return;
+    }
     if (product.category !== lastCategory) {
       rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
     }
