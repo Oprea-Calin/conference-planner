@@ -47,18 +47,22 @@ const ConferenceCard: React.FC<{ item: Conference }> = ({ item }) => {
             <Typography fontWeight={500}>Speaker principal:</Typography>
             <Typography>{item.mainSpeakerName}</Typography>
           </Grid>
+          <Grid>
+            <Typography fontWeight={500}>Participanti: </Typography>
+            <Typography>{item.attendeesList.length}</Typography>
+          </Grid>
         </Grid>
 
-        <Grid container direction="column" padding={1} sx={{ backgroundColor: "#f5f5f5", borderRadius: 1 }}>
+        {/* <Grid container direction="column" padding={1} sx={{ backgroundColor: "#f5f5f5", borderRadius: 1 }}>
           <Typography fontWeight={500} mb={1}>
-            Participanti ({item.attendeesList.length}):
+            Participanti {item.attendeesList.length}:
           </Typography>
           <Box display="flex" gap={1} flexWrap="wrap">
             {item.attendeesList.map((name, idx) => (
               <Chip key={idx} label={name} />
             ))}
           </Box>
-        </Grid>
+        </Grid> */}
       </Grid>
     </CardContent>
   );

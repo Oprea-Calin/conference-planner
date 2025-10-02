@@ -1,41 +1,20 @@
-import { mockData, type Conference } from "./mockData";
-import { Card, Grid } from "@mui/material";
-
+import { type Conference } from "./mockData";
+import { Grid } from "@mui/material";
 import ConferenceCard from "./ConferenceCard";
-const ConferenceList: React.FC<{ conference: Conference[] }> = () => {
-  return (
-    <Grid
-      container
-      spacing={2}
-      size={{ xs: 6, md: 4 }}
-      overflow={"auto"}
-      justifyContent="center"
-      // sx={{
-      //   height: "80vh",
-      //   // overflowY: "auto",
-      //   display: "grid",
-      //   px: 2,
-      //   py: 1
-      // }}
-    >
-      {mockData.map((conference) => (
-        <Card
-          key={conference.id}
-          sx={{
-            maxWidth: 600,
-            width: "100%",
-            paddingLeft: 2,
-            paddingRight: 2,
-            paddingBottom: 2,
+import type { JSX } from "react";
 
-            mb: 3,
-            boxShadow: 3,
-            borderRadius: 2
-          }}
-        >
-          <ConferenceCard item={conference} />
-        </Card>
-      ))}
+const ConferenceList: React.FC<{ conferences: Conference[]; filterText: string }> = ({ conferences, filterText }) => {
+  const rows: JSX.Element[] = [];
+  conferences.forEach((conference) => {
+    if (conference.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
+      return;
+    }
+    rows.push(<ConferenceCard item={conference} key={conference.id} />);
+  });
+
+  return (
+    <Grid container spacing={2} size={{ xs: 6, md: 4 }} overflow={"auto"} justifyContent="center">
+      {rows}
     </Grid>
   );
 };
