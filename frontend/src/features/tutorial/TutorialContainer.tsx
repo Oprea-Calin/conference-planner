@@ -11,15 +11,21 @@ import LessonSeven from "./lesson7/LessonSeven";
 import LessonEight from "./lesson8/LessonEight";
 import LessonNine from "./lesson9/LessonNine";
 import ThinkingInReact from "./thinkingInReact/thinkingInReact";
-
+import LessonTen from "./lesson10/LessonTen";
+import { useSearchParams } from "react-router-dom";
+import LessonEleven from "./Lesson11/LessonEleven";
+import LessonTwelve from "./lesson12/LessonTwelve";
+import LessonThirteen from "./lesson13/LessonThirteen";
 const TutorialContainer: React.FC = () => {
-  const [value, setValue] = useState<string>("1");
+  // const [value, setValue] = useState<string>("1");
+  const [searchParams, setSearchParams] = useSearchParams("?tab=1");
+  const value: string = searchParams.get("tab") || "1";
 
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={(_e, newValue) => setValue(newValue)} variant="scrollable" scrollButtons="auto">
+          <TabList onChange={(_e, newValue) => setSearchParams({ tab: newValue })} variant="scrollable" scrollButtons="auto">
             <Tab label="Lesson One" value="1" />
             <Tab label="Lesson Two" value="2" />
             <Tab label="Lesson Three" value="3" />
@@ -30,6 +36,10 @@ const TutorialContainer: React.FC = () => {
             <Tab label="Lesson Eight" value="8" />
             <Tab label="Lesson Nine" value="9" />
             <Tab label="Lesson Thinking in React" value="thinkingInReact" />
+            <Tab label="Lesson Ten" value="10" />
+            <Tab label="Lesson Eleven" value="11" />
+            <Tab label="Lesson Twelve" value="12" />
+            <Tab label="Lesson Thirteen" value="13" />
           </TabList>
         </Box>
 
@@ -62,6 +72,18 @@ const TutorialContainer: React.FC = () => {
         </TabPanel>
         <TabPanel value="thinkingInReact">
           <ThinkingInReact></ThinkingInReact>
+        </TabPanel>
+        <TabPanel value="10">
+          <LessonTen></LessonTen>
+        </TabPanel>
+        <TabPanel value="11">
+          <LessonEleven></LessonEleven>
+        </TabPanel>
+        <TabPanel value="12">
+          <LessonTwelve></LessonTwelve>
+        </TabPanel>
+        <TabPanel value="13">
+          <LessonThirteen></LessonThirteen>
         </TabPanel>
       </TabContext>
     </Box>
