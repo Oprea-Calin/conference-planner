@@ -1,10 +1,10 @@
-import { type Conference } from "./mockData";
-import { Box, CardContent, Chip, Grid, Typography } from "@mui/material";
+import { CardContent, Chip, Grid, Typography } from "@mui/material";
 import GroupsIcon from "@mui/icons-material/Groups";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import type { ConferenceDto } from "types";
 
-const ConferenceCard: React.FC<{ item: Conference }> = ({ item }) => {
+const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
   return (
     <Grid container sx={{ border: "1px solid #e0e0e0", borderRadius: 2 }}>
       <CardContent>
@@ -18,7 +18,7 @@ const ConferenceCard: React.FC<{ item: Conference }> = ({ item }) => {
             <Typography variant="h6" fontWeight={600}>
               {item.name}
             </Typography>
-            <Chip label={item.conferenceTypeName} sx={{ textTransform: "capitalize" }} />
+            <Chip label={item.conferenceType} sx={{ textTransform: "capitalize" }} />
           </Grid>
 
           <Grid
@@ -34,7 +34,7 @@ const ConferenceCard: React.FC<{ item: Conference }> = ({ item }) => {
             </Grid>
             <Grid>
               <Typography fontWeight={500}>Tara:</Typography>
-              <Typography>{item.country}</Typography>
+              <Typography>{item.countryName}</Typography>
             </Grid>
           </Grid>
 
@@ -47,11 +47,11 @@ const ConferenceCard: React.FC<{ item: Conference }> = ({ item }) => {
           >
             <Grid>
               <Typography fontWeight={500}>Data inceput:</Typography>
-              <Typography>{item.startDate.trim()}</Typography>
+              <Typography>{new Date(item.startDate).toLocaleDateString()}</Typography>
             </Grid>
             <Grid>
               <Typography fontWeight={500}>Data final:</Typography>
-              <Typography>{item.endDate.trim()}</Typography>
+              <Typography>{new Date(item.endDate).toLocaleDateString()}</Typography>
             </Grid>
           </Grid>
 
@@ -62,7 +62,7 @@ const ConferenceCard: React.FC<{ item: Conference }> = ({ item }) => {
             </Grid>
             <Grid>
               <Typography fontWeight={500}>Participanti: </Typography>
-              <Typography>{item.attendeesList.length}</Typography>
+              <Typography>{item.atendeesList.length}</Typography>
             </Grid>
           </Grid>
 

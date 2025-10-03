@@ -1,3 +1,5 @@
+import type { List } from "lodash";
+
 type SystemVersionDto = {
   version: string;
   buildDate: string;
@@ -6,6 +8,21 @@ type DictionaryItem = {
   id: number;
   name: string;
   code: string;
+};
+type ConferenceDto = {
+  id: number;
+  conferenceType: string;
+  locationName: string;
+  countryName: string;
+  countyName: string;
+  cityName: string;
+  organizerEmail: string;
+  categoryName: string;
+  startDate: Date;
+  endDate: Date;
+  name: string;
+  atendeesList: List<string>;
+  mainSpeakerName: string;
 };
 
 type UserGroupDto = {
@@ -58,5 +75,6 @@ export type {
   InitializationParamValue,
   AsyncCommandResult,
   CommandExecutionError,
-  DictionaryItem
+  DictionaryItem,
+  ConferenceDto
 };

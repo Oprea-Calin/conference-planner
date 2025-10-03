@@ -2,7 +2,7 @@ export interface Conference {
   id: number;
   conferenceTypeName: string;
   locationName: string;
-  startDate: string;
+  startDate: Date;
   endDate: string;
   mainSpeakerName: string;
   attendeesList: string[];

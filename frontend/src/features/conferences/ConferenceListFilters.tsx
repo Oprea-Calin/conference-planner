@@ -3,15 +3,23 @@ import { Grid } from "@mui/material";
 const ConferenceListFilters: React.FC<{
   filterText: string;
   onFilterTextChange: (text: string) => void;
-}> = ({ filterText, onFilterTextChange }) => {
+  filterStartDate: Date;
+  onFilterStartDateChange: (date: Date) => void;
+  filterEndDate: Date;
+  onFilterEndDateChange: (date: Date) => void;
+}> = ({ filterText, onFilterTextChange, filterStartDate, onFilterStartDateChange, filterEndDate, onFilterEndDateChange }) => {
   return (
-    <div>
+    <div style={{ position: "sticky", top: 0, backgroundColor: "white", paddingBottom: 8 }}>
       <Grid display={"flex"} justifyContent="center" alignItems="center" padding={0}>
         <Grid container spacing={2} size={{ xs: 6, md: 4 }} overflow={"auto"} justifyContent="center">
           <Grid>
             <input
               type="date"
               name="startDate"
+              value={filterStartDate.toLocaleDateString("en-CA")}
+              onChange={(e) => {
+                onFilterStartDateChange(new Date(e.target.value));
+              }}
               placeholder="Start Date"
               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
             />
@@ -20,6 +28,10 @@ const ConferenceListFilters: React.FC<{
             <input
               type="date"
               name="endDate"
+              value={filterEndDate.toLocaleDateString("en-CA")}
+              onChange={(e) => {
+                onFilterEndDateChange(new Date(e.target.value));
+              }}
               placeholder="End Date"
               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
             />

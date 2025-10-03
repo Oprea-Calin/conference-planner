@@ -20,6 +20,9 @@ const endpoints = {
   },
   dictionaries: {
     categories: `${apiHost}/Dictionaries/categories`
+  },
+  conferences: {
+    default: `${apiHost}/Conferences/list-for-attendees`
   }
 };
 
