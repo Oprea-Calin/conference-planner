@@ -18,7 +18,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
             <Typography variant="h6" fontWeight={600}>
               {item.name}
             </Typography>
-            <Chip label={item.conferenceType} sx={{ textTransform: "capitalize" }} />
+            <Chip label={item.conferenceTypeName} sx={{ textTransform: "capitalize" }} />
           </Grid>
 
           <Grid

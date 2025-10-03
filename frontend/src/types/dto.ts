@@ -11,7 +11,7 @@ type DictionaryItem = {
 };
 type ConferenceDto = {
   id: number;
-  conferenceType: string;
+  conferenceTypeName: string;
   locationName: string;
   countryName: string;
   countyName: string;
