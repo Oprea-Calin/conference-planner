@@ -4,8 +4,22 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import RoomIcon from "@mui/icons-material/Room";
 import PersonIcon from "@mui/icons-material/Person";
 import type { ConferenceDto } from "types";
+import { use } from "react";
+import { toast } from "react-toastify";
+import { deleteMutationFetcher, useApiSWRMutation } from "units/swr";
+import { endpoints } from "utils";
 
 const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
+  const { trigger: deleteConference, isMutating: isDeletingConference } = useApiSWRMutation(
+    endpoints.conferences.deleteConference,
+    deleteMutationFetcher<{ id: number }>,
+    {
+      onError: (error) => {
+        toast.error(`Error deleting conference: ${error.message}`);
+      }
+    }
+  );
+
   return (
     <Card
       elevation={2}
@@ -21,7 +35,13 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
           <EditIcon fontSize="small" />
         </IconButton>
         <IconButton size="small">
-          <DeleteIcon fontSize="small" />
+          <DeleteIcon
+            fontSize="small"
+            onClick={() => {
+              deleteConference({ id: item.id });
+              //window.location.reload();
+            }}
+          />
         </IconButton>
       </Box>
 

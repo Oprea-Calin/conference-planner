@@ -3,10 +3,10 @@ import { Grid } from "@mui/material";
 const ConferenceListFilters: React.FC<{
   filterText: string;
   onFilterTextChange: (text: string) => void;
-  filterStartDate: Date | null;
-  onFilterStartDateChange: (date: Date | null) => void;
-  filterEndDate: Date | null;
-  onFilterEndDateChange: (date: Date | null) => void;
+  filterStartDate: Date | undefined;
+  onFilterStartDateChange: (date: Date | undefined) => void;
+  filterEndDate: Date | undefined;
+  onFilterEndDateChange: (date: Date | undefined) => void;
   filterConferenceTypeName: string;
   onFilterConferenceTypeNameChange: (conferenceTypeName: string) => void;
   filterCity: string;

@@ -6,8 +6,8 @@ import type { ConferenceDto } from "types/dto";
 const ConferenceList: React.FC<{
   conferences: ConferenceDto[];
   filterText: string;
-  filterStartDate: Date;
-  filterEndDate: Date;
+  filterStartDate: Date | undefined;
+  filterEndDate: Date | undefined;
   filterConferenceTypeName: string;
   filterCity: string;
   filterCounty: string;

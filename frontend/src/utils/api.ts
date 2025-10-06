@@ -19,10 +19,16 @@ const endpoints = {
     default: `${usersRoute}`
   },
   dictionaries: {
-    categories: `${apiHost}/Dictionaries/categories`
+    categories: `${apiHost}/Dictionaries/categories`,
+    conferenceTypes: `${apiHost}/Dictionaries/conference-types`,
+    countries: `${apiHost}/Dictionaries/countries`,
+    counties: `${apiHost}/Dictionaries/counties`,
+    cities: `${apiHost}/Dictionaries/cities`
   },
   conferences: {
-    default: `${apiHost}/Conferences/list-for-attendees`
+    default: `${apiHost}/Conferences/list-for-attendees`,
+    saveConference: `${apiHost}/Conferences/save-conference`,
+    deleteConference: `${apiHost}/Conferences/{id}`
   }
 };
 
