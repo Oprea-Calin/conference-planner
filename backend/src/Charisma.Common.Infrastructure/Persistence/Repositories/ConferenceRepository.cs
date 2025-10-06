@@ -19,6 +19,8 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
                 .Include(c => c.Location.City)
                 .Include(c => c.Category)
                 .Include(c => c.ConferenceType)
+                .Include(c => c.ConferenceXAttendees)
+                    .ThenInclude(cs =>cs.Status)
                 .Include(c => c.ConferenceXSpeakers)
                     .ThenInclude(cs => cs.Speaker)
                 .ToListAsync();

@@ -1,84 +1,62 @@
-import { CardContent, Chip, Grid, Typography } from "@mui/material";
-import GroupsIcon from "@mui/icons-material/Groups";
+import { Box, Card, CardContent, Chip, IconButton, Typography, Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import RoomIcon from "@mui/icons-material/Room";
+import PersonIcon from "@mui/icons-material/Person";
 import type { ConferenceDto } from "types";
 
 const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
   return (
-    <Grid container sx={{ border: "1px solid #e0e0e0", borderRadius: 2 }}>
+    <Card
+      elevation={2}
+      sx={{
+        borderRadius: 2,
+        minWidth: 300,
+        position: "relative",
+        paddingBottom: 2
+      }}
+    >
+      <Box sx={{ position: "absolute", top: 8, right: 8 }}>
+        <IconButton size="small">
+          <EditIcon fontSize="small" />
+        </IconButton>
+        <IconButton size="small">
+          <DeleteIcon fontSize="small" />
+        </IconButton>
+      </Box>
+
       <CardContent>
-        <Grid alignItems={"right"} justifyContent={"right"} container mb={2} gap={2}>
-          <EditIcon />
-          <DeleteIcon />
-        </Grid>
-        <Grid container direction="column" gap={2}>
-          <Grid container justifyContent="space-between" alignItems="center" sx={{ backgroundColor: "#f5f5f5", p: 1, borderRadius: 1 }}>
-            <GroupsIcon />
-            <Typography variant="h6" fontWeight={600}>
-              {item.name}
-            </Typography>
-            <Chip label={item.conferenceTypeName} sx={{ textTransform: "capitalize" }} />
-          </Grid>
+        <Typography variant="h6" fontWeight={600} gutterBottom>
+          {item.name}
+        </Typography>
 
-          <Grid
-            container
-            justifyContent="space-between"
-            alignItems="center"
-            padding={1}
-            sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}
-          >
-            <Grid>
-              <Typography fontWeight={500}>Locatie:</Typography>
-              <Typography>{item.locationName}</Typography>
-            </Grid>
-            <Grid>
-              <Typography fontWeight={500}>Tara:</Typography>
-              <Typography>{item.countryName}</Typography>
-            </Grid>
-          </Grid>
+        <Chip label={item.conferenceTypeName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
 
-          <Grid
-            container
-            justifyContent="space-between"
-            padding={1}
-            alignItems="center"
-            sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}
-          >
-            <Grid>
-              <Typography fontWeight={500}>Data inceput:</Typography>
-              <Typography>{new Date(item.startDate).toLocaleDateString()}</Typography>
-            </Grid>
-            <Grid>
-              <Typography fontWeight={500}>Data final:</Typography>
-              <Typography>{new Date(item.endDate).toLocaleDateString()}</Typography>
-            </Grid>
-          </Grid>
-
-          <Grid container justifyContent="space-between" padding={1} sx={{ backgroundColor: "#fafafa", borderRadius: 1 }}>
-            <Grid>
-              <Typography fontWeight={500}>Speaker principal:</Typography>
-              <Typography>{item.mainSpeakerName}</Typography>
-            </Grid>
-            <Grid>
-              <Typography fontWeight={500}>Participanti: </Typography>
-              <Typography>{item.atendeesList.length}</Typography>
-            </Grid>
-          </Grid>
-
-          {/* <Grid container direction="column" padding={1} sx={{ backgroundColor: "#f5f5f5", borderRadius: 1 }}>
-          <Typography fontWeight={500} mb={1}>
-            Participanti {item.attendeesList.length}:
+        <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <PersonIcon fontSize="small" />
+          <Typography variant="body2">
+            <strong>Speaker:</strong> {item.mainSpeakerName}
           </Typography>
-          <Box display="flex" gap={1} flexWrap="wrap">
-            {item.attendeesList.map((name, idx) => (
-              <Chip key={idx} label={name} />
-            ))}
-          </Box>
-        </Grid> */}
-        </Grid>
+        </Box>
+
+        <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <RoomIcon fontSize="small" />
+          <Typography variant="body2">
+            {item.cityName}, {item.countyName.toUpperCase()}, {item.countryName.toUpperCase()}
+          </Typography>
+        </Box>
+
+        <Typography variant="body2" color="text.secondary" gutterBottom>
+          {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()} |{" "}
+          {new Date(item.startDate).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} -{" "}
+          {new Date(item.endDate).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+        </Typography>
+
+        <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>
+          {item.atendeesList.length} attendees
+        </Button>
       </CardContent>
-    </Grid>
+    </Card>
   );
 };
 

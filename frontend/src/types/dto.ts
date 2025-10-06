@@ -9,6 +9,11 @@ type DictionaryItem = {
   name: string;
   code: string;
 };
+type ConferenceXAtendee = {
+  id: number;
+  AtendeeEmail: string;
+  StatusName: string;
+};
 type ConferenceDto = {
   id: number;
   conferenceTypeName: string;
@@ -21,7 +26,7 @@ type ConferenceDto = {
   startDate: Date;
   endDate: Date;
   name: string;
-  atendeesList: List<string>;
+  atendeesList: List<ConferenceXAtendee>;
   mainSpeakerName: string;
 };
 
@@ -76,5 +81,6 @@ export type {
   AsyncCommandResult,
   CommandExecutionError,
   DictionaryItem,
-  ConferenceDto
+  ConferenceDto,
+  ConferenceXAtendee
 };

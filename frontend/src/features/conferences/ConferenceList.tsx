@@ -3,12 +3,16 @@ import ConferenceCard from "./ConferenceCard";
 import type { JSX } from "react";
 import type { ConferenceDto } from "types/dto";
 
-const ConferenceList: React.FC<{ conferences: ConferenceDto[]; filterText: string; filterStartDate: Date; filterEndDate: Date }> = ({
-  conferences,
-  filterText,
-  filterStartDate,
-  filterEndDate
-}) => {
+const ConferenceList: React.FC<{
+  conferences: ConferenceDto[];
+  filterText: string;
+  filterStartDate: Date;
+  filterEndDate: Date;
+  filterConferenceTypeName: string;
+  filterCity: string;
+  filterCounty: string;
+  filterCountry: string;
+}> = ({ conferences, filterText, filterStartDate, filterEndDate, filterConferenceTypeName, filterCity, filterCounty, filterCountry }) => {
   const rows: JSX.Element[] = [];
   conferences.forEach((conference) => {
     if (conference.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
@@ -18,6 +22,18 @@ const ConferenceList: React.FC<{ conferences: ConferenceDto[]; filterText: strin
     const ed = new Date(conference.endDate);
 
     if (sd < filterStartDate || ed > filterEndDate) {
+      return;
+    }
+    if (conference.conferenceTypeName.toLowerCase().indexOf(filterConferenceTypeName.toLowerCase()) === -1) {
+      return;
+    }
+    if (conference.countyName.toLowerCase().indexOf(filterCounty.toLowerCase()) === -1) {
+      return;
+    }
+    if (conference.countryName.toLowerCase().indexOf(filterCountry.toLowerCase()) === -1) {
+      return;
+    }
+    if (conference.cityName.toLowerCase().indexOf(filterCity.toLowerCase()) === -1) {
       return;
     }
 
