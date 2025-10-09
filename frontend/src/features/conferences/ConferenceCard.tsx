@@ -6,10 +6,20 @@ import PersonIcon from "@mui/icons-material/Person";
 import type { ConferenceDto } from "types";
 import { use } from "react";
 import { toast } from "react-toastify";
-import { deleteMutationFetcher, useApiSWRMutation } from "units/swr";
+import { deleteMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import { endpoints } from "utils";
+import { useSubscription } from "units/notifications";
+import { notificationTypes } from "constants";
+import { t } from "i18next";
 
 const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
+  const {
+    // data: ConferenceListData = [],
+    // isLoading: isLoadingConferenceList,
+    mutate: refetchConferenceList
+  } = useApiSWR<ConferenceDto[], Error>(endpoints.conferences.default, {
+    onError: (err) => toast.error(t("User.error", { message: err.message }))
+  });
   const { trigger: deleteConference, isMutating: isDeletingConference } = useApiSWRMutation(
     endpoints.conferences.deleteConference,
     deleteMutationFetcher<{ id: number }>,
@@ -19,6 +29,13 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
       }
     }
   );
+
+  useSubscription(notificationTypes.CONFERENCE_DELETED, {
+    onNotification: () => {
+      refetchConferenceList();
+      toast.info(t("Conferences.ConferenceDeletedNotification"));
+    }
+  });
 
   return (
     <Card
