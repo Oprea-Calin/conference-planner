@@ -91,11 +91,60 @@ const ConferenceContainer: React.FC = () => {
 
   return (
     <div style={{ height: "100%", overflow: "auto" }}>
-      <button onClick={() => setIsDialogOpen(true)}>{t("Add Conference")}</button>
+      <button
+        onClick={() => setIsDialogOpen(true)}
+        style={{
+          position: "fixed",
+          bottom: "24px",
+          right: "24px",
+          width: "56px",
+          height: "56px",
+          borderRadius: "50%",
+          backgroundColor: "#1976d2",
+          color: "white",
+          border: "none",
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+          fontSize: "32px",
+          zIndex: 1000,
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+        title={t("Add Conference")}
+      >
+        +
+      </button>
 
       {isDialogOpen && (
-        <dialog open style={{ padding: "20px", width: "90%", maxWidth: "1200px", zIndex: 11 }}>
-          <button onClick={() => setIsDialogOpen(false)}>{t("Close")}</button>
+        <dialog
+          open
+          style={{
+            padding: "40px",
+            width: "90%",
+            maxWidth: "1200px",
+            zIndex: 11,
+            border: "12px",
+            borderRadius: "12px",
+            boxShadow: "0 50px 30px rgba(0, 0, 0, 0.3)",
+            backgroundColor: "#fff"
+          }}
+        >
+          <button
+            onClick={() => setIsDialogOpen(false)}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              background: "none",
+              border: "none",
+              fontSize: "20px",
+              cursor: "pointer"
+            }}
+            title={t("Close")}
+          >
+            ✕
+          </button>
 
           <h2 style={{ borderBottom: "2px solid blue", paddingBottom: "10px" }}>{t("Conference Info")}</h2>
 
