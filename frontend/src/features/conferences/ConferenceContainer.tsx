@@ -7,6 +7,7 @@ import { endpoints, toast } from "utils";
 import { useTranslation } from "react-i18next";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { mutate } from "swr";
 
 const ConferenceContainer: React.FC = () => {
   const { t } = useTranslation();
@@ -52,6 +53,7 @@ const ConferenceContainer: React.FC = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState({
+    id: "",
     name: "",
     address: "",
     countryId: "",
@@ -85,7 +87,7 @@ const ConferenceContainer: React.FC = () => {
   // console.log("Categories from API:", data);
   // console.log(conferences);
   const { trigger: createConference, isMutating: isCreatingConference } = useApiSWRMutation(
-    "/api/Conferences/save-conference",
+    endpoints.conferences.saveConference,
     mutationFetcher
   );
 
@@ -143,7 +145,7 @@ const ConferenceContainer: React.FC = () => {
             }}
             title={t("Close")}
           >
-            ✕
+            X
           </button>
 
           <h2 style={{ borderBottom: "2px solid blue", paddingBottom: "10px" }}>{t("Conference Info")}</h2>
@@ -187,11 +189,11 @@ const ConferenceContainer: React.FC = () => {
             <div style={{ display: "flex", gap: "10px" }}>
               <div style={{ flex: 1 }}>
                 <label>{t("Start Date")}</label>
-                <input type="date" style={{ width: "100%" }} />
+                <input type="date" style={{ width: "100%" }} value={startDate} onChange={(e) => setStartDate(e.target.value)} />
               </div>
               <div style={{ flex: 1 }}>
                 <label>{t("End Date")}</label>
-                <input type="date" style={{ width: "100%" }} />
+                <input type="date" style={{ width: "100%" }} value={endDate} onChange={(e) => setEndDate(e.target.value)} />
               </div>
             </div>
           </div>
@@ -201,15 +203,29 @@ const ConferenceContainer: React.FC = () => {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "30px" }}>
             <div>
               <label>{t("Name")}</label>
-              <input type="text" style={{ width: "100%" }} />
+              <input
+                type="text"
+                style={{ width: "100%" }}
+                value={location.name}
+                onChange={(e) => setLocation({ ...location, name: e.target.value })}
+              />
             </div>
             <div>
               <label>{t("Address")}</label>
-              <input type="text" style={{ width: "100%" }} />
+              <input
+                type="text"
+                value={location.address}
+                style={{ width: "100%" }}
+                onChange={(e) => setLocation({ ...location, address: e.target.value })}
+              />
             </div>
             <div>
               <label>{t("Country")}</label>
-              <select style={{ width: "100%" }}>
+              <select
+                style={{ width: "100%" }}
+                value={location.countryId}
+                onChange={(e) => setLocation({ ...location, countryId: e.target.value })}
+              >
                 <option value="">{t("Select one...")}</option>
                 {conferenceCountries.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -220,7 +236,11 @@ const ConferenceContainer: React.FC = () => {
             </div>
             <div>
               <label>{t("County")}</label>
-              <select style={{ width: "100%" }}>
+              <select
+                style={{ width: "100%" }}
+                value={location.countyId}
+                onChange={(e) => setLocation({ ...location, countyId: e.target.value })}
+              >
                 <option value="">{t("Select one...")}</option>
                 {conferenceCounties.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -231,7 +251,11 @@ const ConferenceContainer: React.FC = () => {
             </div>
             <div>
               <label>{t("City")}</label>
-              <select style={{ width: "100%" }}>
+              <select
+                style={{ width: "100%" }}
+                value={location.cityId}
+                onChange={(e) => setLocation({ ...location, cityId: e.target.value })}
+              >
                 <option value="">{t("Select one...")}</option>
                 {conferenceCities.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -243,11 +267,21 @@ const ConferenceContainer: React.FC = () => {
             <div style={{ display: "flex", gap: "10px" }}>
               <div style={{ flex: 1 }}>
                 <label>{t("Latitude")}</label>
-                <input type="text" style={{ width: "100%" }} />
+                <input
+                  type="text"
+                  style={{ width: "100%" }}
+                  value={location.latitude}
+                  onChange={(e) => setLocation({ ...location, latitude: e.target.value })}
+                />
               </div>
               <div style={{ flex: 1 }}>
                 <label>{t("Longitude")}</label>
-                <input type="text" style={{ width: "100%" }} />
+                <input
+                  type="text"
+                  style={{ width: "100%" }}
+                  value={location.longitude}
+                  onChange={(e) => setLocation({ ...location, longitude: e.target.value })}
+                />
               </div>
             </div>
           </div>
@@ -356,18 +390,40 @@ const ConferenceContainer: React.FC = () => {
           <button
             onClick={async () => {
               try {
-                await createConference({
+                const payload = {
+                  id: 0,
+                  conferenceTypeId: Number(conferenceType),
+                  location: {
+                    locationId: Number(location.id) || 0,
+                    name: location.name,
+                    address: location.address,
+                    countryId: Number(location.countryId),
+                    countyId: Number(location.countyId),
+                    cityId: Number(location.cityId),
+                    latitude: Number(location.latitude),
+                    longitude: Number(location.longitude)
+                  },
+                  organizerEmail: "alina@totalsoft.ro",
+                  categoryId: Number(category),
+                  startDate: new Date(startDate).toISOString(),
+                  endDate: new Date(endDate).toISOString(),
                   name: conferenceName,
-                  typeId: conferenceType,
-                  categoryId: category,
-                  startDate,
-                  endDate,
-                  location,
-                  speakers
-                });
+                  speakerList: speakers.map((s) => ({
+                    conferenceSpeakerId: 0,
+                    speakerId: 0,
+                    name: s.name,
+                    nationality: s.nationality,
+                    rating: s.rating ? Number(s.rating) : null,
+                    isMainSpeaker: s.main
+                  }))
+                };
+
+                await createConference(payload);
+                toast.success("succes");
                 setIsDialogOpen(false);
               } catch (err) {
                 console.error("Failed to create conference:", err);
+                toast.error("Ere");
               }
             }}
           >
