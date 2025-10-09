@@ -36,6 +36,12 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
       toast.info(t("Conferences.ConferenceDeletedNotification"));
     }
   });
+  useSubscription(notificationTypes.CONFERENCE_CREATED, {
+    onNotification: () => {
+      refetchConferenceList();
+      toast.info(t("Conferences.ConferenceCreatedNotification"));
+    }
+  });
 
   return (
     <Card
@@ -48,10 +54,10 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
       }}
     >
       <Box sx={{ position: "absolute", top: 8, right: 8 }}>
-        <IconButton size="small">
+        <IconButton size="small" style={{ color: "" }}>
           <EditIcon fontSize="small" />
         </IconButton>
-        <IconButton size="small">
+        <IconButton size="small" style={{ color: "red" }}>
           <DeleteIcon
             fontSize="small"
             onClick={() => {
@@ -62,7 +68,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
         </IconButton>
       </Box>
 
-      <CardContent>
+      <CardContent style={{ paddingTop: 28 }}>
         <Typography variant="h6" fontWeight={600} gutterBottom>
           {item.name}
         </Typography>
@@ -84,9 +90,10 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
         </Box>
 
         <Typography variant="body2" color="text.secondary" gutterBottom>
-          {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()} |{" "}
+          {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
+          {/* |{" "}
           {new Date(item.startDate).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} -{" "}
-          {new Date(item.endDate).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+          {new Date(item.endDate).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} */}
         </Typography>
 
         <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>

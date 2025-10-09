@@ -63,29 +63,6 @@ const ConferenceContainer: React.FC = () => {
     longitude: ""
   });
 
-  // console.log("Conference types from API:", conferenceTypes);
-  {
-    /* <div>
-  <label>{t("Conference Type")}</label>
-  <select
-    style={{ width: "100%" }}
-    value={conferenceType}
-    onChange={(e) => setConferenceType(e.target.value)}
-  >
-    <option value="">{t("Select one...")}</option>
-    {conferenceTypes.map((type) => (
-      <option key={type.id} value={type.id}>
-        {type.name}
-      </option>
-    ))}
-  </select>
-</div> */
-  }
-
-  // console.log(data?.at(0)?.name);
-  // console.log(data?.[0]?.name);
-  // console.log("Categories from API:", data);
-  // console.log(conferences);
   const { trigger: createConference, isMutating: isCreatingConference } = useApiSWRMutation(
     endpoints.conferences.saveConference,
     mutationFetcher
@@ -423,7 +400,7 @@ const ConferenceContainer: React.FC = () => {
                 setIsDialogOpen(false);
               } catch (err) {
                 console.error("Failed to create conference:", err);
-                toast.error("Ere");
+                toast.error("Error creating conference");
               }
             }}
           >
@@ -432,32 +409,48 @@ const ConferenceContainer: React.FC = () => {
         </dialog>
       )}
 
-      <ConferenceListFilters
-        filterText={filterText}
-        onFilterTextChange={setFilterText}
-        filterStartDate={filterStartDate}
-        onFilterStartDateChange={setFilterStartDate}
-        filterEndDate={filterEndDate}
-        onFilterEndDateChange={setFilterEndDate}
-        filterConferenceTypeName={filterConferenceTypeName}
-        onFilterConferenceTypeNameChange={setFilterConferenceTypeName}
-        filterCity={filterCity}
-        onFilterCityChange={setFilterCity}
-        filterCountry={filterCountry}
-        onFilterCountryChange={setFilterCountry}
-        filterCounty={filterCounty}
-        onFilterCountyChange={setFilterCounty}
-      />
-      <ConferenceList
-        conferences={allConferences}
-        filterText={filterText}
-        filterStartDate={filterStartDate}
-        filterEndDate={filterEndDate}
-        filterConferenceTypeName={filterConferenceTypeName}
-        filterCity={filterCity}
-        filterCounty={filterCounty}
-        filterCountry={filterCountry}
-      />
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          backgroundColor: "white",
+          zIndex: 1,
+          overflowX: "auto",
+          whiteSpace: "nowrap",
+          display: "flex",
+          padding: "10px",
+          gap: "10px"
+        }}
+      >
+        <ConferenceListFilters
+          filterText={filterText}
+          onFilterTextChange={setFilterText}
+          filterStartDate={filterStartDate}
+          onFilterStartDateChange={setFilterStartDate}
+          filterEndDate={filterEndDate}
+          onFilterEndDateChange={setFilterEndDate}
+          filterConferenceTypeName={filterConferenceTypeName}
+          onFilterConferenceTypeNameChange={setFilterConferenceTypeName}
+          filterCity={filterCity}
+          onFilterCityChange={setFilterCity}
+          filterCountry={filterCountry}
+          onFilterCountryChange={setFilterCountry}
+          filterCounty={filterCounty}
+          onFilterCountyChange={setFilterCounty}
+        />
+      </div>
+      <div>
+        <ConferenceList
+          conferences={allConferences}
+          filterText={filterText}
+          filterStartDate={filterStartDate}
+          filterEndDate={filterEndDate}
+          filterConferenceTypeName={filterConferenceTypeName}
+          filterCity={filterCity}
+          filterCounty={filterCounty}
+          filterCountry={filterCountry}
+        />
+      </div>
     </div>
   );
 };
