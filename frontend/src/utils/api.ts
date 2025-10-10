@@ -1,3 +1,4 @@
+import { get } from "lodash";
 import env from "./env";
 import urlJoin from "url-join";
 
@@ -28,7 +29,8 @@ const endpoints = {
   conferences: {
     default: `${apiHost}/Conferences/list-for-attendees`,
     saveConference: `${apiHost}/Conferences/save-conference`,
-    deleteConference: `${apiHost}/Conferences/{id}`
+    deleteConference: `${apiHost}/Conferences/{id}`,
+    getConferenceById: (id: number) => `${apiHost}/Conferences/conference/${id}`
   }
 };
 

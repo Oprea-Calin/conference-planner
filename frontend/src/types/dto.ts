@@ -45,6 +45,7 @@ type ConferenceDto = {
   location: {
     locationId: number;
     name: string;
+    code: string;
     address: string;
     countryId: number;
     countyId: number;

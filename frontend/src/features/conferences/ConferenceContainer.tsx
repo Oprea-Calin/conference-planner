@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import ConferenceList from "./ConferenceList";
 import ConferenceListFilters from "./ConferenceListFilters";
-import { mutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
+import { fetcher, mutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import type { ConferenceDto } from "types";
 import { endpoints, toast } from "utils";
 import { useTranslation } from "react-i18next";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { mutate } from "swr";
+import { get } from "lodash";
 
 const ConferenceContainer: React.FC = () => {
   const { t } = useTranslation();
@@ -45,9 +46,10 @@ const ConferenceContainer: React.FC = () => {
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const [speakers, setSpeakers] = useState([{ name: "", nationality: "", rating: "", main: false }]);
+  const [speakers, setSpeakers] = useState([{ confSp: "", id: "", name: "", nationality: "", rating: "", main: false }]);
 
   const [currentConference, setCurrentConference] = useState<ConferenceDto | null>(null);
+  const [currentConferenceId, setCurrentConferenceId] = useState<number>(0);
 
   const [conferenceName, setConferenceName] = useState("");
   const [conferenceType, setConferenceType] = useState("");
@@ -57,6 +59,7 @@ const ConferenceContainer: React.FC = () => {
   const [location, setLocation] = useState({
     id: 0,
     name: "",
+    code: "",
     address: "",
     countryId: "",
     countyId: "",
@@ -64,6 +67,14 @@ const ConferenceContainer: React.FC = () => {
     latitude: "",
     longitude: ""
   });
+
+  const { data: conferenceById } = useApiSWR<ConferenceDto, Error>(
+    currentConferenceId > 0 ? endpoints.conferences.getConferenceById(currentConferenceId) : null,
+    {
+      onError: (err) => toast.error(t("Error loading conference", { message: err.message }))
+    }
+  );
+
   const { trigger: editConference, isMutating: isEditingConference } = useApiSWRMutation(
     endpoints.conferences.saveConference,
     mutationFetcher<{ id: number }>,
@@ -74,8 +85,60 @@ const ConferenceContainer: React.FC = () => {
     }
   );
 
-  const handleEdit = (conference: ConferenceDto) => {
-    console.log("handleEdit called:", conference);
+  // const handleEdit = (c: ConferenceDto) => {
+  //   setCurrentConferenceId(c.id);
+  //   const conference = get(conferenceById, "id") === c.id ? conferenceById : c;
+  //   if (!conference) {
+  //     toast.error("Conference not found");
+  //     return;
+  //   }
+  //   setCurrentConference(conference);
+  //   setConferenceName(conference.name || "");
+  //   setConferenceType(conference.conferenceTypeId?.toString() || "");
+  //   setCategory(conference.categoryId?.toString() || "");
+  //   setStartDate(conference.startDate ? new Date(conference.startDate).toISOString().split("T")[0] : "");
+  //   setEndDate(conference.endDate ? new Date(conference.endDate).toISOString().split("T")[0] : "");
+
+  //   const loc = conference.location || {};
+  //   setLocation({
+  //     id: loc.locationId || 0,
+  //     name: loc.name || "",
+  //     address: loc.address || "",
+  //     countryId: loc.countryId?.toString() || "",
+  //     countyId: loc.countyId?.toString() || "",
+  //     cityId: loc.cityId?.toString() || "",
+  //     latitude: loc.latitude?.toString() || "",
+  //     longitude: loc.longitude?.toString() || ""
+  //   });
+
+  //   const speakerList =
+  //     conference.speakerList?.map((s) => ({
+  //       conferenceSpeakerId: s.conferenceSpeakerId || 0,
+  //       speakerId: s.speakerId || 0,
+  //       name: s.name || "",
+  //       nationality: s.nationality || "",
+  //       rating: s.rating?.toString() || "",
+  //       main: s.isMainSpeaker || false
+  //     })) || [];
+
+  //   setSpeakers(speakerList.length > 0 ? speakerList : [{ name: "", nationality: "", rating: "", main: false }]);
+
+  //   setIsDialogOpen(true);
+  // };
+  const handleEdit = (c: ConferenceDto) => {
+    setCurrentConferenceId(c.id);
+
+    if (conferenceById?.id === c.id) {
+      populateConferenceData(conferenceById);
+    }
+  };
+  React.useEffect(() => {
+    if (conferenceById && conferenceById.id === currentConferenceId) {
+      populateConferenceData(conferenceById);
+    }
+  }, [conferenceById, currentConferenceId]);
+
+  const populateConferenceData = (conference: ConferenceDto) => {
     setCurrentConference(conference);
     setConferenceName(conference.name || "");
     setConferenceType(conference.conferenceTypeId?.toString() || "");
@@ -83,45 +146,68 @@ const ConferenceContainer: React.FC = () => {
     setStartDate(conference.startDate ? new Date(conference.startDate).toISOString().split("T")[0] : "");
     setEndDate(conference.endDate ? new Date(conference.endDate).toISOString().split("T")[0] : "");
 
+    const loc = conference.location || {};
     setLocation({
-      id: currentConference?.location?.locationId || 0,
-      name: conference.location?.name,
-      address: conference.location?.address,
-      countryId: conference.location?.countryId?.toString(),
-      countyId: conference.location?.countyId?.toString(),
-      cityId: conference.location?.cityId?.toString(),
-      latitude: conference.location?.latitude?.toString(),
-      longitude: conference.location?.longitude?.toString()
+      id: loc.locationId || 0,
+      name: loc.name || "",
+      address: loc.address || "",
+      code: loc.code || "",
+      countryId: loc.countryId?.toString() || "",
+      countyId: loc.countyId?.toString() || "",
+      cityId: loc.cityId?.toString() || "",
+      latitude: loc.latitude?.toString() || "",
+      longitude: loc.longitude?.toString() || ""
     });
 
-    setSpeakers(
+    const speakerList =
       conference.speakerList?.map((s) => ({
-        conferenceSpeakerId: s.conferenceSpeakerId || 0,
-        speakerId: s.speakerId || 0,
+        confSp: s.conferenceSpeakerId.toString() || "",
+        id: s.speakerId.toString() || "",
         name: s.name || "",
         nationality: s.nationality || "",
         rating: s.rating?.toString() || "",
         main: s.isMainSpeaker || false
-      })) || []
-    );
+      })) || [];
+
+    setSpeakers(speakerList.length > 0 ? speakerList : [{ confSp: "", id: "", name: "", nationality: "", rating: "", main: false }]);
 
     setIsDialogOpen(true);
   };
 
-  const handleSave = async (updatedConference: ConferenceDto) => {
-    await editConference(updatedConference);
-    setIsDialogOpen(false);
-    // trigger refresh, mutate
-  };
   const { trigger: createConference, isMutating: isCreatingConference } = useApiSWRMutation(
     endpoints.conferences.saveConference,
     mutationFetcher
   );
 
+  const handleCreateNewConference = () => {
+    setCurrentConference(null);
+    setConferenceName("");
+    setConferenceType("");
+    setCategory("");
+    setStartDate("");
+    setEndDate("");
+    setLocation({
+      id: 0,
+      name: "",
+      address: "",
+      code: "",
+      countryId: "",
+      countyId: "",
+      cityId: "",
+      latitude: "",
+      longitude: ""
+    });
+    setSpeakers([{ confSp: "", id: "", name: "", nationality: "", rating: "", main: false }]);
+    setIsDialogOpen(true);
+  };
+
   return (
     <div style={{ height: "100%", overflow: "auto" }}>
       <button
-        onClick={() => setIsDialogOpen(true)}
+        onClick={() => {
+          setIsDialogOpen(true);
+          handleCreateNewConference();
+        }}
         style={{
           position: "fixed",
           bottom: "24px",
@@ -191,7 +277,7 @@ const ConferenceContainer: React.FC = () => {
 
             <div>
               <label>{t("Conference Type")}</label>
-              <select style={{ width: "100%" }} onChange={(e) => setConferenceType(e.target.value)}>
+              <select style={{ width: "100%" }} value={conferenceType} onChange={(e) => setConferenceType(e.target.value)}>
                 <option value="">{t("Select one...")}</option>
                 {conferenceTypes.map((type) => (
                   <option key={type.id} value={type.id}>
@@ -203,7 +289,7 @@ const ConferenceContainer: React.FC = () => {
 
             <div>
               <label>{t("Category")}</label>
-              <select style={{ width: "100%" }} onChange={(e) => setCategory(e.target.value)}>
+              <select style={{ width: "100%" }} value={category} onChange={(e) => setCategory(e.target.value)}>
                 <option value="">{t("Select one...")}</option>
                 {conferenceCategories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
@@ -400,7 +486,7 @@ const ConferenceContainer: React.FC = () => {
             ))}
 
             <button
-              onClick={() => setSpeakers([...speakers, { name: "", nationality: "", rating: "", main: false }])}
+              onClick={() => setSpeakers([...speakers, { confSp: "", id: "", name: "", nationality: "", rating: "", main: false }])}
               style={{
                 background: "none",
                 border: "none",
@@ -423,6 +509,7 @@ const ConferenceContainer: React.FC = () => {
                   location: {
                     locationId: Number(location.id) || 0,
                     name: location.name,
+                    code: location.code || "",
                     address: location.address,
                     countryId: Number(location.countryId),
                     countyId: Number(location.countyId),
@@ -436,8 +523,8 @@ const ConferenceContainer: React.FC = () => {
                   endDate: new Date(endDate).toISOString(),
                   name: conferenceName,
                   speakerList: speakers.map((s) => ({
-                    conferenceSpeakerId: 0,
-                    speakerId: 0,
+                    conferenceSpeakerId: s.confSp || 0,
+                    speakerId: s.id || 0,
                     name: s.name,
                     nationality: s.nationality,
                     rating: s.rating ? Number(s.rating) : null,
