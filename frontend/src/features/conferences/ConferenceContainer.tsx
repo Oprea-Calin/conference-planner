@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ConferenceList from "./ConferenceList";
 import ConferenceListFilters from "./ConferenceListFilters";
-import { mutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
+import { mutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import type { ConferenceDto } from "types";
 import { endpoints, toast } from "utils";
 import { useTranslation } from "react-i18next";
@@ -47,13 +47,15 @@ const ConferenceContainer: React.FC = () => {
 
   const [speakers, setSpeakers] = useState([{ name: "", nationality: "", rating: "", main: false }]);
 
+  const [currentConference, setCurrentConference] = useState<ConferenceDto | null>(null);
+
   const [conferenceName, setConferenceName] = useState("");
   const [conferenceType, setConferenceType] = useState("");
   const [category, setCategory] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [location, setLocation] = useState({
-    id: "",
+    id: 0,
     name: "",
     address: "",
     countryId: "",
@@ -62,7 +64,55 @@ const ConferenceContainer: React.FC = () => {
     latitude: "",
     longitude: ""
   });
+  const { trigger: editConference, isMutating: isEditingConference } = useApiSWRMutation(
+    endpoints.conferences.saveConference,
+    mutationFetcher<{ id: number }>,
+    {
+      onError: (error) => {
+        toast.error(`Error editing conference: ${error.message}`);
+      }
+    }
+  );
 
+  const handleEdit = (conference: ConferenceDto) => {
+    console.log("handleEdit called:", conference);
+    setCurrentConference(conference);
+    setConferenceName(conference.name || "");
+    setConferenceType(conference.conferenceTypeId?.toString() || "");
+    setCategory(conference.categoryId?.toString() || "");
+    setStartDate(conference.startDate ? new Date(conference.startDate).toISOString().split("T")[0] : "");
+    setEndDate(conference.endDate ? new Date(conference.endDate).toISOString().split("T")[0] : "");
+
+    setLocation({
+      id: currentConference?.location?.locationId || 0,
+      name: conference.location?.name,
+      address: conference.location?.address,
+      countryId: conference.location?.countryId?.toString(),
+      countyId: conference.location?.countyId?.toString(),
+      cityId: conference.location?.cityId?.toString(),
+      latitude: conference.location?.latitude?.toString(),
+      longitude: conference.location?.longitude?.toString()
+    });
+
+    setSpeakers(
+      conference.speakerList?.map((s) => ({
+        conferenceSpeakerId: s.conferenceSpeakerId || 0,
+        speakerId: s.speakerId || 0,
+        name: s.name || "",
+        nationality: s.nationality || "",
+        rating: s.rating?.toString() || "",
+        main: s.isMainSpeaker || false
+      })) || []
+    );
+
+    setIsDialogOpen(true);
+  };
+
+  const handleSave = async (updatedConference: ConferenceDto) => {
+    await editConference(updatedConference);
+    setIsDialogOpen(false);
+    // trigger refresh, mutate
+  };
   const { trigger: createConference, isMutating: isCreatingConference } = useApiSWRMutation(
     endpoints.conferences.saveConference,
     mutationFetcher
@@ -368,7 +418,7 @@ const ConferenceContainer: React.FC = () => {
             onClick={async () => {
               try {
                 const payload = {
-                  id: 0,
+                  id: currentConference?.id || 0,
                   conferenceTypeId: Number(conferenceType),
                   location: {
                     locationId: Number(location.id) || 0,
@@ -395,9 +445,19 @@ const ConferenceContainer: React.FC = () => {
                   }))
                 };
 
-                await createConference(payload);
-                toast.success("succes");
-                setIsDialogOpen(false);
+                try {
+                  if (payload.id && payload.id > 0) {
+                    await editConference(payload);
+                    toast.success("conference edited!");
+                  } else {
+                    await createConference(payload);
+                    toast.success("conference created!");
+                  }
+                  setIsDialogOpen(false);
+                } catch (error) {
+                  toast.error("err.");
+                  console.error(error);
+                }
               } catch (err) {
                 console.error("Failed to create conference:", err);
                 toast.error("Error creating conference");
@@ -449,7 +509,9 @@ const ConferenceContainer: React.FC = () => {
           filterCity={filterCity}
           filterCounty={filterCounty}
           filterCountry={filterCountry}
+          onEdit={handleEdit}
         />
+        {/* {isDialogOpen && <ConferenceDialog conference={currentConference} onClose={() => setIsDialogOpen(false)} onSave={handleSave} />} */}
       </div>
     </div>
   );

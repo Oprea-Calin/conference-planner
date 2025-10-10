@@ -56,6 +56,7 @@ namespace Charisma.Api.Controllers
             return Ok(new AsyncCommandResult(CorrelationManager.GetCorrelationId()));
         }
 
+
         [HttpPut("change-attendance-status")]
         public async Task<ActionResult<bool>> ChangeAtendanceStatus([FromBody] ChangeAttendanceStatus command, CancellationToken cancellationToken)
         {

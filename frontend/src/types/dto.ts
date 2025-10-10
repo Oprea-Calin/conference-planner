@@ -14,20 +14,59 @@ type ConferenceXAtendee = {
   AtendeeEmail: string;
   StatusName: string;
 };
+// type ConferenceDto = {
+//   id: number;
+//   conferenceTypeName: string;
+//   locationName: string;
+//   countryName: string;
+//   countyName: string;
+//   cityName: string;
+//   organizerEmail: string;
+//   categoryName: string;
+//   startDate: Date;
+//   endDate: Date;
+//   name: string;
+//   atendeesList: List<ConferenceXAtendee>;
+//   mainSpeakerName: string;
+// };
 type ConferenceDto = {
   id: number;
-  conferenceTypeName: string;
-  locationName: string;
-  countryName: string;
-  countyName: string;
-  cityName: string;
-  organizerEmail: string;
-  categoryName: string;
+  name: string;
   startDate: Date;
   endDate: Date;
-  name: string;
-  atendeesList: List<ConferenceXAtendee>;
-  mainSpeakerName: string;
+  organizerEmail: string;
+
+  conferenceTypeId: number;
+  conferenceTypeName: string;
+
+  categoryId: number;
+  categoryName: string;
+
+  location: {
+    locationId: number;
+    name: string;
+    address: string;
+    countryId: number;
+    countyId: number;
+    cityId: number;
+    latitude: number;
+    longitude: number;
+  };
+
+  speakerList: {
+    conferenceSpeakerId: number;
+    speakerId: number;
+    name: string;
+    nationality: string;
+    rating: number;
+    isMainSpeaker: boolean;
+  }[];
+
+  locationName?: string;
+  countryName?: string;
+  countyName?: string;
+  cityName?: string;
+  mainSpeakerName?: string;
 };
 
 type UserGroupDto = {

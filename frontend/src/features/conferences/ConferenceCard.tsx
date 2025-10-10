@@ -6,13 +6,13 @@ import PersonIcon from "@mui/icons-material/Person";
 import type { ConferenceDto } from "types";
 import { use } from "react";
 import { toast } from "react-toastify";
-import { deleteMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
+import { deleteMutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import { endpoints } from "utils";
 import { useSubscription } from "units/notifications";
 import { notificationTypes } from "constants";
 import { t } from "i18next";
 
-const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
+const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: ConferenceDto) => void }> = ({ item, onEdit }) => {
   const {
     // data: ConferenceListData = [],
     // isLoading: isLoadingConferenceList,
@@ -55,14 +55,18 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
     >
       <Box sx={{ position: "absolute", top: 8, right: 8 }}>
         <IconButton size="small" style={{ color: "" }}>
-          <EditIcon fontSize="small" />
+          <EditIcon
+            fontSize="small"
+            onClick={() => {
+              onEdit(item);
+            }}
+          />
         </IconButton>
         <IconButton size="small" style={{ color: "red" }}>
           <DeleteIcon
             fontSize="small"
             onClick={() => {
               deleteConference({ id: item.id });
-              //window.location.reload();
             }}
           />
         </IconButton>
@@ -73,7 +77,10 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
           {item.name}
         </Typography>
 
-        <Chip label={item.conferenceTypeName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
+        <Box display={"flex"} justifyContent={"space-between"}>
+          <Chip label={item.conferenceTypeName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
+          <Chip label={item.categoryName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
+        </Box>
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
           <PersonIcon fontSize="small" />
@@ -91,9 +98,6 @@ const ConferenceCard: React.FC<{ item: ConferenceDto }> = ({ item }) => {
 
         <Typography variant="body2" color="text.secondary" gutterBottom>
           {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
-          {/* |{" "}
-          {new Date(item.startDate).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} -{" "}
-          {new Date(item.endDate).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} */}
         </Typography>
 
         <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>

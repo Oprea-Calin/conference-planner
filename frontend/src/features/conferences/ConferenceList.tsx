@@ -5,6 +5,7 @@ import type { ConferenceDto } from "types/dto";
 
 const ConferenceList: React.FC<{
   conferences: ConferenceDto[];
+  onEdit?: (conference: ConferenceDto) => void;
   filterText: string;
   filterStartDate: Date | undefined;
   filterEndDate: Date | undefined;
@@ -12,7 +13,17 @@ const ConferenceList: React.FC<{
   filterCity: string;
   filterCounty: string;
   filterCountry: string;
-}> = ({ conferences, filterText, filterStartDate, filterEndDate, filterConferenceTypeName, filterCity, filterCounty, filterCountry }) => {
+}> = ({
+  conferences,
+  onEdit,
+  filterText,
+  filterStartDate,
+  filterEndDate,
+  filterConferenceTypeName,
+  filterCity,
+  filterCounty,
+  filterCountry
+}) => {
   const rows: JSX.Element[] = [];
   conferences.forEach((conference) => {
     if (conference.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
@@ -37,7 +48,7 @@ const ConferenceList: React.FC<{
       return;
     }
 
-    rows.push(<ConferenceCard item={conference} key={conference.id} />);
+    rows.push(<ConferenceCard item={conference} key={conference.id} onEdit={onEdit} />);
   });
 
   return (
