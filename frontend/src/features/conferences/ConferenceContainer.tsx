@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import ConferenceList from "./ConferenceList";
 import ConferenceListFilters from "./ConferenceListFilters";
-import { fetcher, mutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
+import { fetcher, mutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import type { ConferenceDto } from "types";
 import { endpoints, toast } from "utils";
 import { useTranslation } from "react-i18next";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { mutate } from "swr";
-import { get } from "lodash";
 
 const ConferenceContainer: React.FC = () => {
   const { t } = useTranslation();
@@ -85,46 +84,6 @@ const ConferenceContainer: React.FC = () => {
     }
   );
 
-  // const handleEdit = (c: ConferenceDto) => {
-  //   setCurrentConferenceId(c.id);
-  //   const conference = get(conferenceById, "id") === c.id ? conferenceById : c;
-  //   if (!conference) {
-  //     toast.error("Conference not found");
-  //     return;
-  //   }
-  //   setCurrentConference(conference);
-  //   setConferenceName(conference.name || "");
-  //   setConferenceType(conference.conferenceTypeId?.toString() || "");
-  //   setCategory(conference.categoryId?.toString() || "");
-  //   setStartDate(conference.startDate ? new Date(conference.startDate).toISOString().split("T")[0] : "");
-  //   setEndDate(conference.endDate ? new Date(conference.endDate).toISOString().split("T")[0] : "");
-
-  //   const loc = conference.location || {};
-  //   setLocation({
-  //     id: loc.locationId || 0,
-  //     name: loc.name || "",
-  //     address: loc.address || "",
-  //     countryId: loc.countryId?.toString() || "",
-  //     countyId: loc.countyId?.toString() || "",
-  //     cityId: loc.cityId?.toString() || "",
-  //     latitude: loc.latitude?.toString() || "",
-  //     longitude: loc.longitude?.toString() || ""
-  //   });
-
-  //   const speakerList =
-  //     conference.speakerList?.map((s) => ({
-  //       conferenceSpeakerId: s.conferenceSpeakerId || 0,
-  //       speakerId: s.speakerId || 0,
-  //       name: s.name || "",
-  //       nationality: s.nationality || "",
-  //       rating: s.rating?.toString() || "",
-  //       main: s.isMainSpeaker || false
-  //     })) || [];
-
-  //   setSpeakers(speakerList.length > 0 ? speakerList : [{ name: "", nationality: "", rating: "", main: false }]);
-
-  //   setIsDialogOpen(true);
-  // };
   const handleEdit = (c: ConferenceDto) => {
     setCurrentConferenceId(c.id);
 
@@ -501,6 +460,19 @@ const ConferenceContainer: React.FC = () => {
           </div>
 
           <button
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "100px",
+              padding: "8px 16px",
+              backgroundColor: "#1976d2",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontWeight: "bold",
+              boxShadow: "0 2px 6px rgba(25, 118, 210, 0.4)"
+            }}
             onClick={async () => {
               try {
                 const payload = {
@@ -536,6 +508,7 @@ const ConferenceContainer: React.FC = () => {
                   if (payload.id && payload.id > 0) {
                     await editConference(payload);
                     toast.success("conference edited!");
+                    await mutate(endpoints.conferences.default);
                   } else {
                     await createConference(payload);
                     toast.success("conference created!");
@@ -598,7 +571,6 @@ const ConferenceContainer: React.FC = () => {
           filterCountry={filterCountry}
           onEdit={handleEdit}
         />
-        {/* {isDialogOpen && <ConferenceDialog conference={currentConference} onClose={() => setIsDialogOpen(false)} onSave={handleSave} />} */}
       </div>
     </div>
   );

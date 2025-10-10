@@ -49,7 +49,7 @@ namespace Charisma.Api.Application.Queries.Conference
 
                 if (!string.IsNullOrWhiteSpace(request.email))
                     filtered = filtered.Where(c => c.OrganizerEmail != null && c.OrganizerEmail.Contains(request.email, StringComparison.OrdinalIgnoreCase));
-
+               
 
                 foreach (var conference in filtered)
                 {
@@ -77,6 +77,7 @@ namespace Charisma.Api.Application.Queries.Conference
                             StartDate = conference.StartDate,
                             EndDate = conference.EndDate,
                             Name = conference.Name,
+                            Address = conference.Location.Address,
                             MainSpeakerName = conference.ConferenceXSpeakers?.FirstOrDefault(x => x.IsMainSpeaker)?.Speaker?.Name,
                             AtendeesList = atendeesList
                         };

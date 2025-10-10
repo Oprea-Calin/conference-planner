@@ -14,21 +14,7 @@ type ConferenceXAtendee = {
   AtendeeEmail: string;
   StatusName: string;
 };
-// type ConferenceDto = {
-//   id: number;
-//   conferenceTypeName: string;
-//   locationName: string;
-//   countryName: string;
-//   countyName: string;
-//   cityName: string;
-//   organizerEmail: string;
-//   categoryName: string;
-//   startDate: Date;
-//   endDate: Date;
-//   name: string;
-//   atendeesList: List<ConferenceXAtendee>;
-//   mainSpeakerName: string;
-// };
+
 type ConferenceDto = {
   id: number;
   name: string;
@@ -62,11 +48,13 @@ type ConferenceDto = {
     rating: number;
     isMainSpeaker: boolean;
   }[];
+  atendeesList: List<ConferenceXAtendee>;
 
-  locationName?: string;
-  countryName?: string;
-  countyName?: string;
-  cityName?: string;
+  locationName: string;
+  address: string;
+  countryName: string;
+  countyName: string;
+  cityName: string;
   mainSpeakerName?: string;
 };
 

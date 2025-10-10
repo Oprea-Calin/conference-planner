@@ -11,6 +11,7 @@ namespace Charisma.Common.Domain.Dtos
         public string CountryName { get; init; }
         public string CountyName { get; init; }
         public string CityName { get; init; }
+        public string Address { get; set; }
         public string OrganizerEmail { get; init; }
         public string CategoryName { get; init; }
         public DateTime StartDate { get; init; }

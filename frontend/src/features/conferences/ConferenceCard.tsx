@@ -11,13 +11,11 @@ import { endpoints } from "utils";
 import { useSubscription } from "units/notifications";
 import { notificationTypes } from "constants";
 import { t } from "i18next";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: ConferenceDto) => void }> = ({ item, onEdit }) => {
-  const {
-    // data: ConferenceListData = [],
-    // isLoading: isLoadingConferenceList,
-    mutate: refetchConferenceList
-  } = useApiSWR<ConferenceDto[], Error>(endpoints.conferences.default, {
+  const { mutate: refetchConferenceList } = useApiSWR<ConferenceDto[], Error>(endpoints.conferences.default, {
     onError: (err) => toast.error(t("User.error", { message: err.message }))
   });
 
@@ -34,18 +32,29 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
     }
   });
 
+  const { trigger: deleteConference, isMutating: isDeletingConference } = useApiSWRMutation(
+    endpoints.conferences.deleteConference,
+    deleteMutationFetcher<{ id: number }>,
+    {
+      onError: (error) => {
+        toast.error(`Error deleting conference: ${error.message}`);
+      }
+    }
+  );
   return (
     <Card
-      elevation={2}
+      elevation={5}
       sx={{
         borderRadius: 2,
         minWidth: 300,
         position: "relative",
-        paddingBottom: 2
+        paddingBottom: 2,
+        marginBottom: 2,
+        marginTop: 2
       }}
     >
-      <Box sx={{ position: "absolute", top: 8, right: 8 }}>
-        <IconButton size="small" style={{ color: "" }}>
+      <Box sx={{ position: "absolute", top: 5, right: 8 }}>
+        <IconButton size="medium" style={{ color: "" }}>
           <EditIcon
             fontSize="small"
             onClick={() => {
@@ -53,7 +62,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             }}
           />
         </IconButton>
-        <IconButton size="small" style={{ color: "red" }}>
+        <IconButton size="medium" style={{ color: "red" }}>
           <DeleteIcon
             fontSize="small"
             onClick={() => {
@@ -81,15 +90,25 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         </Box>
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
-          <RoomIcon fontSize="small" />
+          <LocationCityIcon fontSize="small" />
           <Typography variant="body2">
             {item.cityName}, {item.countyName.toUpperCase()}, {item.countryName.toUpperCase()}
           </Typography>
         </Box>
 
-        <Typography variant="body2" color="text.secondary" gutterBottom>
-          {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
-        </Typography>
+        <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <Typography variant="body2">
+            <RoomIcon fontSize="small" />
+            <strong></strong> {item.address}
+          </Typography>
+        </Box>
+
+        <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <Typography variant="body2" color="text.secondary" gutterBottom>
+            <CalendarMonthIcon fontSize="small" />
+            {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
+          </Typography>
+        </Box>
 
         <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>
           {item.atendeesList.length} attendees
