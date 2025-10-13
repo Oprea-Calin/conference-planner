@@ -11,11 +11,11 @@ function App() {
     <OidcSecure configurationName={oidcConfigName}>
       <I18nextInitializer>
         <RealtimeNotificationsProvider>
-          <UserDataProvider>
-            <EmailProvider>
+          <EmailProvider>
+            <UserDataProvider>
               <Router />
-            </EmailProvider>
-          </UserDataProvider>
+            </UserDataProvider>
+          </EmailProvider>
         </RealtimeNotificationsProvider>
       </I18nextInitializer>
     </OidcSecure>

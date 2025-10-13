@@ -24,12 +24,14 @@ const endpoints = {
     conferenceTypes: `${apiHost}/Dictionaries/conference-types`,
     countries: `${apiHost}/Dictionaries/countries`,
     counties: `${apiHost}/Dictionaries/counties`,
-    cities: `${apiHost}/Dictionaries/cities`
+    cities: `${apiHost}/Dictionaries/cities`,
+    statuses: `${apiHost}/Dictionaries/statuses`
   },
   conferences: {
     default: `${apiHost}/Conferences/list-for-attendees`,
     saveConference: `${apiHost}/Conferences/save-conference`,
     deleteConference: `${apiHost}/Conferences/{id}`,
+    changeAttendStatus: `${apiHost}/Conferences/change-attendance-status`,
     getConferenceById: (id: number) => `${apiHost}/Conferences/conference/${id}`
   }
 };

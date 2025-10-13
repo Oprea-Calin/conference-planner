@@ -1,5 +1,3 @@
-import type { List } from "lodash";
-
 type SystemVersionDto = {
   version: string;
   buildDate: string;
@@ -11,8 +9,10 @@ type DictionaryItem = {
 };
 type ConferenceXAtendee = {
   id: number;
-  AtendeeEmail: string;
-  StatusName: string;
+  atendeeEmail: string;
+  conferenceId: number;
+  statusId: number;
+  statusName: string;
 };
 
 type ConferenceDto = {
@@ -48,7 +48,7 @@ type ConferenceDto = {
     rating: number;
     isMainSpeaker: boolean;
   }[];
-  atendeesList: List<ConferenceXAtendee>;
+  atendeesList: Array<ConferenceXAtendee>;
 
   locationName: string;
   address: string;

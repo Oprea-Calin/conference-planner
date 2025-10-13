@@ -43,6 +43,13 @@ namespace Charisma.Api.Controllers
             return Ok(result);
         }
 
+        //[HttpGet("attendeesForConference/{Id}")]
+        //public async Task<IActionResult> GetAttendeesForConference([FromRoute] GetAttendeesForConference.Query query)
+        //{
+        //    var result = await mediator.Send(query);
+        //    return Ok(result);
+        //}
+
         /// <summary>
         /// If id is null then create a new one. If id has value, edit the existing one
         /// </summary>
