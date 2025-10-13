@@ -88,13 +88,27 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
     }
   );
 
-  const handleEdit = (c: ConferenceDto) => {
+  // const handleEdit = (c: ConferenceDto) => {
+  //   setCurrentConferenceId(c.id);
+
+  //   if (conferenceById?.id === c.id) {
+  //     populateConferenceData(conferenceById);
+  //   }
+  // };
+  const handleEdit = async (c: ConferenceDto) => {
     setCurrentConferenceId(c.id);
 
-    if (conferenceById?.id === c.id) {
-      populateConferenceData(conferenceById);
+    const freshConference = await mutate(
+      endpoints.conferences.getConferenceById(c.id),
+      fetcher(endpoints.conferences.getConferenceById(c.id)),
+      { revalidate: true }
+    );
+
+    if (freshConference) {
+      populateConferenceData(freshConference);
     }
   };
+
   React.useEffect(() => {
     if (conferenceById && conferenceById.id === currentConferenceId) {
       populateConferenceData(conferenceById);
@@ -104,9 +118,23 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
   useSubscription(notificationTypes.CONFERENCE_DELETED, {
     onNotification: () => {
       refetchConferenceList();
-      toast.info(t("Conferences.ATTENDANCESTATUSCHANGED"));
+      toast.info(t("Conferences.ConferenceDeletedNotification"));
     }
   });
+
+  useSubscription(notificationTypes.CONFERENCE_CREATED, {
+    onNotification: () => {
+      refetchConferenceList();
+      toast.info(t("Conferences.ConferenceCreatedNotification"));
+    }
+  });
+  useSubscription(notificationTypes.CONFERENCE_UPDATED, {
+    onNotification: () => {
+      refetchConferenceList();
+      toast.info(t("Conferences.ConferenceUpdatedNotification"));
+    }
+  });
+
   const populateConferenceData = (conference: ConferenceDto) => {
     setCurrentConference(conference);
     setConferenceName(conference.name || "");
@@ -520,7 +548,6 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   if (payload.id && payload.id > 0) {
                     await editConference(payload);
                     toast.success("conference edited!");
-                    await mutate(endpoints.conferences.default);
                   } else {
                     await createConference(payload);
                     toast.success("conference created!");

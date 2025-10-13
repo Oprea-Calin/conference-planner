@@ -143,7 +143,7 @@ const AllConferencesContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = fa
     mutationFetcher
   );
 
-  useSubscription(notificationTypes.CONFERENCE_DELETED, {
+  useSubscription(notificationTypes.ATTENDANCESTATUSCHANGED, {
     onNotification: () => {
       refetchConferenceList();
       toast.info(t("Conferences.ATTENDANCESTATUSCHANGED"));

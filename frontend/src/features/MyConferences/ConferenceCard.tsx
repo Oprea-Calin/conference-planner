@@ -7,8 +7,6 @@ import type { ConferenceDto, ConferenceXAtendee } from "types";
 import { toast } from "react-toastify";
 import { deleteMutationFetcher, fetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import { endpoints } from "utils";
-import { useSubscription } from "units/notifications";
-import { notificationTypes } from "constants";
 import { t } from "i18next";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
