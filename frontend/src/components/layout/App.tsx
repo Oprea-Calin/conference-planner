@@ -4,6 +4,7 @@ import Router from "./Router";
 import { I18nextInitializer } from "units/internationalization/I18nextInitializer";
 import { RealtimeNotificationsProvider } from "units/notifications";
 import { UserDataProvider } from "../../contexts/UserDataContext";
+import { EmailProvider } from "features/home/EmailContext";
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
       <I18nextInitializer>
         <RealtimeNotificationsProvider>
           <UserDataProvider>
-            <Router />
+            <EmailProvider>
+              <Router />
+            </EmailProvider>
           </UserDataProvider>
         </RealtimeNotificationsProvider>
       </I18nextInitializer>
