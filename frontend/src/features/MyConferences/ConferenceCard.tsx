@@ -57,6 +57,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
       }
     }
   );
+  const hasEnded = new Date(item.endDate) < new Date();
 
   const { trigger: changeAttendStatus } = useApiSWRMutation(endpoints.conferences.changeAttendStatus, putMutationFetcher, {
     onSuccess: () => {
@@ -169,6 +170,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
                   size="small"
                   variant="contained"
                   color="primary"
+                  disabled={hasEnded}
                   onClick={() => attendConference({ id: item.id, email })}
                   sx={{ mr: 1 }}
                 >
@@ -178,7 +180,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
                   Withdrawn
                 </Typography>
               </>
-            ) : status === "Attended" ? (
+            ) : status === "Attended" || (status === "Joined" && hasEnded) ? (
               <Typography component="span" color="success.main" sx={{ fontWeight: "bold", mr: 1, verticalAlign: "middle" }}>
                 Attended
               </Typography>
@@ -190,11 +192,50 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
                 </Button>
               </>
             ) : (
-              <Button size="small" variant="contained" color="primary" onClick={() => attendConference({ id: item.id, email })}>
+              <Button
+                size="small"
+                variant="contained"
+                color="primary"
+                disabled={hasEnded}
+                onClick={() => attendConference({ id: item.id, email })}
+              >
                 Attend
               </Button>
             )}
           </Box>
+          // <Box mt={2}>
+          //   {status === "Withdrawn" ? (
+          //     <>
+          //       <Button
+          //         size="small"
+          //         variant="contained"
+          //         color="primary"
+          //         onClick={() => attendConference({ id: item.id, email })}
+          //         sx={{ mr: 1 }}
+          //       >
+          //         Attend
+          //       </Button>
+          //       <Typography component="span" color="text.secondary" sx={{ fontStyle: "italic", verticalAlign: "middle" }}>
+          //         Withdrawn
+          //       </Typography>
+          //     </>
+          //   ) : status === "Attended" ? (
+          //     <Typography component="span" color="success.main" sx={{ fontWeight: "bold", mr: 1, verticalAlign: "middle" }}>
+          //       Attended
+          //     </Typography>
+          //   ) : status === "Joined" ? (
+          //     <>
+          //       <Chip label="Joined" color="success" sx={{ mr: 1 }} />
+          //       <Button size="small" variant="outlined" color="error" onClick={() => withdrawConference({ id: item.id, email })}>
+          //         Withdraw
+          //       </Button>
+          //     </>
+          //   ) : (
+          //     <Button size="small" variant="contained" color="primary" onClick={() => attendConference({ id: item.id, email })}>
+          //       Attend
+          //     </Button>
+          //   )}
+          // </Box>
         )}
       </CardContent>
     </Card>

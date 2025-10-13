@@ -241,7 +241,9 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             border: "12px",
             borderRadius: "12px",
             boxShadow: "0 50px 30px rgba(0, 0, 0, 0.3)",
-            backgroundColor: "#fff"
+            backgroundColor: "#fff",
+            alignItems: "flex-start", //adaugate recent
+            position: "relative" //adaugate recent
           }}
         >
           <button
