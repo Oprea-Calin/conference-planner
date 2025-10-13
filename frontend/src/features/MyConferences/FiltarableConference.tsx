@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Conference } from "././mockData";
+import type { Conference } from "./mockData";
 
 const FilterableConferences: React.FC<{ conferences: Conference[] }> = ({ conferences }) => {
   const [filterText, setFilterText] = useState<string>("");

@@ -6,6 +6,7 @@ import type { ConferenceDto } from "types/dto";
 const ConferenceList: React.FC<{
   conferences: ConferenceDto[];
   onEdit?: (conference: ConferenceDto) => void;
+  canEdit?: boolean;
   filterText: string;
   filterStartDate: Date | undefined;
   filterEndDate: Date | undefined;
@@ -16,6 +17,7 @@ const ConferenceList: React.FC<{
 }> = ({
   conferences,
   onEdit,
+  canEdit,
   filterText,
   filterStartDate,
   filterEndDate,
@@ -48,7 +50,7 @@ const ConferenceList: React.FC<{
       return;
     }
 
-    rows.push(<ConferenceCard item={conference} key={conference.id} onEdit={onEdit} />);
+    rows.push(<ConferenceCard item={conference} key={conference.id} onEdit={onEdit} canEdit={canEdit} />);
   });
 
   return (

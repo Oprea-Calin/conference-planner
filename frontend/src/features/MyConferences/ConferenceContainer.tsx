@@ -10,7 +10,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { mutate } from "swr";
 import { EmailProvider, useEmail } from "features/home/EmailContext";
 
-const ConferenceContainer: React.FC = () => {
+const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }) => {
   const { t } = useTranslation();
 
   const [filterText, setFilterText] = useState<string>("");
@@ -163,6 +163,8 @@ const ConferenceContainer: React.FC = () => {
   };
 
   const organizerEmail = useContext(EmailProvider);
+
+  const myConferences = allConferences.filter((conf) => conf.organizerEmail === email);
 
   return (
     <EmailProvider>
@@ -566,7 +568,7 @@ const ConferenceContainer: React.FC = () => {
         </div>
         <div>
           <ConferenceList
-            conferences={allConferences}
+            conferences={myConferences}
             filterText={filterText}
             filterStartDate={filterStartDate}
             filterEndDate={filterEndDate}
@@ -575,6 +577,7 @@ const ConferenceContainer: React.FC = () => {
             filterCounty={filterCounty}
             filterCountry={filterCountry}
             onEdit={handleEdit}
+            canEdit={true}
           />
         </div>
       </div>

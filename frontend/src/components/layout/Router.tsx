@@ -9,7 +9,8 @@ import NotificationsContainer from "../../features/notifications/NotificationsCo
 import SupportContainer from "../../features/support/SupportContainer";
 import UserContainer from "features/users/UserContainer";
 import TutorialContainer from "features/tutorial/TutorialContainer";
-import ConferenceContainer from "features/conferences/ConferenceContainer";
+import ConferenceContainer from "features/MyConferences/ConferenceContainer";
+import AllConferencesContainer from "features/AllConferences/AllConferencesContainer";
 
 const Router: React.FC = () => {
   return (
@@ -19,13 +20,13 @@ const Router: React.FC = () => {
           <Route index element={<HomeContainer />} />
           <Route path="users" element={<UserContainer />} />
           <Route path="conferences" element={<ConferenceContainer />} />
+          <Route path="allConferences" element={<AllConferencesContainer />} />
           <Route path="settings" element={<SettingsContainer />} />
           <Route path="notifications" element={<NotificationsContainer />} />
           <Route path="tutorial" element={<TutorialContainer />} />
           <Route path="support" element={<SupportContainer />} />
           <Route path="unauthorized" element={<Unauthorized />} />
           <Route path="*" element={<NotFound />} />
-          
         </Route>
       </Routes>
     </BrowserRouter>

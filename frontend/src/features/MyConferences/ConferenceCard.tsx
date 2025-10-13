@@ -14,7 +14,11 @@ import { t } from "i18next";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
-const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: ConferenceDto) => void }> = ({ item, onEdit }) => {
+const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: ConferenceDto) => void; canEdit?: boolean }> = ({
+  item,
+  onEdit,
+  canEdit
+}) => {
   const { mutate: refetchConferenceList } = useApiSWR<ConferenceDto[], Error>(endpoints.conferences.default, {
     onError: (err) => toast.error(t("User.error", { message: err.message }))
   });
@@ -53,24 +57,26 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         marginTop: 2
       }}
     >
-      <Box sx={{ position: "absolute", top: 5, right: 8 }}>
-        <IconButton size="medium" style={{ color: "" }}>
-          <EditIcon
-            fontSize="small"
-            onClick={() => {
-              onEdit(item);
-            }}
-          />
-        </IconButton>
-        <IconButton size="medium" style={{ color: "red" }}>
-          <DeleteIcon
-            fontSize="small"
-            onClick={() => {
-              deleteConference({ id: item.id });
-            }}
-          />
-        </IconButton>
-      </Box>
+      {canEdit && (
+        <Box sx={{ position: "absolute", top: 5, right: 8 }}>
+          <IconButton size="medium" style={{ color: "" }}>
+            <EditIcon
+              fontSize="small"
+              onClick={() => {
+                onEdit(item);
+              }}
+            />
+          </IconButton>
+          <IconButton size="medium" style={{ color: "red" }}>
+            <DeleteIcon
+              fontSize="small"
+              onClick={() => {
+                deleteConference({ id: item.id });
+              }}
+            />
+          </IconButton>
+        </Box>
+      )}
 
       <CardContent style={{ paddingTop: 28 }}>
         <Typography variant="h6" fontWeight={600} gutterBottom>
