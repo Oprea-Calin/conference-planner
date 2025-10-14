@@ -21,6 +21,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
 import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 
 const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: ConferenceDto) => void; canEdit?: boolean }> = ({
   item,
@@ -191,8 +192,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
                 <Box mt={2} display="flex" justifyContent="center">
                   <Box p={2} bgcolor="white" borderRadius={2} width="fit-content" boxShadow={2} mb={2}>
                     <QRCode
-                      // value={`${window.location.origin}/ConferenceDetails/${item.id}`}
-                      value={"https://www.youtube.com/watch?v=9HDQH6ReAyw"}
+                      value={`${window.location.origin}/ConferenceDetails/${item.id}`}
                       size={160}
                       style={{ height: "160px", width: "160px" }}
                     />
@@ -225,7 +225,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
   const [showAllSpeakers, setShowAllSpeakers] = useState(false);
 
   const hasMainSpeaker = !!item.mainSpeakerName?.trim();
-  const fallbackSpeaker = item.speakers?.[0]?.name || "No speakers";
+  const fallbackSpeaker = item.speakerList?.[0]?.name || "No speakers";
 
   const toggleSpeakers = () => setShowAllSpeakers(!showAllSpeakers);
 
@@ -283,14 +283,14 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             display="flex"
             alignItems="center"
             gap={1}
-            sx={{ cursor: item.speakers?.length > 1 ? "pointer" : "default" }}
-            onClick={item.speakers?.length > 1 ? toggleSpeakers : undefined}
+            sx={{ cursor: item.speakerList?.length > 1 ? "pointer" : "default" }}
+            onClick={item.speakerList?.length > 1 ? toggleSpeakers : undefined}
           >
             <PersonIcon fontSize="small" />
             <Typography variant="body2">
               <strong>Speaker:</strong> {hasMainSpeaker ? item.mainSpeakerName : fallbackSpeaker}
             </Typography>
-            {item.speakers?.length > 1 && (
+            {item.speakerList?.length > 1 && (
               <ExpandMoreIcon
                 sx={{
                   transform: showAllSpeakers ? "rotate(180deg)" : "rotate(0deg)",
@@ -300,9 +300,9 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             )}
           </Box>
 
-          {showAllSpeakers && item.speakers?.length > 1 && (
-            <Box mt={1} ml={3} display="flex" flexDirection="column" gap={0.5}>
-              {item.speakers.map((speaker) => (
+          {showAllSpeakers && item.speakerList?.length > 1 && (
+            <Box mt={1} ml={3} display="flex" flexDirection="column" gap={1}>
+              {item.speakerList.map((speaker) => (
                 <Typography variant="body2" color="text.secondary" key={speaker.speakerId}>
                   {speaker.name}
                 </Typography>
@@ -319,16 +319,23 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         </Box>
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <RoomIcon fontSize="small" />
           <Typography variant="body2">
-            <RoomIcon fontSize="small" />
             <strong></strong> {item.address}
           </Typography>
         </Box>
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <CalendarMonthIcon fontSize="small" />
           <Typography variant="body2" color="text.secondary" gutterBottom>
-            <CalendarMonthIcon fontSize="small" />
             {new Date(item.startDate).toLocaleDateString()} - {new Date(item.endDate).toLocaleDateString()}
+          </Typography>
+        </Box>
+
+        <Box display="flex" alignItems="center" gap={1} mb={1}>
+          <ContactSupportIcon fontSize="small" />
+          <Typography variant="body2">
+            <strong></strong> {item.organizerEmail}
           </Typography>
         </Box>
 

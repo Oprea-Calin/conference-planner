@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 
 const ConferenceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-
   const currentConferenceId = Number(id);
 
   const { data: conferenceById, error } = useApiSWR<ConferenceDto, Error>(
@@ -23,15 +22,18 @@ const ConferenceDetails: React.FC = () => {
   if (error) return <p>{t("Error loading conference data")}</p>;
   if (!conferenceById) return <p>{t("Loading...")}</p>;
 
+  const mainSpeaker = conferenceById.speakerList?.find((s) => s.isMainSpeaker);
+
   return (
     <div style={styles.page}>
       <h1 style={styles.title}>{conferenceById.name}</h1>
 
-      <Section label={t("Location")}>
-        {conferenceById.cityName}, {conferenceById.countyName}, {conferenceById.countryName}
-      </Section>
+      <Section label={t("Address")}>{conferenceById.location?.address || "N/A"}</Section>
 
-      <Section label={t("Address")}>{conferenceById.address}</Section>
+      <Section label={t("Location IDs")}>
+        City ID: {conferenceById.location?.cityId}, County ID: {conferenceById.location?.countyId}, Country ID:{" "}
+        {conferenceById.location?.countryId}
+      </Section>
 
       <Section label={t("Dates")}>
         {new Date(conferenceById.startDate).toLocaleDateString()} - {new Date(conferenceById.endDate).toLocaleDateString()}
@@ -44,22 +46,23 @@ const ConferenceDetails: React.FC = () => {
           aria-expanded={expandedSpeakers}
           aria-controls="speakers-list"
         >
-          {expandedSpeakers ? "v" : ">"} {t("Speakers")} ({conferenceById.speakers?.length || 0})
+          {expandedSpeakers ? "v" : ">"} {t("Speakers")} ({conferenceById.speakerList?.length || 0})
         </button>
 
-        {expandedSpeakers && conferenceById.speakers && (
+        {expandedSpeakers && conferenceById.speakerList && (
           <ul id="speakers-list" style={styles.list}>
-            {conferenceById.speakers.map((s) => (
+            {conferenceById.speakerList.map((s) => (
               <li key={s.speakerId} style={styles.listItem}>
-                {s.name}
+                {s.name} {s.isMainSpeaker && <strong>(Main)</strong>}
               </li>
             ))}
           </ul>
         )}
       </div>
 
-      <Section label={t("Type")}>{conferenceById.conferenceTypeName}</Section>
+      <Section label={t("Main Speaker")}>{mainSpeaker?.name || "N/A"}</Section>
 
+      <Section label={t("Type")}>{conferenceById.conferenceTypeName}</Section>
       <Section label={t("Category")}>{conferenceById.categoryName}</Section>
     </div>
   );

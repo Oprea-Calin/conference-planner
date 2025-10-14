@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import ConferenceCard from "./ConferenceCard";
 import type { JSX } from "react";
 import type { ConferenceDto } from "types/dto";
@@ -58,6 +58,35 @@ const ConferenceList: React.FC<{
       {rows}
     </Grid>
   );
+  // return (
+  //   <Box
+  //     sx={{
+  //       display: "flex",
+  //       flexWrap: "wrap",
+  //       gap: 16,
+  //       justifyContent: "center",
+  //       overflow: "auto"
+  //     }}
+  //   >
+  //     {conferences
+  //       .filter((conference) => {
+  //         if (conference.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) return false;
+  //         const sd = new Date(conference.startDate);
+  //         const ed = new Date(conference.endDate);
+  //         if (sd < filterStartDate || ed > filterEndDate) return false;
+  //         if (conference.conferenceTypeName.toLowerCase().indexOf(filterConferenceTypeName.toLowerCase()) === -1) return false;
+  //         if (conference.countyName.toLowerCase().indexOf(filterCounty.toLowerCase()) === -1) return false;
+  //         if (conference.countryName.toLowerCase().indexOf(filterCountry.toLowerCase()) === -1) return false;
+  //         if (conference.cityName.toLowerCase().indexOf(filterCity.toLowerCase()) === -1) return false;
+  //         return true;
+  //       })
+  //       .map((conference) => (
+  //         <Box key={conference.id} sx={{ flex: "0 1 300px" }}>
+  //           <ConferenceCard item={conference} onEdit={onEdit} canEdit={canEdit} />
+  //         </Box>
+  //       ))}
+  //   </Box>
+  // );
 };
 
 export default ConferenceList;

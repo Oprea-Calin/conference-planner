@@ -80,7 +80,7 @@ namespace Charisma.Api.Application.Queries.Conference
                             Address = conference.Location.Address,
                             MainSpeakerName = conference.ConferenceXSpeakers?.FirstOrDefault(x => x.IsMainSpeaker)?.Speaker?.Name,
                             AtendeesList = atendeesList,
-                            Speakers = conference.ConferenceXSpeakers?
+                            SpeakerList = conference.ConferenceXSpeakers?
                                 .Where(x => x.Speaker != null)
                                 .Select(x => new SpeakerDto
                              {
