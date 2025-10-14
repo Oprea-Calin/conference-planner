@@ -11,6 +11,7 @@ import { mutate } from "swr";
 import { EmailProvider, useEmail } from "features/home/EmailContext";
 import { useSubscription } from "units/notifications";
 import { notificationTypes } from "constants";
+import { Rating } from "@mui/material";
 
 const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }) => {
   const { t } = useTranslation();
@@ -241,9 +242,9 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             border: "12px",
             borderRadius: "12px",
             boxShadow: "0 50px 30px rgba(0, 0, 0, 0.3)",
-            backgroundColor: "#fff",
-            alignItems: "flex-start", //adaugate recent
-            position: "relative" //adaugate recent
+            backgroundColor: "#fff"
+            // alignItems: "flex-start", //adaugate recent
+            // position: "relative" //adaugate recent
           }}
         >
           <button
@@ -448,7 +449,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     setSpeakers(updated);
                   }}
                 />
-                <input
+                {/* <input
                   type="text"
                   value={speaker.rating}
                   onChange={(e) => {
@@ -456,7 +457,17 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     updated[index].rating = e.target.value;
                     setSpeakers(updated);
                   }}
+                /> */}
+                <Rating
+                  value={Number(speaker.rating) || 0}
+                  precision={0.1}
+                  onChange={(_, newValue) => {
+                    const updated = [...speakers];
+                    updated[index].rating = newValue?.toString() || "0";
+                    setSpeakers(updated);
+                  }}
                 />
+
                 <input
                   type="checkbox"
                   checked={speaker.main}
