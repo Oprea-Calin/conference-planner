@@ -66,7 +66,9 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
       }
     }
   );
-  const hasEnded = new Date(item.endDate) < new Date();
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  const hasEnded = new Date(item.endDate) < date;
 
   const { trigger: changeAttendStatus } = useApiSWRMutation(endpoints.conferences.changeAttendStatus, putMutationFetcher, {
     onSuccess: () => {

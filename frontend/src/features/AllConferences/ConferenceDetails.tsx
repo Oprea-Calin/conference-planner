@@ -5,6 +5,8 @@ import { useApiSWR } from "units/swr";
 import { endpoints } from "utils";
 import type { ConferenceDto } from "types";
 import { useParams } from "react-router-dom";
+import { Box } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const ConferenceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -28,32 +30,67 @@ const ConferenceDetails: React.FC = () => {
     <div style={styles.page}>
       <h1 style={styles.title}>{conferenceById.name}</h1>
 
-      <Section label={t("Address")}>{conferenceById.location?.address || "N/A"}</Section>
+      <Section label={t("Conference Type")}>{conferenceById.conferenceTypeName}</Section>
 
-      <Section label={t("Location IDs")}>
-        City ID: {conferenceById.location?.cityId}, County ID: {conferenceById.location?.countyId}, Country ID:{" "}
-        {conferenceById.location?.countryId}
+      <Section label={t("Location")}>
+        <div>
+          <strong>{conferenceById.location?.name || "Not specified"}</strong>
+          <br />
+          {conferenceById.location?.address || "Not specified"}
+          <br />
+          Latitude: {conferenceById.location?.latitude || "Not specified"}, Longitude:{" "}
+          {conferenceById.location?.longitude || "Not specified"}
+        </div>
       </Section>
+
+      <Section label={t("Organizer Email")}>{conferenceById.organizerEmail || "Not specified"}</Section>
+
+      <Section label={t("Category")}>{conferenceById.categoryName}</Section>
 
       <Section label={t("Dates")}>
         {new Date(conferenceById.startDate).toLocaleDateString()} - {new Date(conferenceById.endDate).toLocaleDateString()}
       </Section>
 
       <div style={styles.section}>
-        <button
+        {/* <button
           onClick={() => setExpandedSpeakers(!expandedSpeakers)}
           style={styles.expandButton}
           aria-expanded={expandedSpeakers}
           aria-controls="speakers-list"
         >
-          {expandedSpeakers ? "v" : ">"} {t("Speakers")} ({conferenceById.speakerList?.length || 0})
-        </button>
+          {expandedSpeakers ? "V" : ">"} {t("Speakers")} ({conferenceById.speakerList?.length || 0})
+        </button> */}
+        <Box
+          onClick={() => setExpandedSpeakers(!expandedSpeakers)}
+          aria-expanded={expandedSpeakers}
+          aria-controls="speakers-list"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "pointer",
+            userSelect: "none"
+          }}
+        >
+          <strong>
+            {t("Speakers")} ({conferenceById.speakerList?.length || 0})
+          </strong>
+          <ExpandMoreIcon
+            sx={{
+              transform: expandedSpeakers ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s"
+            }}
+          />
+        </Box>
 
         {expandedSpeakers && conferenceById.speakerList && (
           <ul id="speakers-list" style={styles.list}>
             {conferenceById.speakerList.map((s) => (
               <li key={s.speakerId} style={styles.listItem}>
-                {s.name} {s.isMainSpeaker && <strong>(Main)</strong>}
+                <strong>{s.name}</strong> {s.isMainSpeaker && <em>({t("Main Speaker")})</em>}
+                <br />
+                Nationality: {s.nationality}
+                <br />
+                Rating: {s.rating}
               </li>
             ))}
           </ul>
@@ -61,9 +98,6 @@ const ConferenceDetails: React.FC = () => {
       </div>
 
       <Section label={t("Main Speaker")}>{mainSpeaker?.name || "N/A"}</Section>
-
-      <Section label={t("Type")}>{conferenceById.conferenceTypeName}</Section>
-      <Section label={t("Category")}>{conferenceById.categoryName}</Section>
     </div>
   );
 };
@@ -107,10 +141,11 @@ const styles = {
   list: {
     marginTop: 8,
     paddingLeft: 20,
-    color: "#444"
+    color: "#444",
+    listStyleType: "disc"
   },
   listItem: {
-    marginBottom: 4
+    marginBottom: 12
   }
 };
 
