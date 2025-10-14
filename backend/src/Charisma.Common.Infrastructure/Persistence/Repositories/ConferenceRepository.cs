@@ -60,6 +60,7 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
             return result;
         }
 
+
         public void Add(Conference conference)
         {
             dbContext.Conferences.Add(conference);

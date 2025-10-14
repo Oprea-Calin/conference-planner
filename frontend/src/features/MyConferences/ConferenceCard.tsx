@@ -13,6 +13,14 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { EmailProvider, useEmail } from "features/home/EmailContext";
 import { useLocalStorage } from "hooks/useLocalStorage";
 import { mutate } from "swr";
+import {
+  CheckCircle as CheckCircleIcon,
+  ExitToApp as ExitToAppIcon,
+  Replay as ReplayIcon,
+  PersonAdd as PersonAddIcon
+} from "@mui/icons-material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useState } from "react";
 
 const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: ConferenceDto) => void; canEdit?: boolean }> = ({
   item,
@@ -71,21 +79,117 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
   const attendConference = ({ id, email }) => {
     changeAttendStatus({
       ConferenceId: id,
+      NewStatusId: 3,
+      AtendeeEmail: email
+    });
+    refetchConferenceList();
+  };
+  const joinConference = ({ id, email }) => {
+    changeAttendStatus({
+      ConferenceId: id,
       NewStatusId: 1,
       AtendeeEmail: email
     });
     refetchConferenceList();
   };
-
   const withdrawConference = ({ id, email }) => {
     changeAttendStatus({
       ConferenceId: id,
-      NewStatusId: 2, //  2 = WITHDRAWN
+      NewStatusId: 2,
       AtendeeEmail: email
     });
     refetchConferenceList();
   };
   // let attendee = item.atendeesList[ind].statusId;
+  const renderUserActions = () => {
+    if (canEdit) return null;
+
+    const buttonStyles = {
+      borderRadius: 3,
+      textTransform: "none",
+      fontWeight: 500,
+      px: 2,
+      py: 0.5
+    };
+
+    if (status === "Withdrawn" && !hasEnded) {
+      return (
+        <Box display="flex" alignItems="center" gap={1}>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<ReplayIcon />}
+            onClick={() => attendConference({ id: item.id, email })}
+            sx={buttonStyles}
+          >
+            Attend
+          </Button>
+          <Typography variant="body2" color="text.secondary" fontStyle="italic">
+            Withdrawn
+          </Typography>
+        </Box>
+      );
+    }
+
+    if (status === "Attended" && !hasEnded) {
+      return (
+        <Box display="flex" alignItems="center" gap={1}>
+          <Button
+            variant="contained"
+            color="success"
+            startIcon={<CheckCircleIcon />}
+            onClick={() => joinConference({ id: item.id, email })}
+            sx={buttonStyles}
+          >
+            Join
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            startIcon={<ExitToAppIcon />}
+            onClick={() => withdrawConference({ id: item.id, email })}
+            sx={buttonStyles}
+          >
+            Withdraw
+          </Button>
+        </Box>
+      );
+    }
+
+    if (status === "Joined") {
+      return (
+        <Box display="flex" alignItems="center" gap={1}>
+          <CheckCircleIcon color="success" fontSize="small" />
+          <Typography color="success.main" fontWeight={600}>
+            Joined
+          </Typography>
+        </Box>
+      );
+    }
+
+    if (!status && !hasEnded) {
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<PersonAddIcon />}
+          onClick={() => attendConference({ id: item.id, email })}
+          sx={buttonStyles}
+        >
+          Attend
+        </Button>
+      );
+    }
+
+    return null;
+  };
+
+  const [showAllSpeakers, setShowAllSpeakers] = useState(false);
+
+  const hasMainSpeaker = !!item.mainSpeakerName?.trim();
+  const fallbackSpeaker = item.speakers?.[0]?.name || "No speakers";
+
+  const toggleSpeakers = () => setShowAllSpeakers(!showAllSpeakers);
 
   return (
     <Card
@@ -130,11 +234,43 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
           <Chip label={item.categoryName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
         </Box>
 
-        <Box display="flex" alignItems="center" gap={1} mb={1}>
+        {/* <Box display="flex" alignItems="center" gap={1} mb={1}>
           <PersonIcon fontSize="small" />
           <Typography variant="body2">
             <strong>Speaker:</strong> {item.mainSpeakerName}
           </Typography>
+        </Box> */}
+        <Box display="flex" flexDirection="column" mb={1}>
+          <Box
+            display="flex"
+            alignItems="center"
+            gap={1}
+            sx={{ cursor: item.speakers?.length > 1 ? "pointer" : "default" }}
+            onClick={item.speakers?.length > 1 ? toggleSpeakers : undefined}
+          >
+            <PersonIcon fontSize="small" />
+            <Typography variant="body2">
+              <strong>Speaker:</strong> {hasMainSpeaker ? item.mainSpeakerName : fallbackSpeaker}
+            </Typography>
+            {item.speakers?.length > 1 && (
+              <ExpandMoreIcon
+                sx={{
+                  transform: showAllSpeakers ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.3s"
+                }}
+              />
+            )}
+          </Box>
+
+          {showAllSpeakers && item.speakers?.length > 1 && (
+            <Box mt={1} ml={3} display="flex" flexDirection="column" gap={0.5}>
+              {item.speakers.map((speaker) => (
+                <Typography variant="body2" color="text.secondary" key={speaker.speakerId}>
+                  {speaker.name}
+                </Typography>
+              ))}
+            </Box>
+          )}
         </Box>
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
@@ -163,46 +299,8 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         </Button>
 
         {!canEdit && (
-          <Box mt={2}>
-            {status === "Withdrawn" ? (
-              <>
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                  disabled={hasEnded}
-                  onClick={() => attendConference({ id: item.id, email })}
-                  sx={{ mr: 1 }}
-                >
-                  Attend
-                </Button>
-                <Typography component="span" color="text.secondary" sx={{ fontStyle: "italic", verticalAlign: "middle" }}>
-                  Withdrawn
-                </Typography>
-              </>
-            ) : status === "Attended" || (status === "Joined" && hasEnded) ? (
-              <Typography component="span" color="success.main" sx={{ fontWeight: "bold", mr: 1, verticalAlign: "middle" }}>
-                Attended
-              </Typography>
-            ) : status === "Joined" ? (
-              <>
-                <Chip label="Joined" color="success" sx={{ mr: 1 }} />
-                <Button size="small" variant="outlined" color="error" onClick={() => withdrawConference({ id: item.id, email })}>
-                  Withdraw
-                </Button>
-              </>
-            ) : (
-              <Button
-                size="small"
-                variant="contained"
-                color="primary"
-                disabled={hasEnded}
-                onClick={() => attendConference({ id: item.id, email })}
-              >
-                Attend
-              </Button>
-            )}
-          </Box>
+          <Box mt={2}>{renderUserActions()}</Box>
+
           // <Box mt={2}>
           //   {status === "Withdrawn" ? (
           //     <>

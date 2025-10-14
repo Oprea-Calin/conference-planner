@@ -40,7 +40,7 @@ type ConferenceDto = {
     longitude: number;
   };
 
-  speakerList: {
+  speakers: {
     conferenceSpeakerId: number;
     speakerId: number;
     name: string;

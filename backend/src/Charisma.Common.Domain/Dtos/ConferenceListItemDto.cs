@@ -19,6 +19,7 @@ namespace Charisma.Common.Domain.Dtos
         public string Name { get; init; }
         public List<ConferenceXAtendee> AtendeesList { get; init; }
         public string MainSpeakerName { get; init; }
+        public List<SpeakerDto> Speakers { get; init; }
     }
     public record ConferenceXAtendee
     {
