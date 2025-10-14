@@ -146,7 +146,7 @@ const AllConferencesContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = fa
   useSubscription(notificationTypes.ATTENDANCESTATUSCHANGED, {
     onNotification: () => {
       refetchConferenceList();
-      toast.info(t("Conferences.ATTENDANCESTATUSCHANGED"));
+      //toast.info(t("Conferences.ATTENDANCESTATUSCHANGED"));
     }
   });
 

@@ -3,16 +3,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RoomIcon from "@mui/icons-material/Room";
 import PersonIcon from "@mui/icons-material/Person";
-import type { ConferenceDto, ConferenceXAtendee } from "types";
+import type { ConferenceDto } from "types";
 import { toast } from "react-toastify";
-import { deleteMutationFetcher, fetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
+import { deleteMutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import { endpoints } from "utils";
 import { t } from "i18next";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { EmailProvider, useEmail } from "features/home/EmailContext";
-import { useLocalStorage } from "hooks/useLocalStorage";
-import { mutate } from "swr";
+import { useEmail } from "features/home/EmailContext";
 import {
   CheckCircle as CheckCircleIcon,
   ExitToApp as ExitToAppIcon,
@@ -21,6 +19,8 @@ import {
 } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
+import QRCode from "react-qr-code";
+import { useNavigate } from "react-router-dom";
 
 const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: ConferenceDto) => void; canEdit?: boolean }> = ({
   item,
@@ -100,6 +100,13 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
     });
     refetchConferenceList();
   };
+  const [showQRCodeInfo, setShowQRCodeInfo] = useState(false);
+  const toggleQRCodeInfo = () => setShowQRCodeInfo(!showQRCodeInfo);
+  const navigate = useNavigate();
+  const goToDetails = () => {
+    navigate(`/ConferenceDetails/${item.id}`);
+  };
+
   // let attendee = item.atendeesList[ind].statusId;
   const renderUserActions = () => {
     if (canEdit) return null;
@@ -158,11 +165,42 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
 
     if (status === "Joined") {
       return (
-        <Box display="flex" alignItems="center" gap={1}>
-          <CheckCircleIcon color="success" fontSize="small" />
-          <Typography color="success.main" fontWeight={600}>
-            Joined
-          </Typography>
+        <Box display="flex" flexDirection="column" gap={1} mt={1}>
+          <Box display="flex" alignItems="center" gap={1}>
+            <CheckCircleIcon color="success" fontSize="small" />
+            <Typography color="success.main" fontWeight={600}>
+              Joined
+            </Typography>
+          </Box>
+
+          {new Date(item.startDate) > new Date() && (
+            <Box mt={2}>
+              <Box mt={2} display="flex" justifyContent="center" gap={1} sx={{ cursor: "pointer" }} onClick={toggleQRCodeInfo}>
+                <Typography variant="subtitle2" fontWeight="bold">
+                  Your Conference QR Code
+                </Typography>
+                <ExpandMoreIcon
+                  sx={{
+                    transform: showQRCodeInfo ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.3s"
+                  }}
+                />
+              </Box>
+
+              {showQRCodeInfo && (
+                <Box mt={2} display="flex" justifyContent="center">
+                  <Box p={2} bgcolor="white" borderRadius={2} width="fit-content" boxShadow={2} mb={2}>
+                    <QRCode
+                      // value={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                      value={"https://www.youtube.com/watch?v=9HDQH6ReAyw"}
+                      size={160}
+                      style={{ height: "160px", width: "160px" }}
+                    />
+                  </Box>
+                </Box>
+              )}
+            </Box>
+          )}
         </Box>
       );
     }
