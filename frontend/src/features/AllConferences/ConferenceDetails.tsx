@@ -10,9 +10,10 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import RoomIcon from "@mui/icons-material/Room";
+import PeopleIcon from "@mui/icons-material/People";
 
 import { Box, CardContent, Chip, Rating, Typography } from "@mui/material";
-import { over } from "lodash";
+import { over, wrap } from "lodash";
 
 const ConferenceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,9 +30,9 @@ const ConferenceDetails: React.FC = () => {
     onError: (err) => toast.error(t("Conference.Error", { message: err.message }))
   });
 
-  // const [expandedSpeakers, setExpandedSpeakers] = useState(false);
+  const [expandedSpeakers, setExpandedSpeakers] = useState(false);
 
-  const expandedSpeakers = true;
+  // const expandedSpeakers = true;
   if (error) return <p>{t("Error loading conference data")}</p>;
   if (!conferenceById) return <p>{t("Loading...")}</p>;
 
@@ -66,7 +67,7 @@ const ConferenceDetails: React.FC = () => {
   }
 
   return (
-    <CardContent style={{ paddingTop: 28, overflow: "auto" }}>
+    <CardContent style={styles.page}>
       <Typography variant="h6" fontWeight={600} gutterBottom>
         {mergedConference.name}
       </Typography>
@@ -81,7 +82,7 @@ const ConferenceDetails: React.FC = () => {
       <Box display="flex" alignItems="center" gap={1} mb={1}>
         <LocationCityIcon fontSize="small" />
         <Typography variant="body2">
-          {mergedConference.cityName}, {mergedConference.countyName.toUpperCase()}, {mergedConference.countryName.toUpperCase()}
+          {mergedConference.cityName}, {mergedConference.countyName}, {mergedConference.countryName}
         </Typography>
       </Box>
 
@@ -107,15 +108,27 @@ const ConferenceDetails: React.FC = () => {
       </Box>
 
       <Box display="flex" alignItems="center" gap={1} mb={1}>
-        <ContactSupportIcon fontSize="small" />
+        <PeopleIcon fontSize="small" />
         <Typography variant="body2">
           {mergedConference.atendeesList.length > 0 ? mergedConference.atendeesList.length : "No attendees"} Attending
         </Typography>
       </Box>
 
       <div style={styles.section}>
-        <Box aria-expanded={expandedSpeakers} aria-controls="speakers-list">
+        <Box
+          onClick={() => setExpandedSpeakers((prev) => !prev)}
+          aria-expanded={expandedSpeakers}
+          aria-controls="speakers-list"
+          style={{ cursor: "pointer" }}
+        >
+          {" "}
           <strong>
+            <ExpandMoreIcon
+              sx={{
+                transform: expandedSpeakers ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.3s"
+              }}
+            />
             {t("Speakers")} ({mergedConference.speakerList?.length || 0})
           </strong>
         </Box>
@@ -124,8 +137,9 @@ const ConferenceDetails: React.FC = () => {
           <div style={styles.speakerCards}>
             {mergedConference.speakerList.map((s) => (
               <div key={s.speakerId ?? s.speakerId} style={styles.speakerCard}>
+                {s.isMainSpeaker && <em style={{ color: "#ff9d00ff", marginLeft: 8 }}> (Main) </em>}
                 <strong style={{ fontSize: "1.1rem" }}>{s.name}</strong>
-                {s.isMainSpeaker && <em style={{ color: "#007bff", marginLeft: 8 }}>Main</em>}
+
                 {s.rating && <Rating value={s.rating} readOnly size="small" sx={{ mt: 1 }} />}
                 <div style={{ marginTop: 6, color: "#555" }}>Nationality: {s.nationality || "Unknown"}</div>
               </div>
@@ -137,23 +151,19 @@ const ConferenceDetails: React.FC = () => {
   );
 };
 
-const Section: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div style={styles.section}>
-    <div style={styles.label}>{label}</div>
-    <div style={styles.value}>{children}</div>
-  </div>
-);
-
 const styles = {
   page: {
-    maxWidth: 600,
+    maxWidth: 700,
     width: "100%",
     margin: "30px auto",
     padding: "30px 24px",
     overflow: "auto",
     backgroundColor: "#f9f9f9",
     borderRadius: 12,
-    boxShadow: "0 6px 18px rgba(0,0,0,0.1)"
+    boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
+    alignItems: "center",
+    display: "flex",
+    flexDirection: "column"
   },
   title: {
     marginBottom: 20,
@@ -164,7 +174,7 @@ const styles = {
   section: {
     marginBottom: 16,
     padding: "12px 16px",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#ffffffff",
     borderRadius: 8,
     boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
   },
@@ -180,7 +190,9 @@ const styles = {
   speakerCards: {
     display: "flex",
     gap: 12,
-    marginTop: 12
+    marginTop: 12,
+    // overflowX: "auto",
+    flexWrap: "wrap"
   },
   speakerCard: {
     backgroundColor: "#fff",
