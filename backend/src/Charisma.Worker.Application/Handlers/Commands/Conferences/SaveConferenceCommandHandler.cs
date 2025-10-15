@@ -43,6 +43,7 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                     StartDate = request.StartDate,
                     EndDate = request.EndDate,
                     Name = request.Name,
+                    Link = request.Link,
                     ConferenceXSpeakers = new List<ConferenceXSpeaker>(),
                 };
 
@@ -94,6 +95,7 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                     StartDate = conference.StartDate,
                     EndDate = conference.EndDate,
                     Name = conference.Name,
+                    Link = conference.Link,
                     SpeakerList = conference.ConferenceXSpeakers.Select(x => new Charisma.Common.Domain.Dtos.Events.Conferences.Speaker()
                     {
                         IsMainSpeaker = x.IsMainSpeaker,
@@ -119,6 +121,7 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                 conference.Location.CityId = request.Location.CityId;
                 conference.Location.Latitude = request.Location.Latitude;
                 conference.Location.Longitude = request.Location.Longitude;
+
 
                 //Speaker List
                 for(int i = conference.ConferenceXSpeakers.Count - 1; i >= 0; i--)
@@ -174,6 +177,7 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                 conference.StartDate = request.StartDate;
                 conference.EndDate = request.EndDate;
                 conference.Name = request.Name;
+                conference.Link = request.Link;
 
                 await conferenceRepository.Save(cancellationToken);
                 await messageBusPublisher.PublishAsync(new ConferenceUpdated
@@ -196,6 +200,7 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                     StartDate = conference.StartDate,
                     EndDate = conference.EndDate,
                     Name = conference.Name,
+                    Link = conference.Link,
                     SpeakerList = conference.ConferenceXSpeakers.Select(x => new Charisma.Common.Domain.Dtos.Events.Conferences.Speaker()
                     {
                         IsMainSpeaker = x.IsMainSpeaker,

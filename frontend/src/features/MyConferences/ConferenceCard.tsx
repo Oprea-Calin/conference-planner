@@ -176,7 +176,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             </Typography>
           </Box>
 
-          {new Date(item.startDate) > new Date() && (
+          {!hasEnded && (
             <Box mt={2}>
               <Box mt={2} display="flex" justifyContent="center" gap={1} sx={{ cursor: "pointer" }} onClick={toggleQRCodeInfo}>
                 <Typography variant="subtitle2" fontWeight="bold">

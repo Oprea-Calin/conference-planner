@@ -56,6 +56,8 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
 
   const { email, setEmail } = useEmail();
   const [conferenceName, setConferenceName] = useState("");
+  const [conferenceLink, setConferenceLink] = useState("");
+
   const [conferenceType, setConferenceType] = useState("");
   const [category, setCategory] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -143,7 +145,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
     setCategory(conference.categoryId?.toString() || "");
     setStartDate(conference.startDate ? new Date(conference.startDate).toISOString().split("T")[0] : "");
     setEndDate(conference.endDate ? new Date(conference.endDate).toISOString().split("T")[0] : "");
-
+    setConferenceLink(conference.link || "");
     const loc = conference.location || {};
     setLocation({
       id: loc.locationId || 0,
@@ -287,6 +289,17 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div>
+              <label>{t("Conference Link")}</label>
+              <input
+                type="text"
+                value={conferenceLink}
+                onChange={(e) => setConferenceLink(e.target.value)}
+                placeholder={t("Enter conference link")}
+                style={{ width: "100%" }}
+              />
             </div>
 
             <div>
@@ -549,6 +562,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   startDate: new Date(startDate).toISOString(),
                   endDate: new Date(endDate).toISOString(),
                   name: conferenceName,
+                  link: conferenceLink,
                   speakerList: speakers.map((s) => ({
                     conferenceSpeakerId: s.confSp || 0,
                     speakerId: s.id || 0,

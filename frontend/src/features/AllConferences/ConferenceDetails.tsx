@@ -51,6 +51,40 @@ const ConferenceDetails: React.FC = () => {
     atendeesList: additionalInfo?.atendeesList || []
   };
 
+  function ConferenceActionButton({
+    type,
+    lat,
+    lng,
+    conferenceUrl
+  }: {
+    type: string;
+    lat: number | undefined;
+    lng: number | undefined;
+    conferenceUrl?: string;
+  }) {
+    const isRemote = type?.toLowerCase() === "remote";
+
+    const handleClick = () => {
+      if (isRemote && conferenceUrl) {
+        window.open(conferenceUrl, "_blank", "noopener,noreferrer");
+      } else if (lat && lng) {
+        const url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+    };
+
+    const label = isRemote ? "Connect to conference" : "Get Directions";
+
+    if (isRemote && !conferenceUrl) return null;
+    if (!isRemote && (!lat || !lng)) return null;
+
+    return (
+      <button style={styles.button} onClick={handleClick}>
+        {label}
+      </button>
+    );
+  }
+
   function OpenInMapsButton({ lat, lng }) {
     if (!lat || !lng) return null;
 
@@ -65,7 +99,7 @@ const ConferenceDetails: React.FC = () => {
       </button>
     );
   }
-
+  // const conferenceUrl = "https://www.zoom.com/";
   return (
     <CardContent style={styles.page}>
       <Typography variant="h6" fontWeight={600} gutterBottom>
@@ -77,7 +111,13 @@ const ConferenceDetails: React.FC = () => {
         <Chip label={mergedConference.categoryName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
       </Box>
 
-      <OpenInMapsButton lat={mergedConference.location?.latitude} lng={mergedConference.location?.longitude} />
+      {/* <OpenInMapsButton lat={mergedConference.location?.latitude} lng={mergedConference.location?.longitude} /> */}
+      <ConferenceActionButton
+        type={mergedConference.conferenceTypeName}
+        lat={mergedConference.location?.latitude}
+        lng={mergedConference.location?.longitude}
+        conferenceUrl={mergedConference.link}
+      />
 
       <Box display="flex" alignItems="center" gap={1} mb={1}>
         <LocationCityIcon fontSize="small" />
@@ -133,17 +173,20 @@ const ConferenceDetails: React.FC = () => {
           </strong>
         </Box>
 
-        {expandedSpeakers && mergedConference.speakerList && (
+        {expandedSpeakers && (
           <div style={styles.speakerCards}>
-            {mergedConference.speakerList.map((s) => (
-              <div key={s.speakerId ?? s.speakerId} style={styles.speakerCard}>
-                {s.isMainSpeaker && <em style={{ color: "#ff9d00ff", marginLeft: 8 }}> (Main) </em>}
-                <strong style={{ fontSize: "1.1rem" }}>{s.name}</strong>
-
-                {s.rating && <Rating value={s.rating} readOnly size="small" sx={{ mt: 1 }} />}
-                <div style={{ marginTop: 6, color: "#555" }}>Nationality: {s.nationality || "Unknown"}</div>
-              </div>
-            ))}
+            {mergedConference.speakerList && mergedConference.speakerList.length > 0 ? (
+              mergedConference.speakerList.map((s) => (
+                <div key={s.speakerId ?? s.speakerId} style={styles.speakerCard}>
+                  {s.isMainSpeaker && <em style={{ color: "#ff9d00ff", marginLeft: 8 }}> (Main) </em>}
+                  <strong style={{ fontSize: "1.1rem" }}>{s.name}</strong>
+                  {s.rating && <Rating value={s.rating} readOnly size="small" sx={{ mt: 1 }} />}
+                  <div style={{ marginTop: 6, color: "#555" }}>Nationality: {s.nationality || "Unknown"}</div>
+                </div>
+              ))
+            ) : (
+              <div style={{ fontStyle: "italic", color: "#999", padding: 10 }}>No speakers</div>
+            )}
           </div>
         )}
       </div>

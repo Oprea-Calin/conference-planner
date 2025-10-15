@@ -44,6 +44,7 @@ namespace Charisma.Api.Application.Queries.Conference
                     StartDate = conference.StartDate,
                     EndDate = conference.EndDate,
                     Name = conference.Name,
+                    Link = conference.Link,
                     SpeakerList = conference.ConferenceXSpeakers.Select(x => new Speaker()
                     {
                         ConferenceSpeakerId = x.Id,

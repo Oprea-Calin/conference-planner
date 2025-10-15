@@ -56,6 +56,7 @@ type ConferenceDto = {
   countyName: string;
   cityName: string;
   mainSpeakerName?: string;
+  link?: string;
 };
 
 type UserGroupDto = {

@@ -14,6 +14,7 @@ namespace Charisma.Common.Domain.Entities.Conferences
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Name { get; set; }
+        public string? Link { get; set; }
 
 
         public DictionaryCategory Category { get; set; }

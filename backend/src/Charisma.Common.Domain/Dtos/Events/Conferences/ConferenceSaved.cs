@@ -16,6 +16,7 @@ namespace Charisma.Common.Domain.Dtos.Events.Conferences
         public DateTime EndDate { get; init; }
         public string Name { get; init; }
         public List<Speaker> SpeakerList { get; init; }
+        public string? Link { get; init; }
     }
 
     public record Speaker
