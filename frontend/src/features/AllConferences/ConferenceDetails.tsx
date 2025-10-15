@@ -5,8 +5,14 @@ import { useApiSWR } from "units/swr";
 import { endpoints } from "utils";
 import type { ConferenceDto } from "types";
 import { useParams } from "react-router-dom";
-import { Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
+import RoomIcon from "@mui/icons-material/Room";
+
+import { Box, CardContent, Chip, Rating, Typography } from "@mui/material";
+import { over } from "lodash";
 
 const ConferenceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,124 +25,168 @@ const ConferenceDetails: React.FC = () => {
     }
   );
 
-  const [expandedSpeakers, setExpandedSpeakers] = useState(false);
+  const { data: allConferences = [] } = useApiSWR<ConferenceDto[], Error>(endpoints.conferences.default, {
+    onError: (err) => toast.error(t("Conference.Error", { message: err.message }))
+  });
 
+  // const [expandedSpeakers, setExpandedSpeakers] = useState(false);
+
+  const expandedSpeakers = true;
   if (error) return <p>{t("Error loading conference data")}</p>;
   if (!conferenceById) return <p>{t("Loading...")}</p>;
 
-  const mainSpeaker = conferenceById.speakerList?.find((s) => s.isMainSpeaker);
+  const additionalInfo = allConferences.find((c) => c.id === conferenceById.id);
+
+  const mergedConference = {
+    ...additionalInfo,
+    ...conferenceById,
+    location: conferenceById.location ?? {
+      name: additionalInfo?.locationName,
+      address: additionalInfo?.address,
+      latitude: null,
+      longitude: null
+    },
+    speakerList: conferenceById.speakerList || additionalInfo?.speakerList || [],
+    atendeesList: additionalInfo?.atendeesList || []
+  };
+
+  function OpenInMapsButton({ lat, lng }) {
+    if (!lat || !lng) return null;
+
+    const handleClick = () => {
+      const url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    };
+
+    return (
+      <button style={styles.button} onClick={handleClick}>
+        Get Directions
+      </button>
+    );
+  }
 
   return (
-    <div style={styles.page}>
-      <h1 style={styles.title}>{conferenceById.name}</h1>
+    <CardContent style={{ paddingTop: 28, overflow: "auto" }}>
+      <Typography variant="h6" fontWeight={600} gutterBottom>
+        {mergedConference.name}
+      </Typography>
 
-      <Section label={t("Conference Type")}>{conferenceById.conferenceTypeName}</Section>
+      <Box display={"flex"} justifyContent={"space-between"}>
+        <Chip label={mergedConference.conferenceTypeName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
+        <Chip label={mergedConference.categoryName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
+      </Box>
 
-      <Section label={t("Location")}>
-        <div>
-          <strong>{conferenceById.location?.name || "Not specified"}</strong>
-          <br />
-          {conferenceById.location?.address || "Not specified"}
-          <br />
-          Latitude: {conferenceById.location?.latitude || "Not specified"}, Longitude:{" "}
-          {conferenceById.location?.longitude || "Not specified"}
-        </div>
-      </Section>
+      <OpenInMapsButton lat={mergedConference.location?.latitude} lng={mergedConference.location?.longitude} />
 
-      <Section label={t("Organizer Email")}>{conferenceById.organizerEmail || "Not specified"}</Section>
+      <Box display="flex" alignItems="center" gap={1} mb={1}>
+        <LocationCityIcon fontSize="small" />
+        <Typography variant="body2">
+          {mergedConference.cityName}, {mergedConference.countyName.toUpperCase()}, {mergedConference.countryName.toUpperCase()}
+        </Typography>
+      </Box>
 
-      <Section label={t("Category")}>{conferenceById.categoryName}</Section>
+      <Box display="flex" alignItems="center" gap={1} mb={1}>
+        <RoomIcon fontSize="small" />
+        <Typography variant="body2">
+          <strong></strong> {mergedConference.address}
+        </Typography>
+      </Box>
 
-      <Section label={t("Dates")}>
-        {new Date(conferenceById.startDate).toLocaleDateString()} - {new Date(conferenceById.endDate).toLocaleDateString()}
-      </Section>
+      <Box display="flex" alignItems="center" gap={1} mb={1}>
+        <CalendarMonthIcon fontSize="small" />
+        <Typography variant="body2" color="text.secondary" gutterBottom>
+          {new Date(mergedConference.startDate).toLocaleDateString()} - {new Date(mergedConference.endDate).toLocaleDateString()}
+        </Typography>
+      </Box>
+
+      <Box display="flex" alignItems="center" gap={1} mb={1}>
+        <ContactSupportIcon fontSize="small" />
+        <Typography variant="body2">
+          <strong></strong> {mergedConference.organizerEmail}
+        </Typography>
+      </Box>
+
+      <Box display="flex" alignItems="center" gap={1} mb={1}>
+        <ContactSupportIcon fontSize="small" />
+        <Typography variant="body2">
+          {mergedConference.atendeesList.length > 0 ? mergedConference.atendeesList.length : "No attendees"} Attending
+        </Typography>
+      </Box>
 
       <div style={styles.section}>
-        {/* <button
-          onClick={() => setExpandedSpeakers(!expandedSpeakers)}
-          style={styles.expandButton}
-          aria-expanded={expandedSpeakers}
-          aria-controls="speakers-list"
-        >
-          {expandedSpeakers ? "V" : ">"} {t("Speakers")} ({conferenceById.speakerList?.length || 0})
-        </button> */}
-        <Box
-          onClick={() => setExpandedSpeakers(!expandedSpeakers)}
-          aria-expanded={expandedSpeakers}
-          aria-controls="speakers-list"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            cursor: "pointer",
-            userSelect: "none"
-          }}
-        >
+        <Box aria-expanded={expandedSpeakers} aria-controls="speakers-list">
           <strong>
-            {t("Speakers")} ({conferenceById.speakerList?.length || 0})
+            {t("Speakers")} ({mergedConference.speakerList?.length || 0})
           </strong>
-          <ExpandMoreIcon
-            sx={{
-              transform: expandedSpeakers ? "rotate(180deg)" : "rotate(0deg)",
-              transition: "transform 0.3s"
-            }}
-          />
         </Box>
 
-        {expandedSpeakers && conferenceById.speakerList && (
-          <ul id="speakers-list" style={styles.list}>
-            {conferenceById.speakerList.map((s) => (
-              <li key={s.speakerId} style={styles.listItem}>
-                <strong>{s.name}</strong> {s.isMainSpeaker && <em>({t("Main Speaker")})</em>}
-                <br />
-                Nationality: {s.nationality}
-                <br />
-                Rating: {s.rating}
-              </li>
+        {expandedSpeakers && mergedConference.speakerList && (
+          <div style={styles.speakerCards}>
+            {mergedConference.speakerList.map((s) => (
+              <div key={s.speakerId ?? s.speakerId} style={styles.speakerCard}>
+                <strong style={{ fontSize: "1.1rem" }}>{s.name}</strong>
+                {s.isMainSpeaker && <em style={{ color: "#007bff", marginLeft: 8 }}>Main</em>}
+                {s.rating && <Rating value={s.rating} readOnly size="small" sx={{ mt: 1 }} />}
+                <div style={{ marginTop: 6, color: "#555" }}>Nationality: {s.nationality || "Unknown"}</div>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
-
-      <Section label={t("Main Speaker")}>{mainSpeaker?.name || "N/A"}</Section>
-    </div>
+    </CardContent>
   );
 };
 
 const Section: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
   <div style={styles.section}>
-    <strong>{label}:</strong> <span>{children}</span>
+    <div style={styles.label}>{label}</div>
+    <div style={styles.value}>{children}</div>
   </div>
 );
 
 const styles = {
   page: {
-    maxWidth: 480,
-    margin: "20px auto",
-    padding: 20,
-    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-    backgroundColor: "#fff",
-    borderRadius: 8,
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
+    maxWidth: 600,
+    width: "100%",
+    margin: "30px auto",
+    padding: "30px 24px",
+    overflow: "auto",
+    backgroundColor: "#f9f9f9",
+    borderRadius: 12,
+    boxShadow: "0 6px 18px rgba(0,0,0,0.1)"
   },
   title: {
-    marginBottom: 16,
-    fontWeight: "700",
-    fontSize: "1.8rem",
-    color: "#333"
+    marginBottom: 20,
+    fontWeight: "800",
+    fontSize: "2rem",
+    color: "#2c3e50"
   },
   section: {
-    marginBottom: 12,
-    fontSize: "1rem",
-    color: "#555"
+    marginBottom: 16,
+    padding: "12px 16px",
+    backgroundColor: "#ffffff",
+    borderRadius: 8,
+    boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
   },
-  expandButton: {
-    background: "none",
-    border: "none",
-    padding: 0,
-    cursor: "pointer",
+  label: {
+    fontWeight: 600,
+    color: "#555",
+    marginBottom: 4
+  },
+  value: {
     fontSize: "1rem",
-    fontWeight: "600",
-    color: "#007bff"
+    color: "#333"
+  },
+  speakerCards: {
+    display: "flex",
+    gap: 12,
+    marginTop: 12
+  },
+  speakerCard: {
+    backgroundColor: "#fff",
+    padding: 12,
+    borderRadius: 8,
+    boxShadow: "0 2px 6px rgba(0,0,0,0.07)"
   },
   list: {
     marginTop: 8,
@@ -146,6 +196,16 @@ const styles = {
   },
   listItem: {
     marginBottom: 12
+  },
+  button: {
+    backgroundColor: "#00a2ffff",
+    color: "#ffffffff",
+    padding: "10px 16px",
+    border: "none",
+    borderRadius: 6,
+    cursor: "pointer",
+    margin: "10px 0",
+    fontSize: "0.95rem"
   }
 };
 

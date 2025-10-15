@@ -383,18 +383,20 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
               <div style={{ flex: 1 }}>
                 <label>{t("Latitude")}</label>
                 <input
-                  type="text"
+                  type="number"
                   style={{ width: "100%" }}
                   value={location.latitude}
+                  // step={0.1}
                   onChange={(e) => setLocation({ ...location, latitude: e.target.value })}
                 />
               </div>
               <div style={{ flex: 1 }}>
                 <label>{t("Longitude")}</label>
                 <input
-                  type="text"
+                  type="number"
                   style={{ width: "100%" }}
                   value={location.longitude}
+                  // step={0.1}
                   onChange={(e) => setLocation({ ...location, longitude: e.target.value })}
                 />
               </div>

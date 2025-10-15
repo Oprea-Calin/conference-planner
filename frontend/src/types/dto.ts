@@ -36,8 +36,8 @@ type ConferenceDto = {
     countryId: number;
     countyId: number;
     cityId: number;
-    latitude: number;
-    longitude: number;
+    latitude?: number;
+    longitude?: number;
   };
 
   speakerList: {

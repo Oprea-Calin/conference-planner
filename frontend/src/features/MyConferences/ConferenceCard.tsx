@@ -193,11 +193,18 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
               {showQRCodeInfo && (
                 <Box mt={2} display="flex" justifyContent="center">
                   <Box p={2} bgcolor="white" borderRadius={2} width="fit-content" boxShadow={2} mb={2}>
-                    <QRCode
-                      value={`${window.location.origin}/ConferenceDetails/${item.id}`}
-                      size={160}
-                      style={{ height: "160px", width: "160px" }}
-                    />
+                    <a
+                      href={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: "inline-block" }}
+                    >
+                      <QRCode
+                        value={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                        size={160}
+                        style={{ height: "160px", width: "160px" }}
+                      />
+                    </a>
                   </Box>
                 </Box>
               )}
