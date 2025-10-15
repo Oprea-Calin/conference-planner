@@ -12,6 +12,7 @@ import { EmailProvider, useEmail } from "features/home/EmailContext";
 import { useSubscription } from "units/notifications";
 import { notificationTypes } from "constants";
 import { Rating } from "@mui/material";
+import { set } from "lodash";
 
 const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }) => {
   const { t } = useTranslation();
@@ -91,13 +92,6 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
     }
   );
 
-  // const handleEdit = (c: ConferenceDto) => {
-  //   setCurrentConferenceId(c.id);
-
-  //   if (conferenceById?.id === c.id) {
-  //     populateConferenceData(conferenceById);
-  //   }
-  // };
   const handleEdit = async (c: ConferenceDto) => {
     setCurrentConferenceId(c.id);
 
@@ -186,6 +180,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
     setCategory("");
     setStartDate("");
     setEndDate("");
+    setConferenceLink("");
     setLocation({
       id: 0,
       name: "",
@@ -197,7 +192,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
       latitude: "",
       longitude: ""
     });
-    setSpeakers([{ confSp: "", id: "", name: "", nationality: "", rating: "", main: false }]);
+    setSpeakers([]);
     setIsDialogOpen(true);
   };
 
@@ -399,7 +394,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   type="number"
                   style={{ width: "100%" }}
                   value={location.latitude}
-                  // step={0.1}
+                  step={0.01}
                   onChange={(e) => setLocation({ ...location, latitude: e.target.value })}
                 />
               </div>
@@ -409,7 +404,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   type="number"
                   style={{ width: "100%" }}
                   value={location.longitude}
-                  // step={0.1}
+                  step={0.01}
                   onChange={(e) => setLocation({ ...location, longitude: e.target.value })}
                 />
               </div>
@@ -464,15 +459,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     setSpeakers(updated);
                   }}
                 />
-                {/* <input
-                  type="text"
-                  value={speaker.rating}
-                  onChange={(e) => {
-                    const updated = [...speakers];
-                    updated[index].rating = e.target.value;
-                    setSpeakers(updated);
-                  }}
-                /> */}
+
                 <Rating
                   value={Number(speaker.rating) || 0}
                   precision={0.1}

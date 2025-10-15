@@ -164,6 +164,14 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
           </Button>
         </Box>
       );
+    } else if (status === "Attended" && hasEnded) {
+      return (
+        <Box display="flex" alignItems="center" gap={1}>
+          <Typography color="blue" fontWeight={600}>
+            Attended
+          </Typography>
+        </Box>
+      );
     }
 
     if (status === "Joined") {
@@ -272,6 +280,12 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
       )}
 
       <CardContent style={{ paddingTop: 28 }}>
+        {hasEnded && (
+          <Typography variant="body2" color="red" fontWeight="bold" gutterBottom>
+            Ended
+          </Typography>
+        )}
+
         <Typography variant="h6" fontWeight={600} gutterBottom>
           {item.name}
         </Typography>
@@ -281,12 +295,6 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
           <Chip label={item.categoryName} size="small" sx={{ mb: 1, textTransform: "capitalize" }} />
         </Box>
 
-        {/* <Box display="flex" alignItems="center" gap={1} mb={1}>
-          <PersonIcon fontSize="small" />
-          <Typography variant="body2">
-            <strong>Speaker:</strong> {item.mainSpeakerName}
-          </Typography>
-        </Box> */}
         <Box display="flex" flexDirection="column" mb={1}>
           <Box
             display="flex"
