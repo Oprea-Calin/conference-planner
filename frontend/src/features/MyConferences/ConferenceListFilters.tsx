@@ -20,6 +20,10 @@ const ConferenceListFilters: React.FC<{
   onFilterCountryChange: (country: string) => void;
   filterCounty: string;
   onFilterCountyChange: (county: string) => void;
+  statusFilter: string;
+  onStatusFilterChange: (status: string) => void;
+  timeFilter: string;
+  onTimeFilterChange: (time: string) => void;
 }> = ({
   filterText,
   onFilterTextChange,
@@ -34,7 +38,11 @@ const ConferenceListFilters: React.FC<{
   filterCountry,
   onFilterCountryChange,
   filterCounty,
-  onFilterCountyChange
+  onFilterCountyChange,
+  statusFilter,
+  onStatusFilterChange,
+  timeFilter,
+  onTimeFilterChange
 }) => {
   const { data: conferenceCities = [] } = useApiSWR<{ id: number; name: string }[], Error>(endpoints.dictionaries.cities, {
     onError: (err) => toast.error(t("Error loading conference categories: ", { message: err.message }))
@@ -49,6 +57,7 @@ const ConferenceListFilters: React.FC<{
     onError: (err) => toast.error(t("Error loading conference types: ", { message: err.message }))
   });
   const [open, setOpen] = useState(false);
+
   return (
     <>
       {/* <Button variant="contained" onClick={() => setOpen(true)}>
@@ -84,6 +93,42 @@ const ConferenceListFilters: React.FC<{
         <DialogTitle sx={{ fontWeight: "bold", fontSize: 22 }}>Filters</DialogTitle>
 
         <DialogContent>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, mt: 3 }}>
+            <Box>
+              <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
+                Status
+              </Typography>
+              <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                {["Joined", "Withdrawn", "Attended"].map((status) => (
+                  <Button
+                    key={status}
+                    variant={statusFilter === status ? "contained" : "outlined"}
+                    onClick={() => onStatusFilterChange(statusFilter === status ? "" : status)}
+                  >
+                    {status}
+                  </Button>
+                ))}
+              </Box>
+            </Box>
+
+            <Box>
+              <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
+                Time
+              </Typography>
+              <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                {["Upcoming", "Ended"].map((time) => (
+                  <Button
+                    key={time}
+                    variant={timeFilter === time ? "contained" : "outlined"}
+                    onClick={() => onTimeFilterChange(timeFilter === time ? "" : time)}
+                  >
+                    {time}
+                  </Button>
+                ))}
+              </Box>
+            </Box>
+          </Box>
+
           <Box
             sx={{
               display: "flex",
@@ -206,115 +251,6 @@ const ConferenceListFilters: React.FC<{
       </Dialog>
     </>
   );
-
-  // return (
-  //   <>
-  //     <div style={{ padding: 16, textAlign: "right" }}>
-  //       <Button variant="outlined" onClick={() => setOpen(true)}>
-  //         Filters
-  //       </Button>
-  //     </div>
-
-  //     <Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="md">
-  //       <DialogTitle>Filters</DialogTitle>
-  //       <DialogContent>
-  //         <Grid container spacing={2}>
-  //           <Grid>
-  //             <input
-  //               type="date"
-  //               name="startDate"
-  //               value={filterStartDate ? filterStartDate.toLocaleDateString("en-CA") : ""}
-  //               onChange={(e) => onFilterStartDateChange(new Date(e.target.value))}
-  //               placeholder="Start Date"
-  //               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
-  //             />
-  //           </Grid>
-  //           <Grid>
-  //             <input
-  //               type="date"
-  //               name="endDate"
-  //               value={filterEndDate ? filterEndDate.toLocaleDateString("en-CA") : ""}
-  //               onChange={(e) => onFilterEndDateChange(new Date(e.target.value))}
-  //               placeholder="End Date"
-  //               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
-  //             />
-  //           </Grid>
-  //           <Grid>
-  //             <input
-  //               type="text"
-  //               name="conferenceName"
-  //               value={filterText}
-  //               onChange={(e) => onFilterTextChange(e.target.value)}
-  //               placeholder="Name"
-  //               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
-  //             />
-  //           </Grid>
-  //           <Grid>
-  //             <select
-  //               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
-  //               value={filterCity}
-  //               onChange={(e) => onFilterCityChange(e.target.value)}
-  //             >
-  //               <option value="">{t("City")}</option>
-  //               {conferenceCities.map((c) => (
-  //                 <option key={c.id} value={c.name}>
-  //                   {c.name}
-  //                 </option>
-  //               ))}
-  //             </select>
-  //           </Grid>
-  //           <Grid>
-  //             <select
-  //               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
-  //               value={filterCounty}
-  //               onChange={(e) => onFilterCountyChange(e.target.value)}
-  //             >
-  //               <option value="">{t("County")}</option>
-  //               {conferenceCounties.map((c) => (
-  //                 <option key={c.id} value={c.name}>
-  //                   {c.name}
-  //                 </option>
-  //               ))}
-  //             </select>
-  //           </Grid>
-  //           <Grid>
-  //             <select
-  //               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
-  //               value={filterCountry}
-  //               onChange={(e) => onFilterCountryChange(e.target.value)}
-  //             >
-  //               <option value="">{t("Country")}</option>
-  //               {conferenceCountries.map((c) => (
-  //                 <option key={c.id} value={c.name}>
-  //                   {c.name}
-  //                 </option>
-  //               ))}
-  //             </select>
-  //           </Grid>
-  //           <Grid>
-  //             <select
-  //               style={{ width: "100%", padding: 8, borderRadius: 4, border: "1px solid #ccc" }}
-  //               value={filterConferenceTypeName}
-  //               onChange={(e) => onFilterConferenceTypeNameChange(e.target.value)}
-  //             >
-  //               <option value="">{t("Type")}</option>
-  //               {conferenceTypes.map((c) => (
-  //                 <option key={c.id} value={c.name}>
-  //                   {c.name}
-  //                 </option>
-  //               ))}
-  //             </select>
-  //           </Grid>
-  //         </Grid>
-  //       </DialogContent>
-  //       <DialogActions>
-  //         <Button onClick={() => setOpen(false)} variant="contained" color="primary">
-  //           Apply
-  //         </Button>
-  //       </DialogActions>
-  //     </Dialog>
-  //   </>
-  // );
 };
 
 export default ConferenceListFilters;

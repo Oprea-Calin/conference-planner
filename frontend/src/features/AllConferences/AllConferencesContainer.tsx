@@ -23,6 +23,8 @@ const AllConferencesContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = fa
   const [filterCountry, setFilterCountry] = useState<string>("");
   const [filterCounty, setFilterCounty] = useState<string>("");
   const [filterCity, setFilterCity] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [timeFilter, setTimeFilter] = useState("");
 
   // const { data: users } = useApiSWR<DictionaryItem[], Error>(endpoints.dictionaries.categories, {
   //   onError: (err) => toast.error(t("User.Error", { message: err.message }))
@@ -78,6 +80,10 @@ const AllConferencesContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = fa
           onFilterCountryChange={setFilterCountry}
           filterCounty={filterCounty}
           onFilterCountyChange={setFilterCounty}
+          statusFilter={statusFilter}
+          onStatusFilterChange={setStatusFilter}
+          timeFilter={timeFilter}
+          onTimeFilterChange={setTimeFilter}
         />
       </div>
       <div>
@@ -90,6 +96,8 @@ const AllConferencesContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = fa
           filterCity={filterCity}
           filterCounty={filterCounty}
           filterCountry={filterCountry}
+          statusFilter={statusFilter}
+          timeFilter={timeFilter}
           canEdit={canEdit}
         />
       </div>

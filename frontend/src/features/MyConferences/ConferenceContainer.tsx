@@ -17,6 +17,9 @@ import { set } from "lodash";
 const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }) => {
   const { t } = useTranslation();
 
+  const [statusFilter, setStatusFilter] = useState("");
+  const [timeFilter, setTimeFilter] = useState("");
+
   const [filterText, setFilterText] = useState<string>("");
   const [filterStartDate, setFilterStartDate] = useState<Date | undefined>();
   const [filterEndDate, setFilterEndDate] = useState<Date | undefined>();
@@ -208,7 +211,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
         style={{
           position: "fixed",
           bottom: "20px",
-          right: "20px",
+          right: "40px",
           width: "60px",
           height: "60px",
           borderRadius: "50%",
@@ -616,6 +619,10 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
           onFilterCountryChange={setFilterCountry}
           filterCounty={filterCounty}
           onFilterCountyChange={setFilterCounty}
+          statusFilter={statusFilter}
+          onStatusFilterChange={setStatusFilter}
+          timeFilter={timeFilter}
+          onTimeFilterChange={setTimeFilter}
         />
       </div>
       <div>
@@ -628,6 +635,8 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
           filterCity={filterCity}
           filterCounty={filterCounty}
           filterCountry={filterCountry}
+          statusFilter={statusFilter}
+          timeFilter={timeFilter}
           onEdit={handleEdit}
           canEdit={true}
         />
