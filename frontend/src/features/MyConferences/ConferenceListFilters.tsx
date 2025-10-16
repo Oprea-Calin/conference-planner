@@ -61,6 +61,12 @@ const ConferenceListFilters: React.FC<{
         sx={{
           background: "linear-gradient(90deg, #1976d2 0%, #42a5f5 100%)",
           color: "white",
+          position: "fixed",
+          right: 40,
+          top: 110,
+          zIndex: 1000,
+          padding: "10px 20px",
+          borderRadius: 8,
           fontWeight: "bold",
           boxShadow: "0 2px 6px rgba(25, 118, 210, 0.2)",
           transition: "ease-in",
@@ -124,7 +130,7 @@ const ConferenceListFilters: React.FC<{
               <Typography variant="subtitle2" sx={{ mb: 0.7, color: "text.secondary", fontWeight: 600 }}>
                 City
               </Typography>
-              <TextField select fullWidth value={filterCity} onChange={(e) => onFilterCityChange(e.target.value)} size="small" displayEmpty>
+              <TextField select fullWidth value={filterCity} onChange={(e) => onFilterCityChange(e.target.value)} size="small">
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>

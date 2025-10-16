@@ -118,20 +118,23 @@ const ConferenceDetails: React.FC = () => {
         lng={mergedConference.location?.longitude}
         conferenceUrl={mergedConference.link}
       />
+      {mergedConference.conferenceTypeName === "OnSite" && (
+        <>
+          <Box display="flex" alignItems="center" gap={1} mb={1}>
+            <LocationCityIcon fontSize="small" />
+            <Typography variant="body2">
+              {mergedConference.cityName}, {mergedConference.countyName}, {mergedConference.countryName}
+            </Typography>
+          </Box>
 
-      <Box display="flex" alignItems="center" gap={1} mb={1}>
-        <LocationCityIcon fontSize="small" />
-        <Typography variant="body2">
-          {mergedConference.cityName}, {mergedConference.countyName}, {mergedConference.countryName}
-        </Typography>
-      </Box>
-
-      <Box display="flex" alignItems="center" gap={1} mb={1}>
-        <RoomIcon fontSize="small" />
-        <Typography variant="body2">
-          <strong></strong> {mergedConference.address}
-        </Typography>
-      </Box>
+          <Box display="flex" alignItems="center" gap={1} mb={1}>
+            <RoomIcon fontSize="small" />
+            <Typography variant="body2">
+              <strong></strong> {mergedConference.address}
+            </Typography>
+          </Box>
+        </>
+      )}
 
       <Box display="flex" alignItems="center" gap={1} mb={1}>
         <CalendarMonthIcon fontSize="small" />
@@ -231,11 +234,11 @@ const styles = {
     color: "#333"
   },
   speakerCards: {
-    display: "flex",
+    // display: "flex",
     gap: 12,
-    marginTop: 12,
+    marginTop: 12
     // overflowX: "auto",
-    flexWrap: "wrap"
+    // flexWrap: "wrap"
   },
   speakerCard: {
     backgroundColor: "#fff",

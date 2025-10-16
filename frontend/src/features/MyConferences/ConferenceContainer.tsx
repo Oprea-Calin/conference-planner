@@ -589,17 +589,17 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
       )}
 
       <div
-        style={{
-          position: "sticky",
-          top: 0,
-          backgroundColor: "white",
-          zIndex: 1,
-          overflowX: "auto",
-          whiteSpace: "nowrap",
-          display: "flex",
-          padding: "10px",
-          gap: "10px"
-        }}
+      // style={{
+      //   position: "sticky",
+      //   top: 0,
+      //   backgroundColor: "white",
+      //   zIndex: 1,
+      //   // overflowX: "auto",
+      //   whiteSpace: "nowrap",
+      //   display: "flex",
+      //   padding: "10px",
+      //   gap: "10px"
+      // }}
       >
         <ConferenceListFilters
           filterText={filterText}
