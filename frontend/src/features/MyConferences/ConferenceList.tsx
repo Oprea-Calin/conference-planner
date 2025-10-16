@@ -65,7 +65,7 @@ const ConferenceList: React.FC<{
         flexWrap: "wrap",
         gap: 6,
         justifyContent: "center",
-        overflow: "auto"
+        marginBottom: 10
       }}
     >
       {conferences

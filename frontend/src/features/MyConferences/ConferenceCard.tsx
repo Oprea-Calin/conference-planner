@@ -333,20 +333,33 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             </Box>
           )}
         </Box>
+        {/* {item.conferenceTypeName === "Remote" && (
+          <>
+            <Box display="flex" alignItems="center" gap={1} mb={1}>
+              <LocationCityIcon fontSize="small" />
+              {item.link}
+              <Typography variant="body2"></Typography>
+            </Box>
+          </>
+        )} */}
 
-        <Box display="flex" alignItems="center" gap={1} mb={1}>
-          <LocationCityIcon fontSize="small" />
-          <Typography variant="body2">
-            {item.cityName}, {item.countyName.toUpperCase()}, {item.countryName.toUpperCase()}
-          </Typography>
-        </Box>
+        {item.conferenceTypeName === "OnSite" && (
+          <>
+            <Box display="flex" alignItems="center" gap={1} mb={1}>
+              <LocationCityIcon fontSize="small" />
+              <Typography variant="body2">
+                {item.cityName}, {item.countyName.toUpperCase()}, {item.countryName.toUpperCase()}
+              </Typography>
+            </Box>
 
-        <Box display="flex" alignItems="center" gap={1} mb={1}>
-          <RoomIcon fontSize="small" />
-          <Typography variant="body2">
-            <strong></strong> {item.address}
-          </Typography>
-        </Box>
+            <Box display="flex" alignItems="center" gap={1} mb={1}>
+              <RoomIcon fontSize="small" />
+              <Typography variant="body2">
+                <strong></strong> {item.address}
+              </Typography>
+            </Box>
+          </>
+        )}
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
           <CalendarMonthIcon fontSize="small" />
@@ -361,12 +374,29 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             <strong></strong> {item.organizerEmail}
           </Typography>
         </Box>
+        {item.conferenceTypeName === "Remote" && (
+          <>
+            <Box display="flex" alignItems="center" gap={1} mb={1} visibility="hidden">
+              <LocationCityIcon fontSize="small" />
+              <Typography variant="body2">
+                {item.cityName}, {item.countyName.toUpperCase()}, {item.countryName.toUpperCase()}
+              </Typography>
+            </Box>
 
-        <Box display="flex" alignItems="center" gap={1} mt={1}>
+            <Box display="flex" alignItems="center" gap={1} mb={1} visibility="hidden">
+              <RoomIcon fontSize="small" />
+              <Typography variant="body2">
+                <strong></strong> {item.address}
+              </Typography>
+            </Box>
+          </>
+        )}
+        <Box display="flex" alignItems="flex-start" gap={1} mt={1}>
           <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>
             {item.atendeesList.length} attendees
           </Button>
-          {status === "Joined" && (
+
+          {!hasEnded && status === "Joined" && (
             // <Box sx={{ width: 64, height: 64 }}>
             //   <QRCode
             //     value={`${window.location.origin}/ConferenceDetails/${item.id}`}

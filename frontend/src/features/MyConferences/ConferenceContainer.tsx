@@ -321,95 +321,99 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             </div>
           </div>
 
-          <h2 style={{ borderBottom: "2px solid blue", paddingBottom: "10px" }}>{t("Location")}</h2>
+          {conferenceType === "2" && (
+            <>
+              <h2 style={{ borderBottom: "2px solid blue", paddingBottom: "10px" }}>{t("Location")}</h2>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "30px" }}>
-            <div>
-              <label>{t("Name")}</label>
-              <input
-                type="text"
-                style={{ width: "100%" }}
-                value={location.name}
-                onChange={(e) => setLocation({ ...location, name: e.target.value })}
-              />
-            </div>
-            <div>
-              <label>{t("Address")}</label>
-              <input
-                type="text"
-                value={location.address}
-                style={{ width: "100%" }}
-                onChange={(e) => setLocation({ ...location, address: e.target.value })}
-              />
-            </div>
-            <div>
-              <label>{t("Country")}</label>
-              <select
-                style={{ width: "100%" }}
-                value={location.countryId}
-                onChange={(e) => setLocation({ ...location, countryId: e.target.value })}
-              >
-                <option value="">{t("Select one...")}</option>
-                {conferenceCountries.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label>{t("County")}</label>
-              <select
-                style={{ width: "100%" }}
-                value={location.countyId}
-                onChange={(e) => setLocation({ ...location, countyId: e.target.value })}
-              >
-                <option value="">{t("Select one...")}</option>
-                {conferenceCounties.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label>{t("City")}</label>
-              <select
-                style={{ width: "100%" }}
-                value={location.cityId}
-                onChange={(e) => setLocation({ ...location, cityId: e.target.value })}
-              >
-                <option value="">{t("Select one...")}</option>
-                {conferenceCities.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div style={{ display: "flex", gap: "10px" }}>
-              <div style={{ flex: 1 }}>
-                <label>{t("Latitude")}</label>
-                <input
-                  type="number"
-                  style={{ width: "100%" }}
-                  value={location.latitude}
-                  step={0.01}
-                  onChange={(e) => setLocation({ ...location, latitude: e.target.value })}
-                />
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "30px" }}>
+                <div>
+                  <label>{t("Name")}</label>
+                  <input
+                    type="text"
+                    style={{ width: "100%" }}
+                    value={location.name}
+                    onChange={(e) => setLocation({ ...location, name: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label>{t("Address")}</label>
+                  <input
+                    type="text"
+                    value={location.address}
+                    style={{ width: "100%" }}
+                    onChange={(e) => setLocation({ ...location, address: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label>{t("Country")}</label>
+                  <select
+                    style={{ width: "100%" }}
+                    value={location.countryId}
+                    onChange={(e) => setLocation({ ...location, countryId: e.target.value })}
+                  >
+                    <option value="">{t("Select one...")}</option>
+                    {conferenceCountries.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label>{t("County")}</label>
+                  <select
+                    style={{ width: "100%" }}
+                    value={location.countyId}
+                    onChange={(e) => setLocation({ ...location, countyId: e.target.value })}
+                  >
+                    <option value="">{t("Select one...")}</option>
+                    {conferenceCounties.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label>{t("City")}</label>
+                  <select
+                    style={{ width: "100%" }}
+                    value={location.cityId}
+                    onChange={(e) => setLocation({ ...location, cityId: e.target.value })}
+                  >
+                    <option value="">{t("Select one...")}</option>
+                    {conferenceCities.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <div style={{ flex: 1 }}>
+                    <label>{t("Latitude")}</label>
+                    <input
+                      type="number"
+                      style={{ width: "100%" }}
+                      value={location.latitude}
+                      step={0.01}
+                      onChange={(e) => setLocation({ ...location, latitude: e.target.value })}
+                    />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <label>{t("Longitude")}</label>
+                    <input
+                      type="number"
+                      style={{ width: "100%" }}
+                      value={location.longitude}
+                      step={0.01}
+                      onChange={(e) => setLocation({ ...location, longitude: e.target.value })}
+                    />
+                  </div>
+                </div>
               </div>
-              <div style={{ flex: 1 }}>
-                <label>{t("Longitude")}</label>
-                <input
-                  type="number"
-                  style={{ width: "100%" }}
-                  value={location.longitude}
-                  step={0.01}
-                  onChange={(e) => setLocation({ ...location, longitude: e.target.value })}
-                />
-              </div>
-            </div>
-          </div>
+            </>
+          )}
 
           <h2 style={{ borderBottom: "2px solid blue", paddingBottom: "10px" }}>{t("Speakers")}</h2>
 
@@ -446,7 +450,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   value={speaker.name}
                   onChange={(e) => {
                     const updated = [...speakers];
-                    updated[index].name = e.target.value;
+                    updated[index].name = e.target.value || "";
                     setSpeakers(updated);
                   }}
                 />
@@ -455,7 +459,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   value={speaker.nationality}
                   onChange={(e) => {
                     const updated = [...speakers];
-                    updated[index].nationality = e.target.value;
+                    updated[index].nationality = e.target.value || "";
                     setSpeakers(updated);
                   }}
                 />
@@ -535,12 +539,12 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   conferenceTypeId: Number(conferenceType),
                   location: {
                     locationId: Number(location.id) || 0,
-                    name: location.name,
+                    name: location.name || "",
                     code: location.code || "",
-                    address: location.address,
-                    countryId: Number(location.countryId),
-                    countyId: Number(location.countyId),
-                    cityId: Number(location.cityId),
+                    address: location.address || "",
+                    countryId: Number(location.countryId) || 1,
+                    countyId: Number(location.countyId) || 1,
+                    cityId: Number(location.cityId) || 1,
                     latitude: Number(location.latitude),
                     longitude: Number(location.longitude)
                   },
