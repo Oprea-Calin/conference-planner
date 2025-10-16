@@ -60,8 +60,7 @@ const AllConferencesContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = fa
           overflowX: "auto",
           whiteSpace: "nowrap",
           display: "flex",
-          padding: "10px",
-          gap: "10px"
+          padding: "10px"
         }}
       >
         <ConferenceListFilters

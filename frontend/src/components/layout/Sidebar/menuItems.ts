@@ -3,7 +3,8 @@ import {
   DescriptionOutlined as FolderIcon,
   NotificationsNoneOutlined as BellIcon,
   HelpOutlineOutlined as LifebuoyIcon,
-  SettingsOutlined as CogIcon
+  SettingsOutlined as CogIcon,
+  EditDocument
 } from "@mui/icons-material";
 
 export interface MenuItem {
@@ -17,7 +18,7 @@ export interface MenuItem {
 export const staticPrimaryNavItems: MenuItem[] = [
   { id: "homepage", labelKey: "Navigation.Homepage", icon: HomeIcon, route: "/" },
   { id: "allConferences", labelKey: "All Conferences", icon: FolderIcon, route: "/allConferences" },
-  { id: "conferences", labelKey: "My Conferences", icon: FolderIcon, route: "/conferences" }
+  { id: "conferences", labelKey: "My Conferences", icon: EditDocument, route: "/conferences" }
   // { id: "users", labelKey: "Navigation.Users", icon: FolderIcon, route: "/users" }
   //  { id: "tutorial", labelKey: "Navigation.Tutorial", icon: FolderIcon, route: "/tutorial" }
 ];

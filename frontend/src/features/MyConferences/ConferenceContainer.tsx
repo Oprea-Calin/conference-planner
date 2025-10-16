@@ -163,7 +163,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
         main: s.isMainSpeaker || false
       })) || [];
 
-    setSpeakers(speakerList.length > 0 ? speakerList : [{ confSp: "", id: "", name: "", nationality: "", rating: "", main: false }]);
+    setSpeakers(speakerList.length > 0 ? speakerList : []);
 
     setIsDialogOpen(true);
   };

@@ -184,7 +184,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             </Typography>
           </Box>
 
-          {!hasEnded && (
+          {/* {!hasEnded && (
             <Box mt={2}>
               <Box mt={2} display="flex" justifyContent="center" gap={1} sx={{ cursor: "pointer" }} onClick={toggleQRCodeInfo}>
                 <Typography variant="subtitle2" fontWeight="bold">
@@ -217,7 +217,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
                 </Box>
               )}
             </Box>
-          )}
+          )} */}
         </Box>
       );
     }
@@ -252,6 +252,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
       sx={{
         borderRadius: 2,
         minWidth: 300,
+        height: "100%",
         position: "relative",
         paddingBottom: 2,
         marginBottom: 2,
@@ -283,6 +284,11 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         {hasEnded && (
           <Typography variant="body2" color="red" fontWeight="bold" gutterBottom>
             Ended
+          </Typography>
+        )}
+        {!hasEnded && (
+          <Typography variant="body2" color="green" fontWeight="bold" gutterBottom>
+            Upcoming
           </Typography>
         )}
 
@@ -356,9 +362,37 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
           </Typography>
         </Box>
 
-        <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>
-          {item.atendeesList.length} attendees
-        </Button>
+        <Box display="flex" alignItems="center" gap={1} mt={1}>
+          <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>
+            {item.atendeesList.length} attendees
+          </Button>
+          {status === "Joined" && (
+            // <Box sx={{ width: 64, height: 64 }}>
+            //   <QRCode
+            //     value={`${window.location.origin}/ConferenceDetails/${item.id}`}
+            //     size={64}
+            //     style={{ height: "64px", width: "64px" }}
+            //   />
+            // </Box>
+
+            <Box mt={2} sx={{ width: 64, height: 64, marginLeft: "35px" }}>
+              <Box p={1} bgcolor="white" borderRadius={1} width="fit-content" boxShadow={1} mb={1}>
+                <a
+                  href={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "inline-block" }}
+                >
+                  <QRCode
+                    value={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                    size={160}
+                    style={{ height: "100px", width: "100px" }}
+                  />
+                </a>
+              </Box>
+            </Box>
+          )}
+        </Box>
 
         {!canEdit && (
           <Box mt={2}>{renderUserActions()}</Box>
