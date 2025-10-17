@@ -235,16 +235,20 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
         <dialog
           open
           style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             padding: "40px",
             width: "90%",
             maxWidth: "1200px",
+            maxHeight: "80vh",
+            overflowY: "auto",
             zIndex: 1100,
-            border: "12px",
-            borderRadius: "12px",
-            boxShadow: "0 50px 30px rgba(0, 0, 0, 0.3)",
-            backgroundColor: "#fff"
-            // alignItems: "flex-start", //adaugate recent
-            // position: "relative" //adaugate recent
+            border: "none",
+            borderRadius: "16px",
+            boxShadow: "0 30px 80px rgba(0, 0, 0, 0.25)",
+            background: "linear-gradient(145deg, #ffffff, #f5f5f5)"
           }}
         >
           <button
@@ -255,17 +259,37 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
               right: "20px",
               background: "none",
               border: "none",
-              fontSize: "20px",
-              cursor: "pointer"
+              fontSize: "24px",
+              fontWeight: "bold",
+              cursor: "pointer",
+              color: "#555"
             }}
             title={t("Close")}
           >
-            X
+            ×
           </button>
 
-          <h2 style={{ borderBottom: "2px solid blue", paddingBottom: "10px" }}>{t("Conference Info")}</h2>
+          <h2
+            style={{
+              borderBottom: "2px solid #1976d2",
+              paddingBottom: "10px",
+              fontSize: "28px",
+              marginBottom: "30px",
+              color: "#1976d2",
+              fontWeight: "600"
+            }}
+          >
+            {t("Conference Info")}
+          </h2>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "30px" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "20px",
+              marginBottom: "40px"
+            }}
+          >
             <div>
               <label>{t("Conference Name")}</label>
               <input
@@ -273,13 +297,27 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                 value={conferenceName}
                 onChange={(e) => setConferenceName(e.target.value)}
                 placeholder={t("Enter conference name")}
-                style={{ width: "100%" }}
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  borderRadius: "6px",
+                  border: "1px solid #ccc"
+                }}
               />
             </div>
 
             <div>
               <label>{t("Conference Type")}</label>
-              <select style={{ width: "100%" }} value={conferenceType} onChange={(e) => setConferenceType(e.target.value)}>
+              <select
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  borderRadius: "6px",
+                  border: "1px solid #ccc"
+                }}
+                value={conferenceType}
+                onChange={(e) => setConferenceType(e.target.value)}
+              >
                 <option value="">{t("Select one...")}</option>
                 {conferenceTypes.map((type) => (
                   <option key={type.id} value={type.id}>
@@ -296,13 +334,27 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                 value={conferenceLink}
                 onChange={(e) => setConferenceLink(e.target.value)}
                 placeholder={t("Enter conference link")}
-                style={{ width: "100%" }}
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  borderRadius: "6px",
+                  border: "1px solid #ccc"
+                }}
               />
             </div>
 
             <div>
               <label>{t("Category")}</label>
-              <select style={{ width: "100%" }} value={category} onChange={(e) => setCategory(e.target.value)}>
+              <select
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  borderRadius: "6px",
+                  border: "1px solid #ccc"
+                }}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
                 <option value="">{t("Select one...")}</option>
                 {conferenceCategories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
@@ -315,25 +367,68 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             <div style={{ display: "flex", gap: "10px" }}>
               <div style={{ flex: 1 }}>
                 <label>{t("Start Date")}</label>
-                <input type="date" style={{ width: "100%" }} value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                <input
+                  type="date"
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "6px",
+                    border: "1px solid #ccc"
+                  }}
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
               </div>
               <div style={{ flex: 1 }}>
                 <label>{t("End Date")}</label>
-                <input type="date" style={{ width: "100%" }} value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                <input
+                  type="date"
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "6px",
+                    border: "1px solid #ccc"
+                  }}
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
               </div>
             </div>
           </div>
 
           {conferenceType === "2" && (
             <>
-              <h2 style={{ borderBottom: "2px solid blue", paddingBottom: "10px" }}>{t("Location")}</h2>
+              <h2
+                style={{
+                  borderBottom: "2px solid #1976d2",
+                  paddingBottom: "10px",
+                  fontSize: "24px",
+                  marginBottom: "20px",
+                  color: "#1976d2",
+                  fontWeight: "500"
+                }}
+              >
+                {t("Location")}
+              </h2>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "30px" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "20px",
+                  marginBottom: "30px"
+                }}
+              >
                 <div>
                   <label>{t("Name")}</label>
                   <input
                     type="text"
-                    style={{ width: "100%" }}
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      borderRadius: "6px",
+                      border: "1px solid #ccc"
+                    }}
                     value={location.name}
                     onChange={(e) => setLocation({ ...location, name: e.target.value })}
                   />
@@ -343,14 +438,24 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   <input
                     type="text"
                     value={location.address}
-                    style={{ width: "100%" }}
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      borderRadius: "6px",
+                      border: "1px solid #ccc"
+                    }}
                     onChange={(e) => setLocation({ ...location, address: e.target.value })}
                   />
                 </div>
                 <div>
                   <label>{t("Country")}</label>
                   <select
-                    style={{ width: "100%" }}
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      borderRadius: "6px",
+                      border: "1px solid #ccc"
+                    }}
                     value={location.countryId}
                     onChange={(e) => setLocation({ ...location, countryId: e.target.value })}
                   >
@@ -365,7 +470,12 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                 <div>
                   <label>{t("County")}</label>
                   <select
-                    style={{ width: "100%" }}
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      borderRadius: "6px",
+                      border: "1px solid #ccc"
+                    }}
                     value={location.countyId}
                     onChange={(e) => setLocation({ ...location, countyId: e.target.value })}
                   >
@@ -380,7 +490,12 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                 <div>
                   <label>{t("City")}</label>
                   <select
-                    style={{ width: "100%" }}
+                    style={{
+                      width: "100%",
+                      padding: "10px",
+                      borderRadius: "6px",
+                      border: "1px solid #ccc"
+                    }}
                     value={location.cityId}
                     onChange={(e) => setLocation({ ...location, cityId: e.target.value })}
                   >
@@ -397,7 +512,12 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     <label>{t("Latitude")}</label>
                     <input
                       type="number"
-                      style={{ width: "100%" }}
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        borderRadius: "6px",
+                        border: "1px solid #ccc"
+                      }}
                       value={location.latitude}
                       step={0.01}
                       onChange={(e) => setLocation({ ...location, latitude: e.target.value })}
@@ -407,7 +527,12 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     <label>{t("Longitude")}</label>
                     <input
                       type="number"
-                      style={{ width: "100%" }}
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        borderRadius: "6px",
+                        border: "1px solid #ccc"
+                      }}
                       value={location.longitude}
                       step={0.01}
                       onChange={(e) => setLocation({ ...location, longitude: e.target.value })}
@@ -418,7 +543,19 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             </>
           )}
 
-          <h2 style={{ borderBottom: "2px solid blue", paddingBottom: "10px" }}>{t("Speakers")}</h2>
+          <h2
+            style={{
+              borderBottom: "2px solid #1976d2",
+              paddingBottom: "10px",
+              fontSize: "24px",
+              marginTop: "40px",
+              marginBottom: "20px",
+              color: "#1976d2",
+              fontWeight: "500"
+            }}
+          >
+            {t("Speakers")}
+          </h2>
 
           <div>
             <div
@@ -466,7 +603,6 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     setSpeakers(updated);
                   }}
                 />
-
                 <Rating
                   value={Number(speaker.rating) || 0}
                   precision={0.1}
@@ -476,7 +612,6 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     setSpeakers(updated);
                   }}
                 />
-
                 <input
                   type="checkbox"
                   checked={speaker.main}
@@ -495,13 +630,13 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   style={{
                     background: "none",
                     border: "none",
-                    color: "blue",
-                    fontSize: "20px",
+                    color: "#d32f2f",
+                    fontSize: "18px",
+                    fontWeight: "bold",
                     cursor: "pointer"
                   }}
-                  title="Delete Speaker"
                 >
-                  <DeleteForeverIcon />
+                  ×
                 </button>
               </div>
             ))}
@@ -509,15 +644,17 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             <button
               onClick={() => setSpeakers([...speakers, { confSp: "", id: "", name: "", nationality: "", rating: "", main: false }])}
               style={{
-                background: "none",
+                marginTop: "10px",
+                backgroundColor: "#1976d2",
+                color: "#fff",
+                padding: "8px 16px",
                 border: "none",
-                color: "blue",
-                fontSize: "20px",
-                cursor: "pointer"
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontWeight: "bold"
               }}
-              title="Add Speaker"
             >
-              <AddCircleOutlineIcon />
+              {t("Add Speaker")}
             </button>
           </div>
 
@@ -526,63 +663,58 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
               position: "absolute",
               top: "20px",
               right: "100px",
-              padding: "8px 16px",
-              backgroundColor: "#1976d2",
+              padding: "10px 20px",
+              backgroundColor: "#4caf50",
               color: "white",
               border: "none",
-              borderRadius: "4px",
+              borderRadius: "6px",
               cursor: "pointer",
               fontWeight: "bold",
-              boxShadow: "0 2px 6px rgba(25, 118, 210, 0.4)"
+              boxShadow: "0 4px 10px rgba(76, 175, 80, 0.4)"
             }}
             onClick={async () => {
-              try {
-                const payload = {
-                  id: currentConference?.id || 0,
-                  conferenceTypeId: Number(conferenceType),
-                  location: {
-                    locationId: Number(location.id) || 0,
-                    name: location.name || "",
-                    code: location.code || "",
-                    address: location.address || "",
-                    countryId: Number(location.countryId) || 1,
-                    countyId: Number(location.countyId) || 1,
-                    cityId: Number(location.cityId) || 1,
-                    latitude: Number(location.latitude),
-                    longitude: Number(location.longitude)
-                  },
-                  organizerEmail: email,
-                  categoryId: Number(category),
-                  startDate: new Date(startDate).toISOString(),
-                  endDate: new Date(endDate).toISOString(),
-                  name: conferenceName,
-                  link: conferenceLink,
-                  speakerList: speakers.map((s) => ({
-                    conferenceSpeakerId: s.confSp || 0,
-                    speakerId: s.id || 0,
-                    name: s.name,
-                    nationality: s.nationality,
-                    rating: s.rating ? Number(s.rating) : null,
-                    isMainSpeaker: s.main
-                  }))
-                };
+              const payload = {
+                id: currentConference?.id || 0,
+                conferenceTypeId: Number(conferenceType),
+                location: {
+                  locationId: Number(location.id) || 0,
+                  name: location.name || "",
+                  code: location.code || "",
+                  address: location.address || "",
+                  countryId: Number(location.countryId) || 1,
+                  countyId: Number(location.countyId) || 1,
+                  cityId: Number(location.cityId) || 1,
+                  latitude: Number(location.latitude),
+                  longitude: Number(location.longitude)
+                },
+                organizerEmail: email,
+                categoryId: Number(category),
+                startDate: new Date(startDate).toISOString(),
+                endDate: new Date(endDate).toISOString(),
+                name: conferenceName,
+                link: conferenceLink,
+                speakerList: speakers.map((s) => ({
+                  conferenceSpeakerId: s.confSp || 0,
+                  speakerId: s.id || 0,
+                  name: s.name,
+                  nationality: s.nationality,
+                  rating: s.rating ? Number(s.rating) : null,
+                  isMainSpeaker: s.main
+                }))
+              };
 
-                try {
-                  if (payload.id && payload.id > 0) {
-                    await editConference(payload);
-                    toast.success("conference edited!");
-                  } else {
-                    await createConference(payload);
-                    toast.success("conference created!");
-                  }
-                  setIsDialogOpen(false);
-                } catch (error) {
-                  toast.error("err.");
-                  console.error(error);
+              try {
+                if (payload.id && payload.id > 0) {
+                  await editConference(payload);
+                  toast.success("Conference edited!");
+                } else {
+                  await createConference(payload);
+                  toast.success("Conference created!");
                 }
-              } catch (err) {
-                console.error("Failed to create conference:", err);
-                toast.error("Error creating conference");
+                setIsDialogOpen(false);
+              } catch (error) {
+                toast.error("Something went wrong.");
+                console.error(error);
               }
             }}
           >

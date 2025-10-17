@@ -144,6 +144,15 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         </Box>
       );
     }
+    if (status === "Withdrawn" && hasEnded) {
+      return (
+        <Box display="flex" alignItems="center" gap={1}>
+          <Typography variant="body2" color="text.secondary" fontStyle="italic">
+            Withdrawn
+          </Typography>
+        </Box>
+      );
+    }
 
     if (status === "Attended" && !hasEnded) {
       return (
@@ -180,48 +189,11 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
 
     if (status === "Joined") {
       return (
-        <Box display="flex" flexDirection="column" gap={1} mt={1}>
-          <Box display="flex" alignItems="center" gap={1}>
-            <CheckCircleIcon color="success" fontSize="small" />
-            <Typography color="success.main" fontWeight={600}>
-              Joined
-            </Typography>
-          </Box>
-
-          {/* {!hasEnded && (
-            <Box mt={2}>
-              <Box mt={2} display="flex" justifyContent="center" gap={1} sx={{ cursor: "pointer" }} onClick={toggleQRCodeInfo}>
-                <Typography variant="subtitle2" fontWeight="bold">
-                  Your Conference QR Code
-                </Typography>
-                <ExpandMoreIcon
-                  sx={{
-                    transform: showQRCodeInfo ? "rotate(180deg)" : "rotate(0deg)",
-                    transition: "transform 0.3s"
-                  }}
-                />
-              </Box>
-
-              {showQRCodeInfo && (
-                <Box mt={2} display="flex" justifyContent="center">
-                  <Box p={2} bgcolor="white" borderRadius={2} width="fit-content" boxShadow={2} mb={2}>
-                    <a
-                      href={`${window.location.origin}/ConferenceDetails/${item.id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ display: "inline-block" }}
-                    >
-                      <QRCode
-                        value={`${window.location.origin}/ConferenceDetails/${item.id}`}
-                        size={160}
-                        style={{ height: "160px", width: "160px" }}
-                      />
-                    </a>
-                  </Box>
-                </Box>
-              )}
-            </Box>
-          )} */}
+        <Box display="flex" alignItems="center" gap={1}>
+          <CheckCircleIcon color="success" fontSize="small" />
+          <Typography color="success.main" fontWeight={600}>
+            Joined
+          </Typography>
         </Box>
       );
     }
@@ -395,76 +367,39 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             </Box>
           </>
         )}
+
         <Box display="flex" alignItems="flex-start" gap={1} mt={1}>
           <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>
             {attendeesNumber} attendees
           </Button>
 
-          {!hasEnded && status === "Joined" && (
-            // <Box sx={{ width: 64, height: 64 }}>
-            //   <QRCode
-            //     value={`${window.location.origin}/ConferenceDetails/${item.id}`}
-            //     size={64}
-            //     style={{ height: "64px", width: "64px" }}
-            //   />
-            // </Box>
-
-            <Box mt={2} sx={{ width: 64, height: 64, marginLeft: "35px" }}>
-              <Box p={1} bgcolor="white" borderRadius={1} width="fit-content" boxShadow={1} mb={1}>
-                <a
-                  href={`${window.location.origin}/ConferenceDetails/${item.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: "inline-block" }}
-                >
-                  <QRCode
-                    value={`${window.location.origin}/ConferenceDetails/${item.id}`}
-                    size={160}
-                    style={{ height: "100px", width: "100px" }}
-                  />
-                </a>
-              </Box>
+          <Box
+            mt={2}
+            sx={{
+              width: 64,
+              height: 64,
+              marginLeft: "35px",
+              visibility: !hasEnded && status === "Joined" ? "visible" : "hidden"
+            }}
+          >
+            <Box p={1} bgcolor="white" borderRadius={1} width="fit-content" boxShadow={1} mb={1}>
+              <a
+                href={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: "inline-block" }}
+              >
+                <QRCode
+                  value={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                  size={160}
+                  style={{ height: "100px", width: "100px" }}
+                />
+              </a>
             </Box>
-          )}
+          </Box>
         </Box>
 
-        {!canEdit && (
-          <Box mt={2}>{renderUserActions()}</Box>
-
-          // <Box mt={2}>
-          //   {status === "Withdrawn" ? (
-          //     <>
-          //       <Button
-          //         size="small"
-          //         variant="contained"
-          //         color="primary"
-          //         onClick={() => attendConference({ id: item.id, email })}
-          //         sx={{ mr: 1 }}
-          //       >
-          //         Attend
-          //       </Button>
-          //       <Typography component="span" color="text.secondary" sx={{ fontStyle: "italic", verticalAlign: "middle" }}>
-          //         Withdrawn
-          //       </Typography>
-          //     </>
-          //   ) : status === "Attended" ? (
-          //     <Typography component="span" color="success.main" sx={{ fontWeight: "bold", mr: 1, verticalAlign: "middle" }}>
-          //       Attended
-          //     </Typography>
-          //   ) : status === "Joined" ? (
-          //     <>
-          //       <Chip label="Joined" color="success" sx={{ mr: 1 }} />
-          //       <Button size="small" variant="outlined" color="error" onClick={() => withdrawConference({ id: item.id, email })}>
-          //         Withdraw
-          //       </Button>
-          //     </>
-          //   ) : (
-          //     <Button size="small" variant="contained" color="primary" onClick={() => attendConference({ id: item.id, email })}>
-          //       Attend
-          //     </Button>
-          //   )}
-          // </Box>
-        )}
+        {!canEdit && <Box mt={2}>{renderUserActions()}</Box>}
       </CardContent>
     </Card>
   );
