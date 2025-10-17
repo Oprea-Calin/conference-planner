@@ -238,7 +238,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             padding: "40px",
             width: "90%",
             maxWidth: "1200px",
-            zIndex: 11,
+            zIndex: 1100,
             border: "12px",
             borderRadius: "12px",
             boxShadow: "0 50px 30px rgba(0, 0, 0, 0.3)",

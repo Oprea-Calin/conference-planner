@@ -129,46 +129,51 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                     if (!request.SpeakerList.Any(x=> x.SpeakerId == conference.ConferenceXSpeakers[i].SpeakerId))
                         conference.ConferenceXSpeakers.RemoveAt(i);
                 }
-                foreach(var reqSpeaker in request.SpeakerList)
+                foreach (var reqSpeaker in request.SpeakerList)
                 {
                     var dbSpeaker = conference.ConferenceXSpeakers.FirstOrDefault(x => x.Speaker.Name == reqSpeaker.Name);
+
                     if (dbSpeaker != null)
                     {
                         dbSpeaker.IsMainSpeaker = reqSpeaker.IsMainSpeaker;
                         dbSpeaker.Speaker.Nationality = reqSpeaker.Nationality;
                         dbSpeaker.Speaker.Rating = reqSpeaker.Rating;
                         dbSpeaker.Speaker.Name = reqSpeaker.Name;
-
                     }
                     else
                     {
-                        var foundSpeaker = allSpeakers.FirstOrDefault(x => x.Name == reqSpeaker.Name); 
-                        if(foundSpeaker != null)
+                        ConferenceXSpeaker newDbSpeaker;
+
+                        var foundSpeaker = allSpeakers.FirstOrDefault(x => x.Name == reqSpeaker.Name);
+                        if (foundSpeaker != null)
                         {
-                            new ConferenceXSpeaker()
+                            foundSpeaker.Rating = reqSpeaker.Rating;
+                            foundSpeaker.Nationality = reqSpeaker.Nationality;
+
+                            newDbSpeaker = new ConferenceXSpeaker
                             {
                                 IsMainSpeaker = reqSpeaker.IsMainSpeaker,
                                 Speaker = foundSpeaker
                             };
-
-                            foundSpeaker.Rating = reqSpeaker.Rating;
-                            foundSpeaker.Nationality = reqSpeaker.Nationality;
                         }
                         else
-                            dbSpeaker = new ConferenceXSpeaker()
+                        {
+                            newDbSpeaker = new ConferenceXSpeaker
                             {
                                 IsMainSpeaker = reqSpeaker.IsMainSpeaker,
-                                Speaker = new Common.Domain.Entities.Conferences.Speaker()
+                                Speaker = new Common.Domain.Entities.Conferences.Speaker
                                 {
                                     Name = reqSpeaker.Name,
                                     Rating = reqSpeaker.Rating,
-                                    Nationality = reqSpeaker.Nationality,
+                                    Nationality = reqSpeaker.Nationality
                                 }
                             };
+                        }
 
-                        conference.ConferenceXSpeakers.Add(dbSpeaker);
+                        conference.ConferenceXSpeakers.Add(newDbSpeaker);
                     }
                 }
+
 
 
                 conference.ConferenceTypeId = request.ConferenceTypeId;
