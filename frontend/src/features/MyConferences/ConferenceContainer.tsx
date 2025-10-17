@@ -170,7 +170,19 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
 
     setIsDialogOpen(true);
   };
-
+  const handleClearFilters = () => {
+    setFilterText("");
+    setFilterStartDate(undefined);
+    setFilterEndDate(undefined);
+    setFilterConferenceTypeName("");
+    setFilterCity("");
+    setFilterCounty("");
+    setFilterCountry("");
+    setStatusFilter("");
+    setTimeFilter("");
+    setStatusFilter("");
+    setTimeFilter("");
+  };
   const { trigger: createConference, isMutating: isCreatingConference } = useApiSWRMutation(
     endpoints.conferences.saveConference,
     mutationFetcher
@@ -636,7 +648,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     cursor: "pointer"
                   }}
                 >
-                  ×
+                  x
                 </button>
               </div>
             ))}
@@ -755,6 +767,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
           onStatusFilterChange={setStatusFilter}
           timeFilter={timeFilter}
           onTimeFilterChange={setTimeFilter}
+          onClearFilters={handleClearFilters}
         />
       </div>
       <div>

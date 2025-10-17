@@ -24,6 +24,7 @@ const ConferenceListFilters: React.FC<{
   onStatusFilterChange: (status: string) => void;
   timeFilter: string;
   onTimeFilterChange: (time: string) => void;
+  onClearFilters: () => void;
 }> = ({
   filterText,
   onFilterTextChange,
@@ -42,7 +43,8 @@ const ConferenceListFilters: React.FC<{
   statusFilter,
   onStatusFilterChange,
   timeFilter,
-  onTimeFilterChange
+  onTimeFilterChange,
+  onClearFilters
 }) => {
   const { data: conferenceCities = [] } = useApiSWR<{ id: number; name: string }[], Error>(endpoints.dictionaries.cities, {
     onError: (err) => toast.error(t("Error loading conference categories: ", { message: err.message }))
@@ -64,7 +66,7 @@ const ConferenceListFilters: React.FC<{
         Filters
       </Button> */}
       <Button
-        variant="contained"
+        variant="outlined"
         disableRipple
         onClick={() => setOpen(true)}
         sx={{
@@ -246,6 +248,9 @@ const ConferenceListFilters: React.FC<{
         <DialogActions sx={{ pr: 3, pb: 2 }}>
           <Button onClick={() => setOpen(false)} variant="contained" color="primary" size="large" fullWidth>
             Apply
+          </Button>
+          <Button variant="outlined" onClick={onClearFilters}>
+            Clear Filters
           </Button>
         </DialogActions>
       </Dialog>

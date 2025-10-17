@@ -43,7 +43,19 @@ const AllConferencesContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = fa
       onError: (err) => toast.error(t("Error loading conference", { message: err.message }))
     }
   );
-
+  const handleClearFilters = () => {
+    setFilterText("");
+    setFilterStartDate(undefined);
+    setFilterEndDate(undefined);
+    setFilterConferenceTypeName("");
+    setFilterCity("");
+    setFilterCounty("");
+    setFilterCountry("");
+    setStatusFilter("");
+    setTimeFilter("");
+    setStatusFilter("");
+    setTimeFilter("");
+  };
   useSubscription(notificationTypes.ATTENDANCESTATUSCHANGED, {
     onNotification: () => {
       refetchConferenceList();
@@ -84,6 +96,7 @@ const AllConferencesContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = fa
           onStatusFilterChange={setStatusFilter}
           timeFilter={timeFilter}
           onTimeFilterChange={setTimeFilter}
+          onClearFilters={handleClearFilters}
         />
       </div>
       <div>
