@@ -230,8 +230,8 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         minWidth: 300,
         height: "100%",
         position: "relative",
-        paddingBottom: 2,
-        marginBottom: 2,
+        // paddingBottom: 2,
+        // marginBottom: 2,
         marginTop: 2
       }}
     >
@@ -382,20 +382,22 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
               visibility: !hasEnded && status === "Joined" ? "visible" : "hidden"
             }}
           >
-            <Box p={1} bgcolor="white" borderRadius={1} width="fit-content" boxShadow={1} mb={1}>
-              <a
-                href={`${window.location.origin}/ConferenceDetails/${item.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ display: "inline-block" }}
-              >
-                <QRCode
-                  value={`${window.location.origin}/ConferenceDetails/${item.id}`}
-                  size={160}
-                  style={{ height: "100px", width: "100px" }}
-                />
-              </a>
-            </Box>
+            {!canEdit && (
+              <Box p={1} bgcolor="white" borderRadius={1} width="fit-content" boxShadow={1} mb={1}>
+                <a
+                  href={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "inline-block" }}
+                >
+                  <QRCode
+                    value={`${window.location.origin}/ConferenceDetails/${item.id}`}
+                    size={160}
+                    style={{ height: "100px", width: "100px" }}
+                  />
+                </a>
+              </Box>
+            )}
           </Box>
         </Box>
 
