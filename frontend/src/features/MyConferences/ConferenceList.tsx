@@ -117,7 +117,6 @@ const ConferenceList: React.FC<{
 
           const statusMatches = !statusFilter || status.toLowerCase() === statusFilter.toLowerCase();
 
-          // Calculam începutul zilei de azi
           const startOfToday = new Date();
           startOfToday.setHours(0, 0, 0, 0);
 

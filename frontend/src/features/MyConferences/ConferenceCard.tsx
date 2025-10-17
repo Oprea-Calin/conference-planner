@@ -52,6 +52,10 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
       break;
     }
   }
+  let attendeesNumber = 0;
+  for (let i = 0; i < item.atendeesList.length; i++) {
+    if (item.atendeesList[i].statusName === "Attended" || item.atendeesList[i].statusName === "Joined") attendeesNumber++;
+  }
 
   // console.log("ASDADS:", isJoined);
   // console.log("ASDADS:", status);
@@ -393,7 +397,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         )}
         <Box display="flex" alignItems="flex-start" gap={1} mt={1}>
           <Button size="small" variant="contained" sx={{ mt: 1, textTransform: "none", borderRadius: 4 }}>
-            {item.atendeesList.length} attendees
+            {attendeesNumber} attendees
           </Button>
 
           {!hasEnded && status === "Joined" && (
