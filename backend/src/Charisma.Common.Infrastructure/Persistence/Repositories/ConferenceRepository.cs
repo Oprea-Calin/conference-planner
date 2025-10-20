@@ -24,6 +24,8 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
                     .ThenInclude(cs =>cs.Status)
                 .Include(c => c.ConferenceXSpeakers)
                     .ThenInclude(cs => cs.Speaker)
+                .Include(c => c.Feedbacks)
+                    .ThenInclude(f => f.Speaker)
                 .ToListAsync();
             return result;
         }
@@ -69,6 +71,11 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
         public void AddAtendeeStatus(ConferenceXAttendee confXAtendee)
         {
             dbContext.ConferenceXAttendees.Add(confXAtendee);
+        }
+
+        public void AddFeedback(Feedback feedback)
+        {
+            dbContext.Feedbacks.Add(feedback);
         }
 
         public void Remove(Conference conference)

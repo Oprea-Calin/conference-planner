@@ -71,6 +71,13 @@ namespace Charisma.Api.Controllers
             return Ok(new AsyncCommandResult(CorrelationManager.GetCorrelationId()));
         }
 
+        [HttpPost("save-feedback")]
+        public async Task<ActionResult<bool>> SaveFeedback([FromBody] SaveFeedback command, CancellationToken cancellationToken)
+        {
+            await mediator.Send(command, cancellationToken);
+            return Ok(new AsyncCommandResult(CorrelationManager.GetCorrelationId()));
+        }
+
         [HttpDelete("{Id}")]
         public async Task<ActionResult<bool>> DeleteConference([FromRoute] DeleteConference command, CancellationToken cancellationToken)
         {

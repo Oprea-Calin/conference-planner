@@ -11,6 +11,7 @@ namespace Charisma.Common.Domain.Abstractions
         Task<Conference> GetConferenceById(int id);
         Task<List<Speaker>> GetSpeakers();
         void Add(Conference conference);
+        void AddFeedback(Feedback feedback);
         void Remove(Conference conference);
         Task Save(CancellationToken cancellationToken);
         Task<List<ConferenceXAttendee>> GetAtendeesForConference(int conferenceId);

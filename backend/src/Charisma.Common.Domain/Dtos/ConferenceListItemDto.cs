@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Charisma.Common.Domain.Entities.Conferences;
+using System;
 using System.Collections.Generic;
 
 namespace Charisma.Common.Domain.Dtos
@@ -21,6 +22,7 @@ namespace Charisma.Common.Domain.Dtos
         public string MainSpeakerName { get; init; }
         public List<SpeakerDto> SpeakerList { get; init; }
         public string Link { get; init; }
+        public List<Feedback> FeedbackList { get; init; }
     }
     public record ConferenceXAtendee
     {
