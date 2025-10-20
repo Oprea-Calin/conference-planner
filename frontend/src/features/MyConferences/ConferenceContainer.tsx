@@ -339,21 +339,23 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
               </select>
             </div>
 
-            <div>
-              <label>{t("Conference Link")}</label>
-              <input
-                type="text"
-                value={conferenceLink}
-                onChange={(e) => setConferenceLink(e.target.value)}
-                placeholder={t("Enter conference link")}
-                style={{
-                  width: "100%",
-                  padding: "10px",
-                  borderRadius: "6px",
-                  border: "1px solid #ccc"
-                }}
-              />
-            </div>
+            {conferenceType === "1" && (
+              <div>
+                <label>{t("Conference Link")}</label>
+                <input
+                  type="text"
+                  value={conferenceLink}
+                  onChange={(e) => setConferenceLink(e.target.value)}
+                  placeholder={t("Enter conference link")}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "6px",
+                    border: "1px solid #ccc"
+                  }}
+                />
+              </div>
+            )}
 
             <div>
               <label>{t("Category")}</label>
