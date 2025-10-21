@@ -18,7 +18,6 @@ namespace Charisma.Common.Infrastructure.Persistence.Configurations.Conferences
             builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.AttendeeEmail).IsRequired();
             builder.Property(x => x.ConferenceId).IsRequired();
-            builder.Property(x => x.SpeakerId).IsRequired();
             builder.Property(x => x.Rating).IsRequired();
             builder.Property(x => x.Message).IsRequired();
 
@@ -29,9 +28,6 @@ namespace Charisma.Common.Infrastructure.Persistence.Configurations.Conferences
                 .WithMany(x => x.Feedbacks)
                 .HasForeignKey(x => x.ConferenceId);
 
-            builder.HasOne(x => x.Speaker)
-                .WithMany()
-                .HasForeignKey(x => x.SpeakerId);
         }
     }
 }

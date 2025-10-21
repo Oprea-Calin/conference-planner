@@ -1,11 +1,25 @@
-import { Box, Card, CardContent, Chip, IconButton, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  IconButton,
+  Typography,
+  Button,
+  DialogContent,
+  DialogTitle,
+  Dialog,
+  Rating,
+  TextField,
+  DialogActions
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RoomIcon from "@mui/icons-material/Room";
 import PersonIcon from "@mui/icons-material/Person";
 import type { ConferenceDto } from "types";
 import { toast } from "react-toastify";
-import { deleteMutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
+import { deleteMutationFetcher, mutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import { endpoints } from "utils";
 import { t } from "i18next";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
@@ -107,6 +121,9 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
     });
     refetchConferenceList();
   };
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [rating, setRating] = useState<number | null>(null);
+  const [message, setMessage] = useState("");
   const [showQRCodeInfo, setShowQRCodeInfo] = useState(false);
   const toggleQRCodeInfo = () => setShowQRCodeInfo(!showQRCodeInfo);
   const navigate = useNavigate();
@@ -221,7 +238,34 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
   const fallbackSpeaker = item.speakerList?.[0]?.name || "No speakers";
 
   const toggleSpeakers = () => setShowAllSpeakers(!showAllSpeakers);
+  const { trigger: createFeedback, isMutating: isCreatingFeedback } = useApiSWRMutation(
+    endpoints.conferences.saveFeedback,
+    mutationFetcher
+  );
+  const submitFeedback = async () => {
+    if (!rating) {
+      alert("Please provide a rating.");
+      return;
+    }
 
+    const payload = {
+      AttendeeEmail: email,
+      ConferenceId: item.id,
+      SpeakerId: 1,
+      Rating: rating,
+      Message: message
+    };
+
+    try {
+      createFeedback(payload);
+      toast.success("Feedback sent! ");
+      closeFeedback();
+    } catch (error: any) {
+      toast.error("Eroare la trimiterea feedback-ului: " + error.message);
+    }
+  };
+  const openFeedback = () => setFeedbackOpen(true);
+  const closeFeedback = () => setFeedbackOpen(false);
   return (
     <Card
       elevation={5}
@@ -403,6 +447,39 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
 
         {!canEdit && <Box mt={2}>{renderUserActions()}</Box>}
       </CardContent>
+      {!canEdit && status === "Joined" && hasEnded && (
+        <Box mt={2}>
+          <Button variant="outlined" onClick={openFeedback}>
+            Trimite Feedback
+          </Button>
+        </Box>
+      )}
+
+      <Dialog open={feedbackOpen} onClose={closeFeedback} maxWidth="sm" fullWidth>
+        <DialogTitle>Trimite feedback pentru conferinta</DialogTitle>
+        <DialogContent>
+          <Box display="flex" flexDirection="column" gap={2} mt={1}>
+            <Typography component="legend">Rating</Typography>
+            <Rating name="conference-feedback-rating" value={rating} precision={0.5} onChange={(_, newValue) => setRating(newValue)} />
+
+            <TextField
+              label="Mesaj"
+              multiline
+              rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              variant="outlined"
+              fullWidth
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeFeedback}>Anuleaza</Button>
+          <Button variant="contained" onClick={submitFeedback}>
+            Trimite
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   );
 };
