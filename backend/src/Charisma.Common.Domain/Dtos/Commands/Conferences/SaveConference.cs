@@ -29,6 +29,7 @@ namespace Charisma.Common.Domain.Dtos.Commands.Conferences
         public string Nationality { get; init; }
         public decimal? Rating { get; init; }
         public bool IsMainSpeaker { get; init; }
+        public string? Image { get; init; }
 
     }
     public record Location

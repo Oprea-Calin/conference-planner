@@ -282,14 +282,14 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             display="flex"
             alignItems="center"
             gap={1}
-            sx={{ cursor: item.speakerList?.length > 1 ? "pointer" : "default" }}
-            onClick={item.speakerList?.length > 1 ? toggleSpeakers : undefined}
+            sx={{ cursor: item.speakerList?.length > 0 ? "pointer" : "default" }}
+            onClick={item.speakerList?.length > 0 ? toggleSpeakers : undefined}
           >
             <PersonIcon fontSize="small" />
             <Typography variant="body2">
               <strong>Speaker:</strong> {hasMainSpeaker ? item.mainSpeakerName : fallbackSpeaker}
             </Typography>
-            {item.speakerList?.length > 1 && (
+            {item.speakerList?.length > 0 && (
               <ExpandMoreIcon
                 sx={{
                   transform: showAllSpeakers ? "rotate(180deg)" : "rotate(0deg)",
@@ -299,11 +299,11 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             )}
           </Box>
 
-          {showAllSpeakers && item.speakerList?.length > 1 && (
+          {showAllSpeakers && item.speakerList?.length > 0 && (
             <Box mt={1} ml={3} display="flex" flexDirection="column" gap={1}>
               {item.speakerList.map((speaker) => (
-                <Typography variant="body2" color="text.secondary" key={speaker.speakerId}>
-                  {speaker.name}
+                <Typography variant="body2" color="text.primary" key={speaker.speakerId}>
+                  {speaker.name} {speaker.rating}/5
                 </Typography>
               ))}
             </Box>

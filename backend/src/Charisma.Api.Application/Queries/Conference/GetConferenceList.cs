@@ -95,7 +95,10 @@ namespace Charisma.Api.Application.Queries.Conference
                                 .Select(x => new SpeakerDto
                              {
                                  Id = x.Speaker.Id,
-                                 Name = x.Speaker.Name
+                                 Name = x.Speaker.Name,
+                                 Rating = x.Speaker.Rating,
+                                 Nationality = x.Speaker.Nationality,
+                                 Image = x.Speaker.Image
                               }).ToList()
                               };
 

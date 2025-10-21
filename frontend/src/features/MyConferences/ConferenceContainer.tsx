@@ -53,7 +53,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const [speakers, setSpeakers] = useState([{ confSp: "", id: "", name: "", nationality: "", rating: "", main: false }]);
+  const [speakers, setSpeakers] = useState([{ confSp: "", id: "", name: "", nationality: "", rating: "", image: "", main: false }]);
 
   const [currentConference, setCurrentConference] = useState<ConferenceDto | null>(null);
   const [currentConferenceId, setCurrentConferenceId] = useState<number>(0);
@@ -163,6 +163,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
         name: s.name || "",
         nationality: s.nationality || "",
         rating: s.rating?.toString() || "",
+        image: s.image?.toString() || "",
         main: s.isMainSpeaker || false
       })) || [];
 
@@ -575,7 +576,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr 120px 40px",
+                gridTemplateColumns: "1fr 1fr 1fr 120px 40px 40px",
                 gap: "10px",
                 fontWeight: "bold",
                 marginBottom: "10px"
@@ -583,8 +584,12 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             >
               <div>{t("Name")}</div>
               <div>{t("Nationality")}</div>
+              <div>{t("Image")}</div>
+
               <div>{t("Rating")}</div>
+
               <div>{t("Main Speaker")}</div>
+
               <div></div>
             </div>
 
@@ -593,7 +598,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                 key={index}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "1fr 1fr 1fr 120px 40px",
+                  gridTemplateColumns: "1fr 1fr 1fr 120px 40px 40px",
                   gap: "10px",
                   alignItems: "center",
                   marginBottom: "10px"
@@ -617,6 +622,18 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     setSpeakers(updated);
                   }}
                 />
+
+                <input
+                  type="text"
+                  style={{ maxWidth: "250px" }}
+                  value={speaker.image}
+                  onChange={(e) => {
+                    const updated = [...speakers];
+                    updated[index].image = e.target.value || "";
+                    setSpeakers(updated);
+                  }}
+                />
+
                 <Rating
                   value={Number(speaker.rating) || 0}
                   precision={0.1}
@@ -656,7 +673,9 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             ))}
 
             <button
-              onClick={() => setSpeakers([...speakers, { confSp: "", id: "", name: "", nationality: "", rating: "", main: false }])}
+              onClick={() =>
+                setSpeakers([...speakers, { confSp: "", id: "", name: "", nationality: "", rating: "", image: "", main: false }])
+              }
               style={{
                 marginTop: "10px",
                 backgroundColor: "#1976d2",
@@ -712,6 +731,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   speakerId: s.id || 0,
                   name: s.name,
                   nationality: s.nationality,
+                  image: s.image || "",
                   rating: s.rating ? Number(s.rating) : null,
                   isMainSpeaker: s.main
                 }))

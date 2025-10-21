@@ -52,7 +52,8 @@ namespace Charisma.Api.Application.Queries.Conference
                         Name = x.Speaker.Name,
                         Nationality = x.Speaker.Nationality,
                         Rating = x.Speaker.Rating,
-                        SpeakerId = x.SpeakerId
+                        SpeakerId = x.SpeakerId,
+                        Image = x.Speaker.Image
                     }).ToList()
                 };
             }

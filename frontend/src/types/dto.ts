@@ -47,6 +47,7 @@ type ConferenceDto = {
     nationality: string;
     rating: number;
     isMainSpeaker: boolean;
+    image: string;
   }[];
   atendeesList: Array<ConferenceXAtendee>;
 

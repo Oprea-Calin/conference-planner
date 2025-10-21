@@ -67,6 +67,7 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                     dbSpeaker.Speaker.Nationality = reqSpeaker.Nationality;
                     dbSpeaker.Speaker.Rating = reqSpeaker.Rating;
                     dbSpeaker.Speaker.Name = reqSpeaker.Name;
+                    dbSpeaker.Speaker.Image = reqSpeaker.Image;
 
                     conference.ConferenceXSpeakers.Add(dbSpeaker);
                 }
@@ -103,7 +104,8 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                         Nationality = x.Speaker.Nationality,
                         Rating = x.Speaker.Rating,
                         ConferenceSpeakerId = x.Id,
-                        SpeakerId = x.SpeakerId
+                        SpeakerId = x.SpeakerId,
+                        Image = x.Speaker.Image
                     }).ToList()
                 }, cancellationToken);
             }
@@ -139,6 +141,8 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                         dbSpeaker.Speaker.Nationality = reqSpeaker.Nationality;
                         dbSpeaker.Speaker.Rating = reqSpeaker.Rating;
                         dbSpeaker.Speaker.Name = reqSpeaker.Name;
+                        dbSpeaker.Speaker.Image = reqSpeaker.Image;
+
                     }
                     else
                     {
@@ -165,7 +169,8 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
                                 {
                                     Name = reqSpeaker.Name,
                                     Rating = reqSpeaker.Rating,
-                                    Nationality = reqSpeaker.Nationality
+                                    Nationality = reqSpeaker.Nationality,
+                                    Image = reqSpeaker.Image
                                 }
                             };
                         }

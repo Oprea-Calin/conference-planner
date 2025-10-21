@@ -53,9 +53,16 @@ const ConferenceList: React.FC<{
           const dateMatches = (!filterStartDate || sd >= filterStartDate) && (!filterEndDate || ed <= filterEndDate);
 
           const typeMatches = conference.conferenceTypeName.toLowerCase().includes(filterConferenceTypeName.toLowerCase());
+
+          const isRemote = conference.conferenceTypeName.toLowerCase() === "remote";
+
           const countyMatches = conference.countyName.toLowerCase().includes(filterCounty.toLowerCase());
           const countryMatches = conference.countryName.toLowerCase().includes(filterCountry.toLowerCase());
           const cityMatches = conference.cityName.toLowerCase().includes(filterCity.toLowerCase());
+
+          if ((filterCountry || filterCounty || filterCity) && isRemote) {
+            return false;
+          }
 
           let status = "";
           for (let i = 0; i < conference.atendeesList.length; i++) {
