@@ -59,6 +59,10 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
                     .ThenInclude(cs => cs.Speaker)
                 .Include(c => c.ConferenceXAttendees)
                     .ThenInclude(c => c.Status)
+                .Include(c => c.Feedbacks)
+                    .ThenInclude(f => f.Speaker)
+
+
                 .FirstOrDefaultAsync(c => c.Id == id);
             return result;
         }
@@ -89,6 +93,7 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
         {
             dbContext.RemoveRange(conference.ConferenceXAttendees);
             dbContext.RemoveRange(conference.ConferenceXSpeakers);
+            dbContext.RemoveRange(conference.Feedbacks);
             dbContext.Conferences.Remove(conference);
         }
 
