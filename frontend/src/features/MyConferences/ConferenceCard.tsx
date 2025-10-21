@@ -240,6 +240,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
 
   const hasMainSpeaker = !!item.mainSpeakerName?.trim();
   const fallbackSpeaker = item.speakerList?.[0]?.name || "No speakers";
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
   const toggleSpeakers = () => setShowAllSpeakers(!showAllSpeakers);
   const { trigger: createFeedback, isMutating: isCreatingFeedback } = useApiSWRMutation(
@@ -261,8 +262,9 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
     };
 
     try {
-      createFeedback(payload);
+      await createFeedback(payload);
       toast.success("Feedback sent! ");
+      setFeedbackSent(true);
       closeFeedback();
     } catch (error: any) {
       toast.error("Eroare la trimiterea feedback-ului: " + error.message);
@@ -354,7 +356,8 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             <Box mt={1} ml={3} display="flex" flexDirection="column" gap={1}>
               {item.speakerList.map((speaker) => (
                 <Typography variant="body2" color="text.primary" key={speaker.speakerId}>
-                  {speaker.name} {speaker.rating}/5
+                  {speaker.name} {speaker.rating > 0 && ` ${speaker.rating}/5`}
+                  {/* {speaker.rating}/5 */}
                 </Typography>
               ))}
             </Box>
@@ -454,14 +457,14 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
 
         {!canEdit && <Box mt={2}>{renderUserActions()}</Box>}
       </CardContent>
-      {!canEdit && status === "Joined" && hasEnded && !hasUserGivenFeedback && (
+      {!canEdit && status === "Joined" && hasEnded && !hasUserGivenFeedback && !feedbackSent && (
         <Box mt={2} display={"flex"} justifyContent={"center"}>
           <Button variant="outlined" onClick={openFeedback}>
             Send Feedback
           </Button>
         </Box>
       )}
-      {hasUserGivenFeedback && (
+      {!canEdit && (hasUserGivenFeedback || feedbackSent) && (
         <Box mt={2} display={"flex"} justifyContent={"center"}>
           <Button disabled variant="outlined" onClick={openFeedback}>
             Feedback already sent

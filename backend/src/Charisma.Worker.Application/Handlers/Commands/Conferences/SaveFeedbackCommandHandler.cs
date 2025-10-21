@@ -38,6 +38,7 @@ namespace Charisma.Worker.Application.Handlers.Commands.Conferences
 
                 conferenceRepository.AddFeedback(feedback);
                 await conferenceRepository.Save(cancellationToken);
+                await messageBusPublisher.PublishAsync(new FeedbackSent(), cancellationToken);
 
                 await messageBusPublisher.PublishAsync(new Feedback
                 {
