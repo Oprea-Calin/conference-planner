@@ -37,6 +37,13 @@ namespace Charisma.Common.Infrastructure.Persistence.Repositories
             return result;
         }
 
+        public Task<List<Feedback>> GetFeedbacks()
+        {
+            var result = dbContext.Feedbacks
+               .ToListAsync();
+            return result;
+        }
+
         public Task<Conference> GetConferenceById(int id)
         {
             var result = dbContext.Conferences

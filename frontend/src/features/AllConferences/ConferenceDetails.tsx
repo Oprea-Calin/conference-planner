@@ -144,16 +144,16 @@ const ConferenceDetails: React.FC = () => {
                       {s.isMainSpeaker && (
                         <Typography variant="caption" color="primary">
                           (Main Speaker)
+                          <br />
                         </Typography>
                       )}
+
                       {s.image && (
-                        <Typography>
-                          <img
-                            src={s.image}
-                            alt="Image"
-                            style={{ alignContent: "center", borderRadius: "8px", boxShadow: "0 0 10px rgba(0,0,0,0.2)" }}
-                          />
-                        </Typography>
+                        <img
+                          src={s.image}
+                          alt="Speaker"
+                          style={{ width: "100px", height: "100px", objectFit: "cover", marginTop: "10px" }}
+                        />
                       )}
                       <Typography fontWeight={600}>
                         {s.name} {s.rating && <Rating value={s.rating} readOnly size="small" sx={{ mt: 1 }} />}

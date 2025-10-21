@@ -279,7 +279,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
             }}
             title={t("Close")}
           >
-            ×
+            x
           </button>
 
           <h2
@@ -623,7 +623,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   }}
                 />
 
-                <input
+                {/* <input
                   type="text"
                   style={{ maxWidth: "250px" }}
                   value={speaker.image}
@@ -631,6 +631,23 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                     const updated = [...speakers];
                     updated[index].image = e.target.value || "";
                     setSpeakers(updated);
+                  }}
+                /> */}
+                <input
+                  type="file"
+                  accept="image/*"
+                  style={{ maxWidth: "250px" }}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      const updated = [...speakers];
+                      updated[index].image = reader.result as string; // Base64 string
+                      setSpeakers(updated);
+                    };
+                    reader.readAsDataURL(file); // citește imaginea ca base64
                   }}
                 />
 

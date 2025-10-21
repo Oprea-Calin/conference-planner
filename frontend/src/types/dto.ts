@@ -60,6 +60,14 @@ type ConferenceDto = {
   link?: string;
 };
 
+type FeedbackDto = {
+  Id: number;
+  attendeeEmail: string;
+  conferenceId: number;
+  rating: number;
+  message: string;
+};
+
 type UserGroupDto = {
   userGroupId: number;
   userGroupName: string;
@@ -112,5 +120,6 @@ export type {
   CommandExecutionError,
   DictionaryItem,
   ConferenceDto,
-  ConferenceXAtendee
+  ConferenceXAtendee,
+  FeedbackDto
 };

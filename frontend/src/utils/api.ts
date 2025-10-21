@@ -29,6 +29,7 @@ const endpoints = {
   },
   conferences: {
     default: `${apiHost}/Conferences/list-for-attendees`,
+    getFeedbacks: `${apiHost}/Conferences/feedbacks`,
     saveConference: `${apiHost}/Conferences/save-conference`,
     saveFeedback: `${apiHost}/Conferences/save-feedback`,
     deleteConference: `${apiHost}/Conferences/{id}`,

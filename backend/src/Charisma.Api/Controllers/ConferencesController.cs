@@ -35,6 +35,12 @@ namespace Charisma.Api.Controllers
             var result = await mediator.Send(query);
             return Ok(result);
         }
+        [HttpGet("feedbacks")]
+        public async Task<IActionResult> GetFeedbackList([FromRoute] GetFeedbackList.Query query)
+        {
+            var result = await mediator.Send(query);
+            return Ok(result);
+        }
 
         [HttpGet("conference/{Id}")]
         public async Task<IActionResult> GetConferenceById([FromRoute] GetConferenceById.Query query)

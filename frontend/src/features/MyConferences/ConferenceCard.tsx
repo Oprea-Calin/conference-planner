@@ -17,7 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RoomIcon from "@mui/icons-material/Room";
 import PersonIcon from "@mui/icons-material/Person";
-import type { ConferenceDto } from "types";
+import type { ConferenceDto, FeedbackDto } from "types";
 import { toast } from "react-toastify";
 import { deleteMutationFetcher, mutationFetcher, putMutationFetcher, useApiSWR, useApiSWRMutation } from "units/swr";
 import { endpoints } from "utils";
@@ -44,6 +44,10 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
 }) => {
   const { mutate: refetchConferenceList } = useApiSWR<ConferenceDto[], Error>(endpoints.conferences.default, {
     onError: (err) => toast.error(t("User.error", { message: err.message }))
+  });
+
+  const { data: feedbacks = [] } = useApiSWR<FeedbackDto[], Error>(endpoints.conferences.getFeedbacks, {
+    onError: (err) => toast.error("Err feedbacks/get")
   });
 
   const { email, setEmail } = useEmail();
@@ -266,6 +270,9 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
   };
   const openFeedback = () => setFeedbackOpen(true);
   const closeFeedback = () => setFeedbackOpen(false);
+
+  const hasUserGivenFeedback = feedbacks.some((fb) => fb.conferenceId === item.id && fb.attendeeEmail === email);
+
   return (
     <Card
       elevation={5}
@@ -447,10 +454,17 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
 
         {!canEdit && <Box mt={2}>{renderUserActions()}</Box>}
       </CardContent>
-      {!canEdit && status === "Joined" && hasEnded && (
-        <Box mt={2}>
+      {!canEdit && status === "Joined" && hasEnded && !hasUserGivenFeedback && (
+        <Box mt={2} display={"flex"} justifyContent={"center"}>
           <Button variant="outlined" onClick={openFeedback}>
-            Trimite Feedback
+            Send Feedback
+          </Button>
+        </Box>
+      )}
+      {hasUserGivenFeedback && (
+        <Box mt={2} display={"flex"} justifyContent={"center"}>
+          <Button disabled variant="outlined" onClick={openFeedback}>
+            Feedback already sent
           </Button>
         </Box>
       )}
@@ -476,7 +490,7 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
         <DialogActions>
           <Button onClick={closeFeedback}>Anuleaza</Button>
           <Button variant="contained" onClick={submitFeedback}>
-            Trimite
+            Send
           </Button>
         </DialogActions>
       </Dialog>
