@@ -134,6 +134,12 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
       toast.info(t("Conferences.ConferenceUpdatedNotification"));
     }
   });
+  // useSubscription(notificationTypes.FEEDBACK_SENT, {
+  //   onNotification: () => {
+  //     refetchConferenceList();
+  //     toast.info(t("Feedbacks.FeedbackSentNotification"));
+  //   }
+  // });
 
   const populateConferenceData = (conference: ConferenceDto) => {
     setCurrentConference(conference);

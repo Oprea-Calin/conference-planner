@@ -356,7 +356,10 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
             <Box mt={1} ml={3} display="flex" flexDirection="column" gap={1}>
               {item.speakerList.map((speaker) => (
                 <Typography variant="body2" color="text.primary" key={speaker.speakerId}>
-                  {speaker.name} {speaker.rating > 0 && ` ${speaker.rating}/5`}
+                  {speaker.name}
+                  <Rating name="Speaker Rating" size="small" readOnly value={speaker.rating} />
+
+                  {/* {speaker.rating > 0 && ` ${speaker.rating}/5`} */}
                   {/* {speaker.rating}/5 */}
                 </Typography>
               ))}
