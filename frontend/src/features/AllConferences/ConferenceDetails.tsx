@@ -175,8 +175,8 @@ const ConferenceDetails: React.FC = () => {
         </Box>
 
         {mergedConference.conferenceTypeName === "OnSite" &&
-          mergedConference.location?.latitude &&
-          mergedConference.location?.longitude && (
+          mergedConference.location?.latitude != 0 &&
+          mergedConference.location?.longitude != 0 && (
             <Box
               sx={{
                 flex: 1,

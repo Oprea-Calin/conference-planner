@@ -744,7 +744,7 @@ const ConferenceContainer: React.FC<{ canEdit?: boolean }> = ({ canEdit = true }
                   longitude: Number(location.longitude)
                 },
                 organizerEmail: email,
-                categoryId: Number(category),
+                categoryId: Number(category) || 1,
                 startDate: new Date(startDate).toISOString(),
                 endDate: new Date(endDate).toISOString(),
                 name: conferenceName,

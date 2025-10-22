@@ -476,11 +476,11 @@ const ConferenceCard: React.FC<{ item: ConferenceDto; onEdit: (conference: Confe
       )}
 
       <Dialog open={feedbackOpen} onClose={closeFeedback} maxWidth="sm" fullWidth>
-        <DialogTitle>Trimite feedback pentru conferinta</DialogTitle>
+        <DialogTitle>Send feedback for conference</DialogTitle>
         <DialogContent>
           <Box display="flex" flexDirection="column" gap={2} mt={1}>
             <Typography component="legend">Rating</Typography>
-            <Rating name="conference-feedback-rating" value={rating} precision={0.5} onChange={(_, newValue) => setRating(newValue)} />
+            <Rating name="conference-feedback-rating" value={rating} precision={0.1} onChange={(_, newValue) => setRating(newValue)} />
 
             <TextField
               label="Mesaj"
